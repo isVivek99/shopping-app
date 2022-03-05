@@ -6,7 +6,7 @@ import 'assets/scss/common/input/inputElementOne.scss';
 function inputElementOne() {
   return (
     <div className='w-100'>
-      <div className='d-flex  justify-content-center col-6 mx-auto'>
+      <div className='d-flex  justify-content-center col-8 col-xl-8 mx-auto'>
         <button className=' search__icon__btn ps-3 f-14'>
           <span className='pe-1'>All categories</span>
 
@@ -17,7 +17,7 @@ function inputElementOne() {
             style={{ height: '16px', width: '16px' }}
           />
         </button>
-        <div className='col-6 position-relative'>
+        <div className='col-6 col-md-8 position-relative'>
           <div className='vertical__line position-absolute'></div>
           <input
             type='text'
