@@ -1,0 +1,42 @@
+@import 'assets/scss/_variables.scss';
+
+.search__icon {
+  position: absolute;
+  top: 14px;
+  right: 15px;
+}
+.search__icon__btn {
+  border-top: 1px solid $border-color-primary;
+  border-right: none;
+  border-bottom: 1px solid $border-color-primary;
+  border-left: 1px solid $border-color-primary;
+  background-color: #fff;
+  border-radius: 12px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 0px;
+  font-weight: 700;
+}
+.input__ele__one {
+  border-radius: 12px;
+  height: 42px;
+  border-top: 1px solid $border-color-primary;
+  border-right: 1px solid $border-color-primary;
+  border-bottom: 1px solid $border-color-primary;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 12px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 12px;
+  border-left: none;
+}
+.input__ele__one:focus {
+  outline: none;
+}
+.vertical__line {
+  background-color: $border-color-primary;
+  height: 20px;
+  width: 2px;
+  left: 10px;
+  top: 12px;
+}
