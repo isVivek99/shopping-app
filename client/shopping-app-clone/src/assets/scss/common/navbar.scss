@@ -1,0 +1,9 @@
+@import 'assets/scss/_variables.scss';
+
+.fa__icon__size i {
+  font-size: 24px;
+  color: $color-white;
+  stroke: $navbar-bg-color;
+  stroke-width: 5;
+  -webkit-text-stroke: 1px rgb(44, 43, 42);
+}
