@@ -22,11 +22,26 @@ function navbar() {
       <div className='d-flex align-items-center mx-3'>
         <img src={brandImage} alt='brandImage' />
         <InputElementOne />
-        <div className='fa__icon__size px-3'>
-          <i className='fas fa-bag-shopping'></i>
-        </div>
+
         <div className='fa__icon__size px-3'>
           <i className='fas fa-user'></i>
+        </div>
+        <div className='position-relative'>
+          <div
+            className='position-absolute text-center'
+            style={{
+              backgroundColor: '#E5704B',
+              width: '24px',
+              height: '24px',
+              borderRadius: '12px',
+              top: '12px',
+            }}
+          >
+            <span style={{ color: 'white', fontSize: '12px' }}>4</span>
+          </div>
+          <div className='fa__icon__size px-3'>
+            <i className='fas fa-bag-shopping'></i>
+          </div>
         </div>
       </div>
     </div>
