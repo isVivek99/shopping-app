@@ -4,6 +4,54 @@
   font-size: 24px;
   color: $color-white;
   stroke: $navbar-bg-color;
-  stroke-width: 5;
   -webkit-text-stroke: 1px rgb(44, 43, 42);
+  stroke-width: 5;
+}
+.fa__icon__size__lg i {
+  font-size: 24px;
+  color: $color-white;
+}
+.navbar-toggle {
+  background-color: $bg-color-primary;
+}
+.navbar__sidebar {
+  background-color: $bg-color-primary;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav__menu {
+  background-color: $color-white;
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
+}
+
+.nav__menu__active {
+  left: 0;
+  transition: 350ms;
+  background-color: $color-white;
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+}
+ul {
+  list-style-type: none;
+}
+.cart__item__count {
+  background-color: #e5704b;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  top: 12px;
+  span {
+    color: $color-white;
+  }
 }

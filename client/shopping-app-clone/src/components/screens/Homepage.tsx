@@ -3,7 +3,7 @@ import Navbar from 'components/common/Navbar';
 function Homepage() {
   return (
     <div>
-      <div className='my-3'>
+      <div className='mb-3 my-lg-3'>
         <Navbar />
       </div>
     </div>

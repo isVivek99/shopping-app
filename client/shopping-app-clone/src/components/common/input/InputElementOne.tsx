@@ -7,7 +7,7 @@ function inputElementOne() {
   return (
     <div className='w-100'>
       <div className='d-flex  justify-content-center col-8 col-xl-8 mx-auto'>
-        <button className=' search__icon__btn ps-3 f-14'>
+        <button className=' search__icon__btn ps-3 f-14 bold'>
           <span className='pe-1'>All categories</span>
 
           <img
