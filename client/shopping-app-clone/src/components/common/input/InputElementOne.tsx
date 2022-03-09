@@ -6,8 +6,8 @@ import 'assets/scss/common/input/inputElementOne.scss';
 function inputElementOne() {
   return (
     <div className='w-100'>
-      <div className='d-flex  justify-content-center col-8 col-xl-8 mx-auto'>
-        <button className=' search__icon__btn ps-3 f-14 bold'>
+      <div className='d-lg-flex  justify-content-center col-11 col-xl-8 mx-auto'>
+        <button className=' search__icon__btn ps-3 f-14 bold d-none d-lg-block'>
           <span className='pe-1'>All categories</span>
 
           <img
@@ -17,12 +17,12 @@ function inputElementOne() {
             style={{ height: '16px', width: '16px' }}
           />
         </button>
-        <div className='col-6 col-md-8 position-relative'>
-          <div className='vertical__line position-absolute'></div>
+        <div className='col-12 col-lg-8 position-relative'>
+          <div className='vertical__line position-absolute d-none d-lg-block'></div>
           <input
             type='text'
             placeholder='Search Products, categories...'
-            className=' input__ele__one col-12 ps-5 f-14'
+            className=' input__ele__one col-12 ps-2 ps-lg-5 f-14'
           />
           <img
             src={searchIcon}

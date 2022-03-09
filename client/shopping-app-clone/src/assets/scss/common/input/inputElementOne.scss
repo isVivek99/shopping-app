@@ -28,7 +28,11 @@
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 12px;
   border-left: none;
-  // min-width: 300px;
+
+  @media (max-width: 992px) {
+    border: 1px solid $border-color-primary;
+    border-radius: 12px;
+  }
 }
 .input__ele__one:focus {
   outline: none;
