@@ -1,0 +1,53 @@
+@import "assets/scss/_variables.scss";
+
+.pri {
+  background: $primary-color;
+  color: $background-color;
+  border: 2px solid #46760a;
+}
+
+.sec {
+  background: $background-color;
+  color: #000;
+  border: 2px solid $primary-color;
+}
+
+.sim {
+  background-color: $secondary-color;
+  color: #000;
+  border: 2px solid $secondary-color;
+}
+
+.str {
+  background-color: $background-color;
+  color: #000;
+  border: 2px solid $background-color;
+}
+
+.lar {
+  padding: 16.5px 48px;
+}
+
+.mid {
+  padding: 12px 16px;
+}
+
+.sml {
+  padding: 6.5px 12px;
+}
+
+.fa-angle-left {
+  margin-right: 12px;
+}
+
+.fa-angle-right {
+  margin-left: 12px;
+}
+
+.sec i {
+  color: $primary-color;
+}
+
+.str i {
+  color: $primary-color;
+}

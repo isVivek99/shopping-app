@@ -1,5 +1,6 @@
-import React from 'react';
-import InputElementOne from './input/InputElementOne';
+import React from "react";
+import ProductCardOne from "./card/ProductCardOne";
+import InputElementOne from "./input/InputElementOne";
 function navbar() {
   return (
     <div>
