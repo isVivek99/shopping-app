@@ -1,5 +1,9 @@
 @import 'assets/scss/_variables.scss';
 
+ul {
+  list-style-type: none;
+}
+
 .fa__icon__size i {
   font-size: 24px;
   color: $color-white;
@@ -35,7 +39,7 @@
   position: fixed;
   top: 0;
   left: -100%;
-  transition: 850ms;
+  transition: 650ms;
 }
 
 .nav__menu__active {
@@ -47,11 +51,21 @@
   position: fixed;
   top: 0;
 }
-ul {
-  list-style-type: none;
+.navbar__subcategories {
+  height: 0px;
+  opacity: 0;
+  display: none;
+  transition: 650ms;
 }
+.navbar__subcategories__active {
+  height: auto;
+  display: block;
+  opacity: 1;
+  transition: 1000ms;
+}
+
 .cart__item__count {
-  background-color: #e5704b;
+  background-color: $bg-color-orange;
   width: 24px;
   height: 24px;
   border-radius: 12px;
