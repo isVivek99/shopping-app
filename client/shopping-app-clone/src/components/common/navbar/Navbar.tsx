@@ -42,19 +42,19 @@ function navbar() {
         </div>
       </div>
       <div className='d-lg-flex justify-content-around px-2 my-1 navbar__dropdown  d-none'>
-        <div className='d-flex align-items-center'>
+        <div className='d-flex align-items-center navbar__dropdown__item '>
           <p className='px-1 f-14 m-0 py-2'>Bakery</p>
           <i className='fas fa-angle-down'></i>
         </div>
-        <div className='d-flex align-items-center'>
+        <div className='d-flex align-items-center navbar__dropdown__item'>
           <p className='px-1 f-14 m-0 py-2'>Fruits and vegetables</p>
           <i className='fas fa-angle-down'></i>
         </div>
-        <div className='d-flex align-items-center'>
+        <div className='d-flex align-items-center navbar__dropdown__item'>
           <p className='px-1 f-14 m-0 py-2'>Meat and fish</p>
           <i className='fas fa-angle-down'></i>
         </div>
-        <div className='d-flex align-items-center'>
+        <div className='d-flex align-items-center navbar__dropdown__item'>
           <p className='px-1 f-14 m-0 py-2'>drinks</p>
           <i className='fas fa-angle-down'></i>
         </div>
