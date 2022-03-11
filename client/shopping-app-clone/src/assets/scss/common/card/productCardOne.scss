@@ -16,10 +16,6 @@
   min-height: 180px;
 }
 
-.content {
-  margin-top: 16px;
-}
-
 .details {
   display: flex;
   flex-direction: column;
@@ -52,4 +48,11 @@
   font-weight: 600;
   font-size: 18px;
   line-height: 27px;
+}
+
+.discountTag {
+  margin-left: 12px;
+  margin-top: 8px;
+  top: 0;
+  display: flex;
 }

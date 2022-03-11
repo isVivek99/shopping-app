@@ -3,24 +3,24 @@
 .pri {
   background: $primary-color;
   color: $background-color;
-  border: 2px solid #46760a;
+  border: 2px solid $primary-button-border;
 }
 
 .sec {
   background: $background-color;
-  color: #000;
+  color: $black-color;
   border: 2px solid $primary-color;
 }
 
 .sim {
   background-color: $secondary-color;
-  color: #000;
+  color: $black-color;
   border: 2px solid $secondary-color;
 }
 
 .str {
   background-color: $background-color;
-  color: #000;
+  color: $black-color;
   border: 2px solid $background-color;
 }
 

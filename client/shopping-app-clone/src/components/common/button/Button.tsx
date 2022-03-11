@@ -1,6 +1,5 @@
-import React, { FC, useEffect, useState } from "react";
+import React from "react";
 import "assets/scss/common/button/button.scss";
-import "https://kit.fontawesome.com/637b14841d.js";
 
 interface BtnProps {
   type: string;
@@ -9,36 +8,27 @@ interface BtnProps {
   arrow: string;
 }
 
-const Button: FC<BtnProps> = ({
-  type,
-  size,
-  text,
-  arrow,
-}: BtnProps): JSX.Element => {
-  const [style, setStyle] = useState<BtnProps>({
-    type: "pri",
-    size: "mid",
-    text: "Text",
-    arrow: "",
-  });
+const Button = ({ type, size, text, arrow }: BtnProps): JSX.Element => {
+  // const [style, setStyle] = useState<BtnProps>({
+  //   type: "pri",
+  //   size: "mid",
+  //   text: "Text",
+  //   arrow: "",
+  // });
 
-  useEffect(() => {
-    setStyle({ type: type, size: size, text: text, arrow: arrow });
-  }, []);
+  // useEffect(() => {
+  //   setStyle({ type: type, size: size, text: text, arrow: arrow });
+  // }, []);
 
   return (
     <div>
       <button
-        className={`${style.type} ${style.size}`}
+        className={`${type} ${size}`}
         style={{ borderRadius: "12px", fontWeight: "700", fontSize: "15px" }}
       >
-        {arrow === "la" && (
-          <i className="fas fa-angle-left" aria-hidden="true"></i>
-        )}
-        {style.text}
-        {arrow === "ra" && (
-          <i className="fas fa-angle-right" aria-hidden="true"></i>
-        )}
+        {arrow === "la" && <i className="fas fa-angle-left"></i>}
+        {text}
+        {arrow === "ra" && <i className="fas fa-angle-right"></i>}
       </button>
     </div>
   );
