@@ -7,12 +7,6 @@ function navbar(): JSX.Element {
     <div>
       navbar
       <InputElementOne />
-      <ProductCardOne
-        discount="-36%"
-        pName="Nirma"
-        pDesc="Washing Prowder nirma doodh si safedi"
-        price={2.56}
-      />
     </div>
   );
 }
