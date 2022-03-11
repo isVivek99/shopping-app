@@ -1,0 +1,58 @@
+@import "assets/scss/_variables.scss";
+
+.ctn {
+  flex-direction: column;
+  display: flex;
+  border: 1px solid #d1d1d1;
+  box-sizing: border-box;
+  border-radius: 12px;
+  padding: 16px;
+  width: 268px;
+  min-height: 332px;
+}
+
+.image img {
+  width: 236px;
+  min-height: 180px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+.buy {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.summary {
+  margin-top: 4px;
+  font-style: normal;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.price {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.discountTag {
+  margin-left: 12px;
+  margin-top: 8px;
+  top: 0;
+  display: flex;
+}
