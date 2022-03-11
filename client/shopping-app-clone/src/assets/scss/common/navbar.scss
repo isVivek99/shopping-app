@@ -1,0 +1,84 @@
+@import 'assets/scss/_variables.scss';
+
+ul {
+  list-style-type: none;
+}
+
+.fa__icon__size i {
+  font-size: 24px;
+  color: $color-white;
+  stroke: $navbar-bg-color;
+  -webkit-text-stroke: 1px rgb(44, 43, 42);
+  stroke-width: 5;
+}
+.fa__icon__size__lg i {
+  font-size: 24px;
+  color: $color-white;
+}
+.fa__icon__size__lg_black i {
+  font-size: 14px;
+  color: $navbar-bg-color;
+}
+
+.navbar-toggle {
+  background-color: $bg-color-primary;
+}
+.navbar__sidebar {
+  background-color: $bg-color-primary;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav__menu {
+  background-color: $color-white;
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 650ms;
+}
+
+.nav__menu__active {
+  left: 0;
+  transition: 350ms;
+  background-color: $color-white;
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+}
+.navbar__subcategories {
+  height: 0px;
+  opacity: 0;
+  display: none;
+  transition: 650ms;
+}
+.navbar__subcategories__active {
+  height: auto;
+  display: block;
+  opacity: 1;
+  transition: 1000ms;
+}
+
+.cart__item__count {
+  background-color: $bg-color-orange;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  top: 12px;
+  span {
+    color: $color-white;
+  }
+}
+
+.navbar__dropdown {
+  height: 55px;
+  background-color: #f9f9f9;
+}
+.navbar__dropdown__item {
+  cursor: pointer;
+}

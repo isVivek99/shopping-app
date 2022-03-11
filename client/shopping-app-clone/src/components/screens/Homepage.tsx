@@ -1,10 +1,11 @@
 import React from 'react';
-import Navbar from 'components/common/Navbar';
+import Navbar from 'components/common/navbar/Navbar';
 function Homepage() {
   return (
     <div>
-      Homepage
-      <Navbar />
+      <div className='mb-3 my-lg-3'>
+        <Navbar />
+      </div>
     </div>
   );
 }
