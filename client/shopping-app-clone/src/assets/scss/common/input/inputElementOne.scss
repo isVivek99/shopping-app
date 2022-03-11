@@ -16,7 +16,6 @@
   border-top-right-radius: 0px;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 0px;
-  font-weight: 700;
 }
 .input__ele__one {
   border-radius: 12px;
@@ -29,6 +28,11 @@
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 12px;
   border-left: none;
+
+  @media (max-width: 992px) {
+    border: 1px solid $border-color-primary;
+    border-radius: 12px;
+  }
 }
 .input__ele__one:focus {
   outline: none;
