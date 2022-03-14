@@ -3,7 +3,7 @@ import searchIcon from 'assets/images/search-icon.png';
 import dropDownArrow from 'assets/images/ic-chevron-down.png';
 import 'assets/scss/common.scss';
 import 'assets/scss/common/input/inputElementOne.scss';
-function inputElementOne() {
+function InputElementOne() {
   return (
     <div className='w-100'>
       <div className='d-lg-flex  justify-content-center col-11 col-xl-8 mx-auto'>
@@ -36,4 +36,4 @@ function inputElementOne() {
   );
 }
 
-export default inputElementOne;
+export default InputElementOne;

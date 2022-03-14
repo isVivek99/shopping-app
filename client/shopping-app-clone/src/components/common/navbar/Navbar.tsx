@@ -1,10 +1,9 @@
-import React from 'react';
 import 'assets/scss/common.scss';
 import 'assets/scss/common/navbar.scss';
 import brandImage from 'assets/images/Brand.png';
 import InputElementOne from 'components/common/input/InputElementOne';
 import NavbarMobile from 'components/common/navbar/NavbarMobile';
-function navbar() {
+function Navbar() {
   return (
     <div>
       <div
@@ -64,4 +63,4 @@ function navbar() {
   );
 }
 
-export default navbar;
+export default Navbar;
