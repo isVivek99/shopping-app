@@ -1,0 +1,14 @@
+@import "assets/scss/_variables.scss";
+
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.on {
+  color: $black-color;
+}
+.off {
+  color: $secondary-color;
+}
