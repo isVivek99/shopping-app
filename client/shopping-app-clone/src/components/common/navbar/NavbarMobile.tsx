@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import 'assets/scss/common.scss';
 import 'assets/scss/common/navbar.scss';
 import brandImageWhite from 'assets/images/brand-white.png';

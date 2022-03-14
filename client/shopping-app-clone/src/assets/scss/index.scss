@@ -1,4 +1,6 @@
+@import 'assets/scss/_variables.scss';
 body,
 html {
   font-family: 'Poppins' !important;
+  background-color: $background-color-gray !important;
 }

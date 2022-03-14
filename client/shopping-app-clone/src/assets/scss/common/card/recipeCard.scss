@@ -1,0 +1,36 @@
+@import 'assets/scss/_variables.scss';
+
+.recipe__card__img__wrapper {
+  margin: 1rem;
+  border-radius: 12px;
+  height: 280px;
+  width: 420px;
+  background: url('/assets/images/recipes/mutton-recipe.webp') no-repeat top
+    center;
+}
+
+.recipe__overlay {
+  border-radius: 8px;
+  background-color: $tag-primary-color;
+  height: 280px;
+  width: 420px;
+  opacity: 1;
+  transition: 0.3s;
+}
+
+.recipe__card__banner {
+  top: 20px;
+  left: 32px;
+  opacity: 1;
+}
+
+.recipe__overlay:hover {
+  opacity: 0;
+}
+.recipe__overlay:hover ~ .recipe__card__banner {
+  opacity: 0;
+}
+.recipe__btn {
+  left: 24px;
+  bottom: 32px;
+}
