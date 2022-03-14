@@ -1,11 +1,12 @@
-import ListElementOne from 'components/common/lists/ListElementOne';
-import ProductCardOne from 'components/common/card/ProductCardOne';
+import ListElementOne from "components/common/lists/ListElementOne";
+import ProductCardOne from "components/common/card/ProductCardOne";
 
 interface CategoryProductListProps {
   listHeader: string;
   listSubTopicArray: Array<string> | undefined;
   productArray: Array<ObjProp> | undefined;
 }
+
 interface ObjProp {
   pName: string;
   pDesc: string;
@@ -20,16 +21,16 @@ const CategoryProductList = ({
 }: CategoryProductListProps) => {
   // const spreadObject = (obj) => {}
   return (
-    <div className='d-flex justify-content-center'>
-      <div className='me-5'>
+    <div className="d-flex justify-content-center">
+      <div className="me-5">
         <ListElementOne
           listHeader={listHeader}
           listSubTopicArray={listSubTopicArray}
         />
       </div>
-      <div className='d-flex justify-content'>
+      <div className="d-flex justify-content">
         {productArray?.map((iter, ind) => (
-          <div key={ind} className='mx-2'>
+          <div key={ind} className="mx-2">
             <ProductCardOne
               pName={iter.pName}
               pDesc={iter.pDesc}
