@@ -3,8 +3,15 @@ export const productDetails = [
     categories: [
       {
         'Meat & fish': [{}, {}],
+      },
+      {
         'Best selling products': {
-          subtopics: ['Blueberries', 'Pomegranate', 'chicken breast', 'tuna'],
+          subtopicList: [
+            'Blueberries',
+            'Pomegranate',
+            'chicken breast',
+            'tuna',
+          ],
           products: [
             {
               pName: 'Blueberries',
@@ -36,7 +43,8 @@ export const productDetails = [
             },
           ],
         },
-
+      },
+      {
         'Best from farmers': {
           subtopics: ['ad', 'asd'],
           products: [

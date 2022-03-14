@@ -1,4 +1,4 @@
-@import "assets/scss/_variables.scss";
+@import 'assets/scss/_variables.scss';
 
 .ctn {
   flex-direction: column;
@@ -11,9 +11,12 @@
   min-height: 332px;
 }
 
-.image img {
+.product__card__image {
   width: 236px;
-  min-height: 180px;
+  max-height: 160px;
+  object-fit: cover;
+  border: 1px solid $border-color-primary;
+  border-radius: 12px;
 }
 
 .details {
