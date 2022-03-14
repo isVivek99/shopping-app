@@ -5,8 +5,14 @@
   border-radius: 12px;
   height: 280px;
   width: 420px;
-  background: url('/assets/images/recipes/mutton-recipe.webp') no-repeat top
-    center;
+}
+
+.recipe__card__img {
+  top: 0;
+  z-index: -1;
+  max-height: 280px;
+  width: 100%;
+  border-radius: 20px;
 }
 
 .recipe__overlay {

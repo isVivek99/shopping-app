@@ -1,6 +1,7 @@
 import Navbar from 'components/common/navbar/Navbar';
-import ListElementOne from 'components/common/lists/ListElementOne';
 import RecipeCard from 'components/common/card/RecipeCard';
+import CategoryProductList from 'components/common/categoryProductList/CategoryProductList';
+import { recipeDetails } from 'utils/recipeDetails';
 import 'assets/scss/screens/homepage.scss';
 function Homepage() {
   const subTopicArray = [
@@ -15,12 +16,25 @@ function Homepage() {
       <div className='homepage__components'>
         <div className='mb-3 py-lg-3'>
           <Navbar />
-
-          <RecipeCard />
-          {/* <ListElementOne
-            listSubTopicArray={subTopicArray}
-            listHeader={listHeader}
-          /> */}
+          {/* recipes */}
+          {recipeDetails.map((itr, idx) => (
+            <div key={idx} className='d-flex justify-content-center flex-wrap'>
+              {itr['non-veg'].map((recipe, index) => (
+                <div key={index}>
+                  <RecipeCard
+                    heading={recipe.heading}
+                    subheading={recipe.subheading}
+                    text={recipe.buttonText}
+                    img={recipe.img}
+                  />
+                </div>
+              ))}
+            </div>
+          ))}
+          {/* recipes */}
+          <div className='mx-auto'>
+            <CategoryProductList />
+          </div>
         </div>
       </div>
     </div>

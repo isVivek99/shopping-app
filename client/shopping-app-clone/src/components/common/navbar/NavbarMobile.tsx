@@ -4,7 +4,7 @@ import 'assets/scss/common/navbar.scss';
 import brandImageWhite from 'assets/images/brand-white.png';
 import brandImageWhiteMobile from 'assets/images/brand-white-mobile.png';
 import InputElementOne from '../input/InputElementOne';
-import { SidebarData } from 'components/common/sideBarData';
+import { SidebarData } from 'utils/sideBarData';
 
 function NavbarMobile() {
   const [sidebar, setSidebar] = useState(false);

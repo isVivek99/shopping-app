@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from '../button/Button';
 import 'assets/scss/common/card/productCardOne.scss';
 import Tags from '../tags/Tags';

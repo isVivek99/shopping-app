@@ -40,6 +40,7 @@ ul {
   top: 0;
   left: -100%;
   transition: 650ms;
+  z-index: 9999;
 }
 
 .nav__menu__active {
@@ -50,6 +51,7 @@ ul {
   height: 100vh;
   position: fixed;
   top: 0;
+  z-index: 9999;
 }
 .navbar__subcategories {
   height: 0px;
