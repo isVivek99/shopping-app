@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from '../button/Button';
 import 'assets/scss/common/card/productCardOne.scss';
 import Tags from '../tags/Tags';
@@ -8,6 +7,7 @@ interface productCardProps {
   pName: string;
   pDesc: string;
   price: number;
+  img: string;
 }
 
 const ProductCardOne = ({
@@ -15,12 +15,16 @@ const ProductCardOne = ({
   pName,
   pDesc,
   price,
+  img,
 }: productCardProps) => {
   return (
     <div>
       <div className='ctn'>
-        <div className='image position-relative'>
-          <img src='http://placeimg.com/640/480/food'></img>
+        <div className='product__card__image__wrapper position-relative'>
+          <img
+            className='product__card__image'
+            src={require('assets/' + img)}
+          />
           <span className='discountTag position-absolute'>
             <Tags
               type={'priT'}
