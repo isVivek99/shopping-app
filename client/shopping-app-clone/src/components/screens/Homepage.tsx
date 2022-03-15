@@ -1,22 +1,24 @@
-import Navbar from 'components/common/navbar/Navbar';
-import RecipeCard from 'components/common/card/RecipeCard';
-import CategoryProductList from 'components/common/categoryProductList/CategoryProductList';
-import { recipeDetails } from 'utils/recipeDetails';
-import { productDetails } from 'utils/productDetails';
-import 'assets/scss/screens/homepage.scss';
+import Navbar from "components/common/navbar/Navbar";
+import RecipeCard from "components/common/card/RecipeCard";
+import CategoryProductList from "components/common/categoryProductList/CategoryProductList";
+import { recipeDetails } from "utils/recipeDetails";
+import { productDetails } from "utils/productDetails";
+import "assets/scss/screens/homepage.scss";
+import Rating from "components/common/rating/Rating";
+
 function Homepage() {
   return (
-    <div className='homepage'>
-      <div className='homepage__components'>
-        <div className='mb-3 py-lg-3'>
+    <div className="homepage">
+      <div className="homepage__components">
+        <div className="mb-3 py-lg-3">
           <Navbar />
           {/* recipes */}
           {recipeDetails.map((itr, idx) => (
             <div
               key={idx}
-              className='d-flex justify-content-center flex-wrap mb-5'
+              className="d-flex justify-content-center flex-wrap mb-5"
             >
-              {itr['non-veg'].map((recipe, index) => (
+              {itr["non-veg"].map((recipe, index) => (
                 <div key={index}>
                   <RecipeCard
                     heading={recipe.heading}
@@ -29,19 +31,20 @@ function Homepage() {
             </div>
           ))}
           {/* recipes */}
-          <div className='mx-auto pt-5'>
+          <div className="mx-auto pt-5">
             {productDetails.map((itr, ind) => (
-              <div key={ind} className='my-5'>
+              <div key={ind} className="my-5">
                 {
                   <CategoryProductList
-                    listSubTopicArray={itr['categorySubTopicList']}
-                    listHeader={itr['categoryName']}
-                    productArray={itr['products']}
+                    listSubTopicArray={itr["categorySubTopicList"]}
+                    listHeader={itr["categoryName"]}
+                    productArray={itr["products"]}
                   />
                 }
               </div>
             ))}
           </div>
+          <Rating type="static" stars={4} />
         </div>
       </div>
     </div>
