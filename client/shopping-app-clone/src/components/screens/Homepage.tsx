@@ -5,13 +5,6 @@ import { recipeDetails } from 'utils/recipeDetails';
 import { productDetails } from 'utils/productDetails';
 import 'assets/scss/screens/homepage.scss';
 function Homepage() {
-  const subTopicArray = [
-    'Bakery',
-    'Fruit and vegetables',
-    'Meat and fish',
-    'Drinks',
-  ];
-
   return (
     <div className='homepage'>
       <div className='homepage__components'>
@@ -38,22 +31,14 @@ function Homepage() {
           {/* recipes */}
           <div className='mx-auto pt-5'>
             {productDetails.map((itr, ind) => (
-              <div key={ind}>
-                {itr['categories'].map((category, index) => (
-                  <div key={index}>
-                    {category['Best selling products'] && (
-                      <CategoryProductList
-                        listSubTopicArray={
-                          category['Best selling products']?.subtopicList
-                        }
-                        listHeader='Best selling products'
-                        productArray={
-                          category['Best selling products']?.products
-                        }
-                      />
-                    )}
-                  </div>
-                ))}
+              <div key={ind} className='my-5'>
+                {
+                  <CategoryProductList
+                    listSubTopicArray={itr['categorySubTopicList']}
+                    listHeader={itr['categoryName']}
+                    productArray={itr['products']}
+                  />
+                }
               </div>
             ))}
           </div>

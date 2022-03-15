@@ -2,7 +2,7 @@ import Button from 'components/common/button/Button';
 import 'assets/scss/common.scss';
 import 'assets/scss/common/list/listOne.scss';
 interface listProps {
-  listHeader: string;
+  listHeader: string | undefined;
   listSubTopicArray: Array<string> | undefined;
 }
 

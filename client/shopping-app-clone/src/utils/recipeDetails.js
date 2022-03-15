@@ -14,7 +14,7 @@ export const recipeDetails = [
         img: 'images/recipes/chicken-curry.jpeg',
       },
       {
-        heading: 'chicken tikka masala',
+        heading: 'chicken lime breast',
         subheading: 'delicious & tasty',
         buttonText: 'Read recipe',
         img: 'images/recipes/chicken-boil.jpeg',

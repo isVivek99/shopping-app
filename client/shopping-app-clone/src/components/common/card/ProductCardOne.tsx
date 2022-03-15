@@ -40,7 +40,7 @@ const ProductCardOne = ({
             <span className='summary'>{pDesc}</span>
           </div>
           <div className='buy'>
-            <span className='price'>{price} USD</span>
+            <span className='price'>₹ {price}</span>
             <Button type={'pri'} size={'sml'} text={'Buy Now'} arrow={'ra'} />
           </div>
         </div>
