@@ -27,6 +27,7 @@ const Button = ({ type, size, text, arrow }: BtnProps): JSX.Element => {
         style={{ borderRadius: "12px", fontWeight: "700", fontSize: "15px" }}
       >
         {arrow === "la" && <i className="fas fa-angle-left"></i>}
+        {arrow === "fav" && <i className="fas fa-heart"></i>}
         {text}
         {arrow === "ra" && <i className="fas fa-angle-right"></i>}
       </button>
