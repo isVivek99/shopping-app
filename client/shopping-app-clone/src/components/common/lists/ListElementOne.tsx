@@ -4,6 +4,7 @@ import 'assets/scss/common/list/listOne.scss';
 interface listProps {
   listHeader: string | undefined;
   listSubTopicArray: Array<string> | undefined;
+  onClick: () => void;
 }
 
 function ListElementOne({ listSubTopicArray, listHeader }: listProps) {
@@ -23,7 +24,13 @@ function ListElementOne({ listSubTopicArray, listHeader }: listProps) {
           </li>
         ))}
       </ul>
-      <Button type='sim' size='mid' text='More categories' arrow='ra' />
+      <Button
+        type='sim'
+        size='mid'
+        text='More categories'
+        arrow='ra'
+        clickHandle={() => console.log('clicked')}
+      />
     </div>
   );
 }

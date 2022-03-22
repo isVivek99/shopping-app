@@ -24,6 +24,9 @@ const CategoryProductList = ({
         <ListElementOne
           listHeader={listHeader}
           listSubTopicArray={listSubTopicArray}
+          onClick={function (): void {
+            throw new Error('Function not implemented.');
+          }}
         />
       </div>
       <div className='d-flex justify-content-center flex-wrap'>
@@ -34,6 +37,7 @@ const CategoryProductList = ({
               pDesc={iter.pDesc}
               price={iter.price}
               img={iter.img}
+              isCart={false}
             />
           </div>
         ))}
