@@ -5,16 +5,27 @@ import 'typeface-poppins';
 import 'assets/scss/index.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import reportWebVitals from './reportWebVitals';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reduceProducts from 'reducers';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { persistStore, persistReducer } from 'redux-persist';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import storage from 'redux-persist/lib/storage';
 
+const persistConfig = {
+  key: 'persist-key',
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, reduceProducts);
+const store = createStore(persistedReducer, composeWithDevTools());
+const persistor = persistStore(store);
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <App />
+    </PersistGate>
+  </Provider>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

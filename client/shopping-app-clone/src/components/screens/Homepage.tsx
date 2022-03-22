@@ -1,4 +1,3 @@
-import Navbar from 'components/common/navbar/Navbar';
 import RecipeCard from 'components/common/card/RecipeCard';
 import CategoryProductList from 'components/common/categoryProductList/CategoryProductList';
 import { recipeDetails } from 'utils/recipeDetails';
@@ -9,7 +8,6 @@ function Homepage() {
     <div className='homepage'>
       <div className='homepage__components'>
         <div className='mb-3 py-lg-3'>
-          <Navbar />
           {/* recipes */}
           {recipeDetails.map((itr, idx) => (
             <div
@@ -23,6 +21,9 @@ function Homepage() {
                     subheading={recipe.subheading}
                     text={recipe.buttonText}
                     img={recipe.img}
+                    onClick={function (): void {
+                      throw new Error('Function not implemented.');
+                    }}
                   />
                 </div>
               ))}
