@@ -2,6 +2,7 @@ import RecipeCard from 'components/common/card/RecipeCard';
 import CategoryProductList from 'components/common/categoryProductList/CategoryProductList';
 import { recipeDetails } from 'utils/recipeDetails';
 import { productDetails } from 'utils/productDetails';
+import Rating from 'components/common/rating/Rating';
 import 'assets/scss/screens/homepage.scss';
 function Homepage() {
   return (
@@ -43,6 +44,7 @@ function Homepage() {
               </div>
             ))}
           </div>
+          <Rating type='static' stars={4} />
         </div>
       </div>
     </div>
