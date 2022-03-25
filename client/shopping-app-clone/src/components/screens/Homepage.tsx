@@ -1,22 +1,14 @@
-import Navbar from 'components/common/navbar/Navbar';
 import RecipeCard from 'components/common/card/RecipeCard';
 import CategoryProductList from 'components/common/categoryProductList/CategoryProductList';
 import { recipeDetails } from 'utils/recipeDetails';
 import { productDetails } from 'utils/productDetails';
+import Rating from 'components/common/rating/Rating';
 import 'assets/scss/screens/homepage.scss';
 function Homepage() {
-  const subTopicArray = [
-    'Bakery',
-    'Fruit and vegetables',
-    'Meat and fish',
-    'Drinks',
-  ];
-
   return (
     <div className='homepage'>
       <div className='homepage__components'>
         <div className='mb-3 py-lg-3'>
-          <Navbar />
           {/* recipes */}
           {recipeDetails.map((itr, idx) => (
             <div
@@ -30,6 +22,9 @@ function Homepage() {
                     subheading={recipe.subheading}
                     text={recipe.buttonText}
                     img={recipe.img}
+                    onClick={function (): void {
+                      throw new Error('Function not implemented.');
+                    }}
                   />
                 </div>
               ))}
@@ -38,25 +33,18 @@ function Homepage() {
           {/* recipes */}
           <div className='mx-auto pt-5'>
             {productDetails.map((itr, ind) => (
-              <div key={ind}>
-                {itr['categories'].map((category, index) => (
-                  <div key={index}>
-                    {category['Best selling products'] && (
-                      <CategoryProductList
-                        listSubTopicArray={
-                          category['Best selling products']?.subtopicList
-                        }
-                        listHeader='Best selling products'
-                        productArray={
-                          category['Best selling products']?.products
-                        }
-                      />
-                    )}
-                  </div>
-                ))}
+              <div key={ind} className='my-5'>
+                {
+                  <CategoryProductList
+                    listSubTopicArray={itr['categorySubTopicList']}
+                    listHeader={itr['categoryName']}
+                    productArray={itr['products']}
+                  />
+                }
               </div>
             ))}
           </div>
+          <Rating type='static' stars={4} />
         </div>
       </div>
     </div>

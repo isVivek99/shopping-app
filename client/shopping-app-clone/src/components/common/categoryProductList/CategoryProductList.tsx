@@ -2,7 +2,7 @@ import ListElementOne from "components/common/lists/ListElementOne";
 import ProductCardOne from "components/common/card/ProductCardOne";
 
 interface CategoryProductListProps {
-  listHeader: string;
+  listHeader: string | undefined;
   listSubTopicArray: Array<string> | undefined;
   productArray: Array<ObjProp> | undefined;
 }
@@ -19,23 +19,26 @@ const CategoryProductList = ({
   listSubTopicArray,
   productArray,
 }: CategoryProductListProps) => {
-  // const spreadObject = (obj) => {}
   return (
-    <div className="d-flex justify-content-center">
+    <div className="d-flex justify-content-center flex-wrap">
       <div className="me-5">
         <ListElementOne
           listHeader={listHeader}
           listSubTopicArray={listSubTopicArray}
+          onClick={function (): void {
+            throw new Error("Function not implemented.");
+          }}
         />
       </div>
-      <div className="d-flex justify-content">
+      <div className="d-flex justify-content-center flex-wrap">
         {productArray?.map((iter, ind) => (
-          <div key={ind} className="mx-2">
+          <div key={ind} className="mx-2 my-1">
             <ProductCardOne
               pName={iter.pName}
               pDesc={iter.pDesc}
               price={iter.price}
               img={iter.img}
+              isCart={false}
             />
           </div>
         ))}

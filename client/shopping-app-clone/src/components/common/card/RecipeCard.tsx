@@ -1,5 +1,4 @@
 import 'assets/scss/common/card/recipeCard.scss';
-import Image from 'assets/images/recipes/mutton-recipe.webp';
 import Button from 'components/common/button/Button';
 
 interface RecipeCardProps {
@@ -7,6 +6,7 @@ interface RecipeCardProps {
   subheading: string;
   text: string;
   img: string;
+  onClick: () => void;
 }
 const RecipeCard = ({
   heading,
@@ -24,7 +24,13 @@ const RecipeCard = ({
           className='position-absolute recipe__card__img'
         />
         <div className='recipe__btn position-absolute'>
-          <Button type='sec' size='mid' text={text} arrow='ra' />
+          <Button
+            type='sec'
+            size='mid'
+            text={text}
+            arrow='ra'
+            clickHandle={() => console.log('clicked')}
+          />
         </div>
         <div className='position-absolute recipe__card__banner'>
           <h3 className='f-12 text-green'>{subheading}</h3>
