@@ -1,0 +1,56 @@
+@import "assets/scss/_variables.scss";
+
+.ctn2 {
+  border: 1px solid $border-color-primary;
+  box-sizing: border-box;
+  border-radius: 12px;
+  padding: 0px;
+  width: 869px;
+  min-height: 280px;
+  justify-content: space-between;
+}
+.product__card__image2 {
+  margin-left: 32px;
+  align-self: center;
+  width: 236px;
+  max-height: 160px;
+  object-fit: cover;
+  border: 1px solid $border-color-primary;
+  border-radius: 12px;
+}
+
+.details2 {
+  margin-top: 32px;
+  flex-direction: column;
+}
+
+.list {
+  margin-top: 27px;
+  font-style: normal;
+  column-gap: 12px;
+  font-weight: 400;
+  font-size: 14px;
+  width: 237px;
+  color: $listItems-color;
+}
+
+.order {
+  flex-direction: column;
+  margin-top: 32px;
+  padding-right: 32px;
+  margin-left: 32px;
+}
+
+.shipping {
+  font-weight: 600;
+  color: $listItems-color;
+}
+
+.ship-time {
+  color: $listItems-color;
+  font-weight: 400;
+}
+
+.title1 {
+  font-weight: 600;
+}

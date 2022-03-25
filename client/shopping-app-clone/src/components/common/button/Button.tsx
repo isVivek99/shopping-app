@@ -1,5 +1,5 @@
-import React from 'react';
-import 'assets/scss/common/button/button.scss';
+import React from "react";
+import "assets/scss/common/button/button.scss";
 
 interface BtnProps {
   type: string;
@@ -20,12 +20,13 @@ const Button = ({
     <div>
       <button
         className={`${type} ${size}`}
-        style={{ borderRadius: '12px', fontWeight: '700', fontSize: '15px' }}
+        style={{ borderRadius: "12px", fontWeight: "700", fontSize: "15px" }}
         onClick={clickHandle}
       >
-        {arrow === 'la' && <i className='fas fa-angle-left'></i>}
+        {arrow === "la" && <i className="fas fa-angle-left"></i>}
+        {arrow === "fav" && <i className="fas fa-heart"></i>}
         {text}
-        {arrow === 'ra' && <i className='fas fa-angle-right'></i>}
+        {arrow === "ra" && <i className="fas fa-angle-right"></i>}
       </button>
     </div>
   );

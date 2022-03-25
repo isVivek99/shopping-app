@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import ListElementOne from 'components/common/lists/ListElementOne';
 import SlideCarousel from 'components/common/carousels/SlideCarousel';
-// import ProductCardOne from 'components/common/card/ProductCardOne';
 
 interface CategoryProductListProps {
   listHeader: string | undefined;
   listSubTopicArray: Array<string> | undefined;
   productArray: Array<ObjProp>;
 }
+
 interface ObjProp {
   pName: string;
   pDesc: string;

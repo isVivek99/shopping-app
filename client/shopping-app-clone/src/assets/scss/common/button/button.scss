@@ -1,4 +1,4 @@
-@import 'assets/scss/_variables.scss';
+@import "assets/scss/_variables.scss";
 
 .pri {
   background: $primary-color;
@@ -37,6 +37,10 @@
 }
 
 .fa-angle-left {
+  margin-right: 12px;
+}
+
+.fa-heart {
   margin-right: 12px;
 }
 
