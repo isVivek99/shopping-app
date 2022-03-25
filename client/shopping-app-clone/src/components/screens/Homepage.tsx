@@ -59,13 +59,6 @@ function Homepage() {
               </div>
             ))}
           </div>
-          <ProductCardTwo
-            pName="PRoduct Title"
-            pDesc="Something about the product and vlah blah"
-            price={98}
-            rating={3}
-            img="http://placeimg.com/640/480/city"
-          />
         </div>
       </div>
     </div>
