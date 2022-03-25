@@ -4,7 +4,7 @@ import CategoryProductList from "components/common/categoryProductList/CategoryP
 import { recipeDetails } from "utils/recipeDetails";
 import { productDetails } from "utils/productDetails";
 import "assets/scss/screens/homepage.scss";
-import ProductCardTwo from "components/common/card/ProductCardTwo";
+import ListRating from "components/common/lists/ListRating";
 
 function Homepage() {
   const subTopicArray = [
@@ -59,13 +59,7 @@ function Homepage() {
               </div>
             ))}
           </div>
-          <ProductCardTwo
-            pName="PRoduct Title"
-            pDesc="Something about the product and vlah blah"
-            price={98}
-            rating={3}
-            img="http://placeimg.com/640/480/city"
-          />
+          <ListRating />
         </div>
       </div>
     </div>

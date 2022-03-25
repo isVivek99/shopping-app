@@ -1,0 +1,11 @@
+@import "assets/scss/_variables.scss";
+
+.ctn3 {
+  flex-direction: column;
+}
+
+.listItems {
+  margin-top: 16px;
+  margin-right: 12px;
+  border: 1.5px solid $border-color-primary;
+}
