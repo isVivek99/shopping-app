@@ -27,7 +27,7 @@ const ProductCardOne = ({
 
   return (
     <div>
-      <div className='ctn'>
+      <div className='ctn mx-auto'>
         <div className='product__card__image__wrapper position-relative'>
           <img
             className='product__card__image'

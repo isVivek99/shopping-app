@@ -2,7 +2,7 @@ import RecipeCard from 'components/common/card/RecipeCard';
 import CategoryProductList from 'components/common/categoryProductList/CategoryProductList';
 import { recipeDetails } from 'utils/recipeDetails';
 import { productDetails } from 'utils/productDetails';
-import Rating from 'components/common/rating/Rating';
+
 import 'assets/scss/screens/homepage.scss';
 function Homepage() {
   return (
@@ -22,9 +22,6 @@ function Homepage() {
                     subheading={recipe.subheading}
                     text={recipe.buttonText}
                     img={recipe.img}
-                    onClick={function (): void {
-                      throw new Error('Function not implemented.');
-                    }}
                   />
                 </div>
               ))}
@@ -33,7 +30,7 @@ function Homepage() {
           {/* recipes */}
           <div className='mx-auto pt-5'>
             {productDetails.map((itr, ind) => (
-              <div key={ind} className='my-5'>
+              <div key={ind} className='mt-5 mx-3'>
                 {
                   <CategoryProductList
                     listSubTopicArray={itr['categorySubTopicList']}
@@ -44,7 +41,6 @@ function Homepage() {
               </div>
             ))}
           </div>
-          <Rating type='static' stars={4} />
         </div>
       </div>
     </div>
