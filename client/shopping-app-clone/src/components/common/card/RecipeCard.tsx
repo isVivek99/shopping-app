@@ -6,7 +6,6 @@ interface RecipeCardProps {
   subheading: string;
   text: string;
   img: string;
-  onClick: () => void;
 }
 const RecipeCard = ({
   heading,

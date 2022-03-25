@@ -9,8 +9,8 @@ function App() {
     <div className='App'>
       <Router>
         <div
-          className='mx-auto navbar__big w-100'
-          style={{ maxWidth: '1440px' }}
+          className='mx-auto navbar__big w-100 position-relative'
+          style={{ maxWidth: '1440px', zIndex: '1' }}
         >
           <Navbar />
         </div>

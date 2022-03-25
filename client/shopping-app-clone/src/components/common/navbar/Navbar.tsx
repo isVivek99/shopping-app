@@ -9,7 +9,7 @@ function Navbar() {
   return (
     <div>
       <div
-        className='d-flex justify-content-between  d-none d-lg-flex mx-auto'
+        className='d-flex justify-content-between  d-none d-lg-flex mx-auto pt-2'
         style={{ width: '98%' }}
       >
         <div className='d-flex '>
