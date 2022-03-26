@@ -1,11 +1,13 @@
+import { useState, useEffect } from "react";
 import ListElementOne from "components/common/lists/ListElementOne";
-import ProductCardOne from "components/common/card/ProductCardOne";
+import SlideCarousel from "components/common/carousels/SlideCarousel";
 
 interface CategoryProductListProps {
-  listHeader: string;
+  listHeader: string | undefined;
   listSubTopicArray: Array<string> | undefined;
-  productArray: Array<ObjProp> | undefined;
+  productArray: Array<ObjProp>;
 }
+
 interface ObjProp {
   pName: string;
   pDesc: string;
@@ -18,26 +20,45 @@ const CategoryProductList = ({
   listSubTopicArray,
   productArray,
 }: CategoryProductListProps) => {
-  // const spreadObject = (obj) => {}
+  const [desktopWidth, setDesktopWidth] = useState(window.innerWidth);
+
+  const updateMedia = () => {
+    setDesktopWidth(window.innerWidth);
+  };
+
+  const getCardCount = () => {
+    if (desktopWidth >= 1399) {
+      return 4;
+    } else if (desktopWidth >= 1200) {
+      return 3;
+    } else if (desktopWidth >= 1150) {
+      return 2;
+    } else if (desktopWidth >= 839) {
+      return 2;
+    } else {
+      return 1;
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateMedia);
+    return () => window.removeEventListener("resize", updateMedia);
+  }, []);
   return (
-    <div className="d-flex justify-content-center">
+    <div className="d-flex align-items-center justify-content-center justify-content-lg-around justify-content-md-between  flex-wrap">
       <div className="me-5">
         <ListElementOne
           listHeader={listHeader}
           listSubTopicArray={listSubTopicArray}
+          onClick={function (): void {
+            throw new Error("Function not implemented.");
+          }}
         />
       </div>
-      <div className="d-flex justify-content">
-        {productArray?.map((iter, ind) => (
-          <div key={ind} className="mx-2">
-            <ProductCardOne
-              pName={iter.pName}
-              pDesc={iter.pDesc}
-              price={iter.price}
-              img={iter.img}
-            />
-          </div>
-        ))}
+      <div className="d-flex flex-wrap">
+        <div className="">
+          <SlideCarousel show={getCardCount()} productArray={productArray} />
+        </div>
       </div>
     </div>
   );
