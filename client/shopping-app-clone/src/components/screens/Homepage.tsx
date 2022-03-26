@@ -4,7 +4,6 @@ import CategoryProductList from "components/common/categoryProductList/CategoryP
 import { recipeDetails } from "utils/recipeDetails";
 import { productDetails } from "utils/productDetails";
 import "assets/scss/screens/homepage.scss";
-import ListRating from "components/common/lists/ListRating";
 
 function Homepage() {
   const subTopicArray = [
@@ -59,7 +58,6 @@ function Homepage() {
               </div>
             ))}
           </div>
-          <ListRating />
         </div>
       </div>
     </div>

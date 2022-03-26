@@ -2,10 +2,28 @@
 
 .ctn3 {
   flex-direction: column;
+  max-width: 268px;
+}
+
+.checkbox {
+  margin-right: 12px;
+  border: 1.5px solid $border-color-primary;
+  height: 20px;
+  width: 20px;
+}
+
+.checkbox[type="checkbox"]:checked {
+  /* <-- Style its checked state */
+  background: black;
+  color: black;
 }
 
 .listItems {
   margin-top: 16px;
-  margin-right: 12px;
-  border: 1.5px solid $border-color-primary;
+  display: flex;
+  align-items: center;
+}
+
+.categoryListItem {
+  justify-content: space-between;
 }

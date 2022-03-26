@@ -12,6 +12,9 @@ button {
 }
 .off {
   color: $secondary-color;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: $border-color-primary;
+  color: $background-color-white;
 }
 
 .star {
