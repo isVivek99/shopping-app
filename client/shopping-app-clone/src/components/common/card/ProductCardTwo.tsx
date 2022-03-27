@@ -48,10 +48,22 @@ const ProductCardTwo = ({
           <span className="mt-4 f-12 shipping ">Free Shipping</span>
           <span className="f-12 ship-time">Delivery in 1 day</span>
           <span className="mt-3 order-btn">
-            <Button type="pri" size="mid" text="Product Detail" arrow="ra" />
+            <Button
+              type="pri"
+              size="mid"
+              text="Product Detail"
+              arrow="ra"
+              clickHandle={function () {}}
+            />
           </span>
           <span className="mt-2 order-btn">
-            <Button type="sim" size="sml" text="Add to wishlist" arrow="fav" />
+            <Button
+              type="sim"
+              size="sml"
+              text="Add to wishlist"
+              arrow="fav "
+              clickHandle={function () {}}
+            />
           </span>
         </div>
       </div>
