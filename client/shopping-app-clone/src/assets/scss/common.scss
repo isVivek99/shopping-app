@@ -21,3 +21,13 @@
 .bold {
   font-weight: 700;
 }
+.page__path {
+  font-size: 12px;
+  color: $listItems-color;
+}
+.color__gray {
+  color: $border-color-primary;
+}
+.bg__color__gray {
+  background-color: $background-color-gray;
+}

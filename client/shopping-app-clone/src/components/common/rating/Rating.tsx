@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "assets/scss/common/rating/rating.scss";
+import React, { useState } from 'react';
+import 'assets/scss/common/rating/rating.scss';
 
 interface ratingProps {
   type: string;
@@ -11,30 +11,30 @@ const Rating = ({ type, stars }: ratingProps) => {
   const [hover, setHover] = useState(0);
 
   return (
-    <div className="star-rating">
+    <div className='star-rating'>
       {[...Array(5)].map((star, index) => {
         index += 1;
-        if (type === "dynamic") {
+        if (type === 'dynamic') {
           return (
             <button
-              type="button"
+              type='button'
               key={index}
-              className={index <= (hover || rating) ? "on" : "off"}
+              className={index <= (hover || rating) ? 'on' : 'off'}
               onClick={() => setRating(index)}
               onMouseEnter={() => setHover(index)}
               onMouseLeave={() => setHover(rating)}
             >
-              <span className="star">&#9733;</span>
+              <span className='star'>&#9733;</span>
             </button>
           );
         }
         return (
           <button
-            type="button"
+            type='button'
             key={index}
-            className={index <= rating ? "on" : "off"}
+            className={index <= rating ? 'on' : 'off'}
           >
-            <span className="star">&#9733;</span>
+            <span className='star'>&#9733;</span>
           </button>
         );
       })}

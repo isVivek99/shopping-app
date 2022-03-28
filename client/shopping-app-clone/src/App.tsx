@@ -2,6 +2,7 @@ import './assets/scss/App.scss';
 import Homepage from './components/screens/Homepage';
 import Navbar from 'components/common/navbar/Navbar';
 import Cart from 'components/screens/Cart';
+import Product from 'components/screens/Product';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Homepage />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/product' element={<Product />} />
         </Routes>
       </Router>
     </div>
