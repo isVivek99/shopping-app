@@ -8,6 +8,13 @@
     overflow: hidden;
     position: relative;
 
+    @include rwd(200) {
+      width: 224px;
+    }
+    @include sm {
+      width: 508px;
+    }
+
     .next__btn {
       position: absolute;
       right: 0;
@@ -36,6 +43,16 @@
 .carousel__custom__content {
   transition: all 250ms ease;
 }
-// .carousel__custom__content > * {
-//   width: 500px;
-// }
+
+.carousel__custom__content__img {
+  height: 500px;
+  width: 500px;
+  @include rwd(200) {
+    height: 220px;
+    width: 220px;
+  }
+  @include sm {
+    height: 500px;
+    width: 500px;
+  }
+}

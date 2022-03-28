@@ -3,6 +3,11 @@ import Rating from 'components/common/rating/Rating';
 import ListItemsCard from 'components/common/lists/ListItemsCard';
 import Button from 'components/common/button/Button';
 import SingleSlideCarousel from 'components/common/carousels/SingleSlideCarousel';
+import expressImage from 'assets/images/promises/express-delivery-icon.webp';
+import expressOrder from 'assets/images/promises/footer-best-price.webp';
+import wideAssortment from 'assets/images/promises/footer-genuine-products.webp';
+import rupeeImage from 'assets/images/promises/footer-easy-returns.webp';
+import 'assets/scss/common.scss';
 import 'assets/scss/screens/product.scss';
 
 const Product = () => {
@@ -17,9 +22,11 @@ const Product = () => {
       </div>
       <div className=' d-flex flex-column flex-lg-row mx-auto'>
         <div className='col-lg-6 col-12'>
-          <SingleSlideCarousel />
+          <div className='mb-2'>
+            <SingleSlideCarousel />
+          </div>
         </div>
-        <div className='col-lg-6 col-12 px-2 px-lg-5'>
+        <div className='col-lg-6 col-12 px-4 px-lg-5'>
           <h1 className='product__page__heading mb-0'>
             Carrots from Tomissy Farm
           </h1>
@@ -124,6 +131,81 @@ const Product = () => {
               <i className='fas fa-heart mx-2'></i>
             </div>
             <p className='wishlist__text'>Add to my wish list</p>
+          </div>
+          <div className='product__promises__section mb-3'>
+            <div className='promises__header'>Why shop from freshness?</div>
+            <div className='promises__container d-grid my-3'>
+              <div className='promises__container__img__div pe-2'>
+                <img
+                  src={expressImage}
+                  alt='express delivery'
+                  className='img-fluid promises__container__img'
+                />
+              </div>
+              <div className='promises__container__content'>
+                <p className='promises__container__content__line__one mb-1 f-12'>
+                  10 minute grocery now
+                </p>
+                <p className='promises__container__content__line__two mb-0 f-12'>
+                  Get your order delivered to your doorstep at the earliest from
+                  dark stores near you.
+                </p>
+              </div>
+            </div>
+            <div className='promises__container d-grid my-3'>
+              <div className='promises__container__img__div pe-2'>
+                <img
+                  src={expressOrder}
+                  alt='express delivery'
+                  className='img-fluid promises__container__img'
+                />
+              </div>
+              <div className='promises__container__content'>
+                <p className='promises__container__content__line__one mb-1 f-12'>
+                  Best Prices & Offers
+                </p>
+                <p className='promises__container__content__line__two mb-0 f-12'>
+                  Cheaper prices than your local supermarket, great cashback
+                  offers to top it off.
+                </p>
+              </div>
+            </div>
+            <div className='promises__container d-grid my-3'>
+              <div className='promises__container__img__div pe-2'>
+                <img
+                  src={wideAssortment}
+                  alt='express delivery'
+                  className='img-fluid promises__container__img'
+                />
+              </div>
+              <div className='promises__container__content'>
+                <p className='promises__container__content__line__one mb-1 f-12'>
+                  Wide Assortment
+                </p>
+                <p className='promises__container__content__line__two mb-0 f-12'>
+                  Choose from 5000+ products across food, personal care,
+                  household & other categories.
+                </p>
+              </div>
+            </div>
+            <div className='promises__container d-grid my-3'>
+              <div className='promises__container__img__div pe-2'>
+                <img
+                  src={rupeeImage}
+                  alt='express delivery'
+                  className='img-fluid promises__container__img'
+                />
+              </div>
+              <div className='promises__container__content'>
+                <p className='promises__container__content__line__one mb-0 f-12'>
+                  Easy Returns
+                </p>
+                <p className='promises__container__content__line__two mb-0 f-12'>
+                  Not satisfied with a product? Return it at the doorstep & get
+                  a refund within hours.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
