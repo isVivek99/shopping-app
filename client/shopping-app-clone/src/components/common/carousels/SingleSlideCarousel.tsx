@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import 'assets/scss/common/carousels/singleSlideCarousel.scss';
 import imgOne from 'assets/images/products/drinks/glucond/glucond-1.webp';
 import imgTwo from 'assets/images/products/drinks/glucond/glucond-2.webp';
@@ -7,6 +7,19 @@ import imgThree from 'assets/images/products/drinks/glucond/glucond-3.jpeg';
 const SingleSlideCarousel = () => {
   const [slideCount, setSlideCount] = useState(4);
   const [currentIndex, setcurrentIndex] = useState(0);
+
+  const getCardWidth = () => {
+    if (window.innerWidth < 576) {
+      return 224;
+    }
+    return 508;
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', getCardWidth);
+    return () => window.removeEventListener('resize', getCardWidth);
+  }, []);
+
   const next = () => {
     setcurrentIndex((prevState) => prevState + 1);
   };
@@ -23,7 +36,9 @@ const SingleSlideCarousel = () => {
 
         <div
           className='carousel__custom__content d-flex'
-          style={{ transform: `translateX(-${currentIndex * 224}px)` }}
+          style={{
+            transform: `translateX(-${currentIndex * getCardWidth()}px)`,
+          }}
         >
           <div className='carousel__custom__content__img px-1'>
             <img

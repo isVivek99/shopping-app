@@ -1,7 +1,7 @@
 import RecipeCard from 'components/common/card/RecipeCard';
 import CategoryProductList from 'components/common/categoryProductList/CategoryProductList';
 import { recipeDetails } from 'utils/recipeDetails';
-import { productDetails } from 'utils/productDetails';
+import { categoryListDetails } from 'utils/categoryListDetails';
 
 import 'assets/scss/screens/homepage.scss';
 function Homepage() {
@@ -29,7 +29,7 @@ function Homepage() {
           ))}
           {/* recipes */}
           <div className='mx-auto pt-5'>
-            {productDetails.map((itr, ind) => (
+            {categoryListDetails.map((itr, ind) => (
               <div key={ind} className='mt-5 mx-3'>
                 {
                   <CategoryProductList
