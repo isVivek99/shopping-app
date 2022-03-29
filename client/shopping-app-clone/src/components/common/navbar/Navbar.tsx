@@ -3,9 +3,13 @@ import 'assets/scss/common/navbar.scss';
 import brandImage from 'assets/images/Brand.png';
 import InputElementOne from 'components/common/input/InputElementOne';
 import NavbarMobile from 'components/common/navbar/NavbarMobile';
+import { useSelector } from 'react-redux';
+import reduceProducts from 'reducers';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
+  type RootStore = ReturnType<typeof reduceProducts>;
+  const productList = useSelector((state: RootStore) => state.myState);
   return (
     <div>
       <div
@@ -36,7 +40,7 @@ function Navbar() {
         <div className='position-relative'>
           <Link to='/cart'>
             <div className='position-absolute text-center cart__item__count'>
-              <span className='f-12'>4</span>
+              <span className='f-12'>{productList.length}</span>
             </div>
             <div className='fa__icon__size px-3'>
               <i className='fas fa-bag-shopping'></i>
