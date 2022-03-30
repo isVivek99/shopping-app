@@ -13,6 +13,7 @@ export const categoryListDetails = [
         pDesc: 'exotic & fresh',
         pWeight: '125g',
         price: 149,
+        rating: 4,
         img: 'images/products/fruits&vegetables/blueberries/blueberries.webp',
       },
       {
@@ -27,12 +28,14 @@ export const categoryListDetails = [
         pDesc: 'Boneless | Fillet',
         pWeight: '450g',
         price: 229,
-        img: 'images/products/meat&fish/chicken-breast/chicken_breast.webp',
+        rating: 4,
+        img: 'images/products/meat&fish/chicken-breast/chicken_breast-1.webp',
       },
       {
         pName: 'Yellowfin Tuna',
         pDesc: 'Seawater fish',
         pWeight: '300g',
+        rating: 4,
         price: 229,
         img: 'images/products/meat&fish/tuna/tuna.webp',
       },
@@ -47,6 +50,7 @@ export const categoryListDetails = [
         pDesc: 'local & fresh',
         pWeight: '250g',
         price: 14.49,
+        rating: 4,
         img: 'images/products/fruits&vegetables/carrots/carrot-1.webp',
       },
       {
@@ -54,6 +58,7 @@ export const categoryListDetails = [
         pDesc: 'local & fresh',
         pWeight: '30 peices',
         price: 235,
+        rating: 4,
         img: 'images/products/bakery/brown-eggs/brownEgg-1.png',
       },
       {
@@ -61,6 +66,7 @@ export const categoryListDetails = [
         pDesc: '6x1 L Multipack ',
         pWeight: '450g',
         price: 379,
+        rating: 4,
         img: 'images/products/bakery/milk/milk-1.webp',
       },
       {
@@ -68,7 +74,8 @@ export const categoryListDetails = [
         pDesc: 'barn raised',
         pWeight: '500g',
         price: 559,
-        img: 'images/products/meat&fish/mutton-lean-curry-cut/lean_goat_curry-cut.png',
+        rating: 4,
+        img: 'images/products/meat&fish/mutton-lean-curry-cut/lean_goat_curry-cut-1.png',
       },
     ],
   },
