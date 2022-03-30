@@ -2,11 +2,11 @@ import RecipeCard from 'components/common/card/RecipeCard';
 import CategoryProductList from 'components/common/categoryProductList/CategoryProductList';
 import { recipeDetails } from 'utils/recipeDetails';
 import { categoryListDetails } from 'utils/categoryListDetails';
-
 import 'assets/scss/screens/homepage.scss';
+import 'assets/scss/common.scss';
 function Homepage() {
   return (
-    <div className='homepage'>
+    <div className='homepage screen'>
       <div className='homepage__components'>
         <div className='mb-3 py-lg-3'>
           {/* recipes */}

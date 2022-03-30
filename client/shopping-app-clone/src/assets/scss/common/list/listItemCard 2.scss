@@ -1,0 +1,28 @@
+@import 'assets/scss/_variables.scss';
+.list {
+  margin-top: 27px;
+  font-style: normal;
+  column-gap: 12px;
+  font-weight: 400;
+  font-size: 14px;
+  width: 237px;
+  color: $listItems-color;
+}
+.category {
+  font-weight: 400;
+  font-size: 14px;
+  color: $listItems-color;
+}
+.value {
+  font-weight: 400;
+  font-size: 14px;
+}
+.black {
+  color: $black-color;
+}
+.gray {
+  color: $listItems-color;
+}
+.green {
+  color: $text-color-green;
+}
