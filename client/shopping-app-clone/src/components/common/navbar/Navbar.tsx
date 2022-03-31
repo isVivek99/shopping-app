@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 function Navbar() {
   type RootStore = ReturnType<typeof reduceProducts>;
-  const productList = useSelector((state: RootStore) => state.myState);
+  const productList = useSelector((state: RootStore) => state?.myState) || [];
   return (
     <div>
       <div
@@ -31,7 +31,9 @@ function Navbar() {
         <hr className='d-flex d-none d-lg-flex mt-1 mb-4' />
       </div>
       <div className='d-flex align-items-center mx-3 d-none d-lg-flex mb-4'>
-        <img src={brandImage} alt='brandImage' />
+        <Link to='/'>
+          <img src={brandImage} alt='brandImage' />
+        </Link>
         <InputElementOne />
 
         <div className='fa__icon__size px-3'>

@@ -13,17 +13,19 @@ interface productCardProps {
   price: number;
   img: string;
   isCart: boolean;
+  rating: number;
+  id: number;
 }
 
 const CategoryListing = ({ productListDetails }: categoryListingProps) => {
-  // console.log((productListDetails);
-  console.log((productListDetails[0] as any).drinks);
-
   const { category } = useParams();
   //   const temp: string = category ? category : 'bakery';
   return (
     <div className='screen'>
-      CategoryListing: {category}
+      <div className='f-12 p-3 '>
+        {' '}
+        <span className='page__path'>Homepage /</span> {category}
+      </div>
       <div className='category__listing__products d-flex flex-wrap justify-content-around'>
         {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-ignore */}
@@ -36,6 +38,8 @@ const CategoryListing = ({ productListDetails }: categoryListingProps) => {
                 price={iter.price}
                 img={iter.img}
                 isCart={false}
+                rating={iter.rating}
+                id={iter.id}
               />
             </div>
           )

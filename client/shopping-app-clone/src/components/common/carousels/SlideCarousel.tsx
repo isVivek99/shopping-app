@@ -8,10 +8,13 @@ interface SlideCarouselProps {
 }
 
 interface ObjProp {
+  discount?: string;
   pName: string;
   pDesc: string;
   price: number;
   img: string;
+  rating: number;
+  id: number;
 }
 
 const SlideCarousel = ({ show, productArray }: SlideCarouselProps) => {
@@ -69,7 +72,10 @@ const SlideCarousel = ({ show, productArray }: SlideCarouselProps) => {
                     pDesc={iter.pDesc}
                     price={iter.price}
                     img={iter.img}
-                    isCart={false}
+                    isCart={true}
+                    rating={iter.rating}
+                    discount={iter.discount}
+                    id={iter.id}
                   />
                 </div>
               ))}

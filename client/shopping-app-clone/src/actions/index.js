@@ -4,3 +4,10 @@ export const addProducts = (product) => {
     payload: { ...product },
   };
 };
+
+export const removeProducts = (product) => {
+  return {
+    type: 'REMOVE_PRODUCT',
+    payload: { ...product },
+  };
+};

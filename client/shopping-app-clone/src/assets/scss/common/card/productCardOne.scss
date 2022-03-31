@@ -8,7 +8,7 @@
   border-radius: 12px;
   padding: 16px;
   width: 268px;
-  min-height: 332px;
+  max-height: 370px;
 }
 
 .product__card__image {
@@ -26,12 +26,12 @@
 
 .buy {
   margin-top: 16px;
+  height: 53px;
   display: flex;
   justify-content: space-between;
 }
 
 .title {
-  font-style: normal;
   font-weight: 500;
   font-size: 15px;
   line-height: 22px;
@@ -39,18 +39,24 @@
 
 .summary {
   margin-top: 4px;
-  font-style: normal;
-  font-style: normal;
+
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
 }
 
-.price {
-  font-style: normal;
+.discount__price {
   font-weight: 600;
   font-size: 18px;
   line-height: 27px;
+}
+
+.actual__price {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  text-decoration: line-through;
+  color: $listItems-color;
 }
 
 .discountTag {

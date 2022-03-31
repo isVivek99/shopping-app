@@ -1,0 +1,16 @@
+@import 'assets/scss/_variables.scss';
+
+.cart__header {
+  font-size: 22px;
+  line-height: 34px;
+  font-weight: 600;
+}
+.cart {
+  width: 468px;
+  border: 1px solid $border-color-primary;
+  border-radius: 12px;
+}
+.cart__line {
+  color: $listItems-color;
+  line-height: 18px;
+}

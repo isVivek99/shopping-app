@@ -13,6 +13,8 @@ interface ObjProp {
   pDesc: string;
   price: number;
   img: string;
+  rating: number;
+  id: number;
 }
 
 const CategoryProductList = ({

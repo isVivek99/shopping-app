@@ -4,9 +4,10 @@ import 'assets/scss/common/rating/rating.scss';
 interface ratingProps {
   type: string;
   stars: number;
+  sizePx?: number;
 }
 
-const Rating = ({ type, stars }: ratingProps) => {
+const Rating = ({ type, stars, sizePx }: ratingProps) => {
   const [rating, setRating] = useState(stars);
   const [hover, setHover] = useState(0);
 
@@ -32,9 +33,9 @@ const Rating = ({ type, stars }: ratingProps) => {
           <button
             type='button'
             key={index}
-            className={index <= rating ? 'on' : 'off'}
+            className={index <= rating ? 'on px-1' : 'off px-1'}
           >
-            <span className='star'>&#9733;</span>
+            <span className={`star f-${sizePx} `}>&#9733;</span>
           </button>
         );
       })}
