@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import ProductCardOne from 'components/common/card/ProductCardOne';
-import 'assets/scss/common/carousels/slideCarousel.scss';
+import { useEffect, useState } from "react";
+import ProductCardOne from "components/common/card/ProductCardOne";
+import "assets/scss/common/carousels/slideCarousel.scss";
 
 interface SlideCarouselProps {
   show: number;
@@ -47,15 +47,15 @@ const SlideCarousel = ({ show, productArray }: SlideCarouselProps) => {
 
   return (
     <div>
-      <div className='carousel-container'>
-        <div className='carousel-wrapper'>
+      <div className="carousel-container">
+        <div className="carousel-wrapper">
           {length !== show && currentIndex !== 0 && (
-            <button className='left-arrow' onClick={prev}>
+            <button className="left-arrow" onClick={prev}>
               &lt;
             </button>
           )}
 
-          <div className='carousel-content-wrapper'>
+          <div className="carousel-content-wrapper">
             <div
               className={`carousel-content show-${show}`}
               style={{
@@ -63,7 +63,7 @@ const SlideCarousel = ({ show, productArray }: SlideCarouselProps) => {
               }}
             >
               {productArray?.map((iter, ind) => (
-                <div key={ind} className=' my-1'>
+                <div key={ind} className=" my-1">
                   <ProductCardOne
                     pName={iter.pName}
                     pDesc={iter.pDesc}
@@ -76,7 +76,7 @@ const SlideCarousel = ({ show, productArray }: SlideCarouselProps) => {
             </div>
           </div>
           {length !== show && currentIndex !== length - show && (
-            <button className='right-arrow' onClick={next}>
+            <button className="right-arrow" onClick={next}>
               &gt;
             </button>
           )}
