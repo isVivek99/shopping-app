@@ -25,7 +25,7 @@ const Tags = ({ type, size, text, close }: TagProps): JSX.Element => {
       className={`tag ${type} ${size}`}
       style={{
         borderRadius: "12px",
-        display: "flex",
+        display: "inline",
         alignItems: "center",
         fontStyle: "normal",
         fontSize: "12px",

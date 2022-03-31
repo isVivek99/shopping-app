@@ -4,6 +4,7 @@ import { recipeDetails } from "utils/recipeDetails";
 import { productDetails } from "utils/productDetails";
 
 import "assets/scss/screens/homepage.scss";
+import Footer from "components/common/footer/Footer";
 function Homepage() {
   return (
     <div className="homepage">
@@ -41,6 +42,7 @@ function Homepage() {
               </div>
             ))}
           </div>
+          <Footer />
         </div>
       </div>
     </div>
