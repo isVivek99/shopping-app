@@ -3,9 +3,13 @@ import 'assets/scss/common/navbar.scss';
 import brandImage from 'assets/images/Brand.png';
 import InputElementOne from 'components/common/input/InputElementOne';
 import NavbarMobile from 'components/common/navbar/NavbarMobile';
+import { useSelector } from 'react-redux';
+import reduceProducts from 'reducers';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
+  type RootStore = ReturnType<typeof reduceProducts>;
+  const productList = useSelector((state: RootStore) => state.myState);
   return (
     <div>
       <div
@@ -36,7 +40,7 @@ function Navbar() {
         <div className='position-relative'>
           <Link to='/cart'>
             <div className='position-absolute text-center cart__item__count'>
-              <span className='f-12'>4</span>
+              <span className='f-12'>{productList.length}</span>
             </div>
             <div className='fa__icon__size px-3'>
               <i className='fas fa-bag-shopping'></i>
@@ -44,23 +48,31 @@ function Navbar() {
           </Link>
         </div>
       </div>
-      <div className='d-lg-flex justify-content-around px-2 my-1 navbar__dropdown  d-none'>
-        <div className='d-flex align-items-center navbar__dropdown__item '>
-          <p className='px-1 f-14 m-0 py-2'>Bakery</p>
-          <i className='fas fa-angle-down'></i>
-        </div>
-        <div className='d-flex align-items-center navbar__dropdown__item'>
-          <p className='px-1 f-14 m-0 py-2'>Fruits and vegetables</p>
-          <i className='fas fa-angle-down'></i>
-        </div>
-        <div className='d-flex align-items-center navbar__dropdown__item'>
-          <p className='px-1 f-14 m-0 py-2'>Meat and fish</p>
-          <i className='fas fa-angle-down'></i>
-        </div>
-        <div className='d-flex align-items-center navbar__dropdown__item'>
-          <p className='px-1 f-14 m-0 py-2'>drinks</p>
-          <i className='fas fa-angle-down'></i>
-        </div>
+      <div className='d-lg-flex justify-content-around align-items-center px-2 my-1 navbar__dropdown  d-none'>
+        <Link to='/bakery' className='text__link'>
+          <div className='d-flex align-items-center navbar__dropdown__item '>
+            <p className='px-1 f-14 m-0 py-2'>Bakery</p>
+            <i className='fas fa-angle-down'></i>
+          </div>
+        </Link>
+        <Link to='/fruits&vegetables' className='text__link'>
+          <div className='d-flex align-items-center navbar__dropdown__item'>
+            <p className='px-1 f-14 m-0 py-2'>Fruits and vegetables</p>
+            <i className='fas fa-angle-down'></i>
+          </div>
+        </Link>
+        <Link to='/meat&fish' className='text__link'>
+          <div className='d-flex align-items-center navbar__dropdown__item'>
+            <p className='px-1 f-14 m-0 py-2'>Meat and fish</p>
+            <i className='fas fa-angle-down'></i>
+          </div>
+        </Link>
+        <Link to='/drinks' className='text__link'>
+          <div className='d-flex align-items-center navbar__dropdown__item'>
+            <p className='px-1 f-14 m-0 py-2'>drinks</p>
+            <i className='fas fa-angle-down'></i>
+          </div>
+        </Link>
       </div>
       <NavbarMobile />
     </div>

@@ -1,6 +1,6 @@
-import Button from "../button/Button";
-import ListItemsCard from "../lists/ListItemsCard";
-import Rating from "../rating/Rating";
+import Button from "components/common/button/Button";
+import ListItemsCard from "components/common/lists/ListItemsCard";
+import Rating from "components/common/rating/Rating";
 import "assets/scss/common/card/productCardTwo.scss";
 
 interface productCardProps {
@@ -29,18 +29,14 @@ const ProductCardTwo = ({
           <span className="f-12 desc">{pDesc}</span>
           <Rating type="static" stars={rating} />
           <span className="list">
-            <ListItemsCard category="Freshness" value="New" highlight={true} />
+            <ListItemsCard category="Freshness" value="New" color="green" />
             <ListItemsCard
               category="Farm"
               value="Grocery Tarm Fields"
-              highlight={false}
+              color="gray"
             />
-            <ListItemsCard
-              category="Delivery"
-              value="Europe"
-              highlight={false}
-            />
-            <ListItemsCard category="Stock" value="320 pcs" highlight={true} />
+            <ListItemsCard category="Delivery" value="Europe" color="gray" />
+            <ListItemsCard category="Stock" value="320 pcs" color="green" />
           </span>
         </div>
         <div className="d-flex order">
@@ -48,22 +44,10 @@ const ProductCardTwo = ({
           <span className="mt-4 f-12 shipping ">Free Shipping</span>
           <span className="f-12 ship-time">Delivery in 1 day</span>
           <span className="mt-3 order-btn">
-            <Button
-              type="pri"
-              size="mid"
-              text="Product Detail"
-              arrow="ra"
-              clickHandle={function () {}}
-            />
+            <Button type="pri" size="mid" text="Product Detail" arrow="ra" />
           </span>
           <span className="mt-2 order-btn">
-            <Button
-              type="sim"
-              size="sml"
-              text="Add to wishlist"
-              arrow="fav "
-              clickHandle={function () {}}
-            />
+            <Button type="sim" size="sml" text="Add to wishlist" arrow="fav" />
           </span>
         </div>
       </div>

@@ -1,13 +1,12 @@
 import RecipeCard from "components/common/card/RecipeCard";
 import CategoryProductList from "components/common/categoryProductList/CategoryProductList";
 import { recipeDetails } from "utils/recipeDetails";
-import { productDetails } from "utils/productDetails";
-
+import { categoryListDetails } from "utils/categoryListDetails";
 import "assets/scss/screens/homepage.scss";
-import Footer from "components/common/footer/Footer";
+import "assets/scss/common.scss";
 function Homepage() {
   return (
-    <div className="homepage">
+    <div className="homepage screen">
       <div className="homepage__components">
         <div className="mb-3 py-lg-3">
           {/* recipes */}
@@ -30,7 +29,7 @@ function Homepage() {
           ))}
           {/* recipes */}
           <div className="mx-auto pt-5">
-            {productDetails.map((itr, ind) => (
+            {categoryListDetails.map((itr, ind) => (
               <div key={ind} className="mt-5 mx-3">
                 {
                   <CategoryProductList
@@ -42,7 +41,6 @@ function Homepage() {
               </div>
             ))}
           </div>
-          <Footer />
         </div>
       </div>
     </div>
