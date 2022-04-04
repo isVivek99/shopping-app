@@ -18,6 +18,8 @@ export const categoryListDetails = [
         img: 'images/products/fruits&vegetables/blueberries/blueberries.webp',
         id: 107,
         quantity: 1,
+        addedToCart: false,
+        addedToWishlist: false,
       },
       {
         pName: 'Pomegranate',
@@ -29,6 +31,8 @@ export const categoryListDetails = [
         img: 'images/products/fruits&vegetables/pomegranate/pomogranate-1.webp',
         id: 150,
         quantity: 1,
+        addedToCart: false,
+        addedToWishlist: false,
       },
       {
         pName: 'Chicken Breast-Boneless',
@@ -40,6 +44,8 @@ export const categoryListDetails = [
         img: 'images/products/meat&fish/chicken-breast/chicken_breast-1.webp',
         id: 112,
         quantity: 1,
+        addedToCart: false,
+        addedToWishlist: false,
       },
       {
         pName: 'Yellowfin Tuna',
@@ -50,6 +56,8 @@ export const categoryListDetails = [
         img: 'images/products/meat&fish/tuna/tuna.webp',
         id: 119,
         quantity: 1,
+        addedToCart: false,
+        addedToWishlist: false,
       },
     ],
   },
@@ -66,6 +74,8 @@ export const categoryListDetails = [
         img: 'images/products/fruits&vegetables/carrots/carrot-1.webp',
         id: 108,
         quantity: 1,
+        addedToCart: false,
+        addedToWishlist: false,
       },
       {
         pName: 'Brown eggs',
@@ -77,6 +87,8 @@ export const categoryListDetails = [
         img: 'images/products/bakery/brown-eggs/brownEgg-1.png',
         id: 101,
         quantity: 1,
+        addedToCart: false,
+        addedToWishlist: false,
       },
       {
         pName: 'Milk',
@@ -87,6 +99,8 @@ export const categoryListDetails = [
         img: 'images/products/bakery/milk/milk-1.webp',
         id: 104,
         quantity: 1,
+        addedToCart: false,
+        addedToWishlist: false,
       },
       {
         pName: 'Mutton',
@@ -98,6 +112,8 @@ export const categoryListDetails = [
         img: 'images/products/meat&fish/mutton-lean-curry-cut/lean_goat_curry-cut-1.png',
         id: 116,
         quantity: 1,
+        addedToCart: false,
+        addedToWishlist: false,
       },
     ],
   },

@@ -5,8 +5,17 @@ import brandImageWhite from 'assets/images/brand-white.png';
 import brandImageWhiteMobile from 'assets/images/brand-white-mobile.png';
 import InputElementOne from '../input/InputElementOne';
 import { SidebarData } from 'utils/sideBarData';
+import { useSelector } from 'react-redux';
+import rootReducer from 'reducers';
 
 function NavbarMobile() {
+  // redux
+  type RootStore = ReturnType<typeof rootReducer>;
+  const productList =
+    useSelector((state: RootStore) => state?.reduceProducts?.myState) || [];
+
+  // navbar
+
   const [sidebar, setSidebar] = useState(false);
   const [activeTab, setActiveTab] = useState(-1);
   const showSidebar = () => setSidebar(!sidebar);
@@ -38,7 +47,7 @@ function NavbarMobile() {
             </div>
             <div className='position-relative'>
               <div className='position-absolute text-center cart__item__count'>
-                <span className='f-12'>4</span>
+                <span className='f-12'>{productList.length}</span>
               </div>
               <div className='fa__icon__size__lg px-3'>
                 <i className='fas fa-bag-shopping'></i>

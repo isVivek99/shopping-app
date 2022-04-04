@@ -4,6 +4,7 @@ import Navbar from 'components/common/navbar/Navbar';
 import Checkout from 'components/screens/Checkout/Checkout';
 import Product from 'components/screens/Product';
 import CategoryListing from 'components/screens/CategoryListing';
+import Wishlist from 'components/screens/Wishlist/Wishlist';
 import { productListDetails } from 'utils/productDetails.js';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -21,6 +22,7 @@ function App() {
           <Route path='/' element={<Homepage />} />
           <Route path='/cart' element={<Checkout />} />
           <Route path='/product' element={<Product />} />
+          <Route path='/wishlist' element={<Wishlist />} />
           <Route
             path='/:category'
             element={

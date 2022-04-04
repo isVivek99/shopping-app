@@ -1,0 +1,52 @@
+import { useSelector } from 'react-redux';
+import rootReducer from 'reducers';
+import ProductCardOne from 'components/common/card/ProductCardOne';
+
+interface cartProductProps {
+  discount?: string;
+  pName: string;
+  pDesc: string;
+  price: number;
+  img: string;
+  isCart: boolean;
+  rating: number;
+  id: number;
+  quantity: number;
+  addedToCart: boolean;
+}
+
+const Wishlist = () => {
+  type RootStore = ReturnType<typeof rootReducer>;
+
+  const productList =
+    useSelector((state: RootStore) => state?.reduceWishlist?.wishlist) || [];
+  const state = useSelector((state: RootStore) => state);
+  console.log(productList, state);
+
+  return (
+    <div className='screen'>
+      Wishlist
+      <div className='d-flex flex-wrap'>
+        {productList.map((product, index) => (
+          <div key={index} className='mx-2 mb-5'>
+            <ProductCardOne
+              pName={product.pName}
+              pDesc={product.pDesc}
+              price={product.price}
+              img={product.img}
+              isCart={true}
+              rating={product.rating}
+              id={product.id}
+              quantity={product.quantity}
+              addedToCart={product.addedToCart}
+              addedToWishlist={product.addedToWishlist}
+              productList={productList}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Wishlist;

@@ -1,19 +1,31 @@
+import { useState } from 'react';
 import Button from '../button/Button';
 import 'assets/scss/common/card/productCardOne.scss';
 import Tags from 'components/common/tags/Tags';
 import { useDispatch } from 'react-redux';
 import { addProducts } from 'actions';
 import Rating from 'components/common/rating/Rating';
-
+import { useNavigate } from 'react-router-dom';
+import { calculateDiscount } from 'utils/calculateDiscountPrice';
+import { removeFromWishlist } from 'actions';
 interface productCardProps {
   discount?: string;
   pName: string;
   pDesc: string;
   price: number;
   img: string;
-  isCart: boolean;
+  isCart?: boolean;
   rating: number;
   id: number;
+  quantity: number;
+  addedToCart: boolean;
+  addedToWishlist: boolean;
+  navigateLink?: string;
+  navigateString?: string;
+}
+
+interface productCardArrayProps extends productCardProps {
+  productList?: Array<productCardProps>;
 }
 
 const ProductCardOne = ({
@@ -25,20 +37,59 @@ const ProductCardOne = ({
   isCart,
   rating,
   id,
-}: productCardProps) => {
+  quantity,
+  addedToCart,
+  addedToWishlist,
+  productList,
+  navigateString,
+  navigateLink,
+}: productCardArrayProps) => {
+  const product = productList
+    ? productList.filter((product) => product.id === id)
+    : [];
+
+  const navigate = useNavigate();
+
+  const [showCartBtn, setShowCartBtn] = useState(
+    product[0] ? product[0].addedToCart || product[0].addedToWishlist : false
+  );
   const dispatch = useDispatch();
+  console.log(
+    product[0],
+    product[0]?.addedToCart,
+    product[0]?.addedToWishlist,
+    showCartBtn
+  );
+
+  const windowLocation = window.location.pathname.substring(1);
+
   const productClickHandler = () => {
-    dispatch(addProducts({ pName, pDesc, price, img, rating, discount, id }));
+    console.log('click');
+
+    dispatch(
+      addProducts({
+        pName,
+        pDesc,
+        price,
+        img,
+        rating,
+        discount,
+        id,
+        quantity,
+        addedToCart,
+        addedToWishlist,
+      })
+    );
+    setShowCartBtn(true);
+
+    if (product[0]?.addedToWishlist) {
+      console.log('delete from wishlist');
+      dispatch(removeFromWishlist({ id }));
+    }
   };
 
-  const calculateDiscount = (price: string | any) => {
-    const discountStr = discount?.substring(0, 2);
-    if (discountStr !== undefined) {
-      const discountNum = parseInt(discountStr);
-      const discountedPrice = price * (discountNum / 100);
-      return (price - discountedPrice).toFixed(2);
-    }
-    return null;
+  const showCartClickHandler = () => {
+    navigate(navigateLink || '../cart');
   };
 
   return (
@@ -70,7 +121,7 @@ const ProductCardOne = ({
             {discount ? (
               <div className='d-flex flex-column'>
                 <p className='discount__price mb-1'>
-                  ₹ {calculateDiscount(price)}
+                  ₹ {calculateDiscount(price, discount)}
                 </p>
                 <p className='actual__price mb-1'>₹ {price}</p>
               </div>
@@ -79,13 +130,49 @@ const ProductCardOne = ({
                 <p className='discount__price mb-1'>₹ {price}</p>
               </div>
             )}
-            <Button
-              type={'pri'}
-              size={'sml'}
-              text={'Buy Now'}
-              arrow={'ra'}
-              clickHandle={isCart ? productClickHandler : () => null}
-            />
+            {showCartBtn ? (
+              <div>
+                {product[0]?.addedToCart && windowLocation !== 'wishlist' && (
+                  <Button
+                    type={'pri'}
+                    size={'sml'}
+                    text={navigateString || 'View Cart-1'}
+                    arrow={'ra'}
+                    clickHandle={isCart ? showCartClickHandler : () => null}
+                  />
+                )}
+
+                {product[0]?.addedToWishlist &&
+                  windowLocation === 'wishlist' && (
+                    <Button
+                      type={'pri'}
+                      size={'sml'}
+                      text={'Add to Cart-1'}
+                      arrow={'ra'}
+                      clickHandle={isCart ? productClickHandler : () => null}
+                    />
+                  )}
+
+                {product[0]?.addedToWishlist &&
+                  windowLocation !== 'wishlist' && (
+                    <Button
+                      type={'pri'}
+                      size={'sml'}
+                      text={navigateString || 'View Cart-2'}
+                      arrow={'ra'}
+                      clickHandle={isCart ? showCartClickHandler : () => null}
+                    />
+                  )}
+              </div>
+            ) : (
+              <Button
+                type={'pri'}
+                size={'sml'}
+                text={'Add to Cart-2'}
+                arrow={'ra'}
+                clickHandle={isCart ? productClickHandler : () => null}
+              />
+            )}
           </div>
         </div>
       </div>

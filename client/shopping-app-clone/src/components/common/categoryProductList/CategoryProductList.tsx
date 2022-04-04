@@ -15,6 +15,9 @@ interface ObjProp {
   img: string;
   rating: number;
   id: number;
+  quantity: number;
+  addedToCart: boolean;
+  addedToWishlist: boolean;
 }
 
 const CategoryProductList = ({

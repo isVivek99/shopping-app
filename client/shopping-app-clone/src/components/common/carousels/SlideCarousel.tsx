@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import ProductCardOne from 'components/common/card/ProductCardOne';
+import rootReducer from 'reducers';
+import { useSelector } from 'react-redux';
 import 'assets/scss/common/carousels/slideCarousel.scss';
 
 interface SlideCarouselProps {
@@ -15,9 +17,19 @@ interface ObjProp {
   img: string;
   rating: number;
   id: number;
+  quantity: number;
+  addedToCart: boolean;
+  addedToWishlist: boolean;
 }
 
 const SlideCarousel = ({ show, productArray }: SlideCarouselProps) => {
+  type RootStore = ReturnType<typeof rootReducer>;
+  const productList1 =
+    useSelector((state: RootStore) => state?.reduceProducts?.myState) || [];
+
+  const productList2 =
+    useSelector((state: RootStore) => state?.reduceWishlist?.wishlist) || [];
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [length, setLength] = useState(productArray.length);
 
@@ -76,6 +88,12 @@ const SlideCarousel = ({ show, productArray }: SlideCarouselProps) => {
                     rating={iter.rating}
                     discount={iter.discount}
                     id={iter.id}
+                    quantity={iter.quantity}
+                    addedToCart={iter.addedToCart}
+                    addedToWishlist={iter.addedToWishlist}
+                    productList={productList1[0] ? productList1 : productList2}
+                    navigateString={productList1[0] ? 'View Cart' : 'Wishlist'}
+                    navigateLink={productList1[0] ? '../cart' : '../wishlist'}
                   />
                 </div>
               ))}
