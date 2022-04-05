@@ -24,10 +24,10 @@ interface ObjProp {
 
 const SlideCarousel = ({ show, productArray }: SlideCarouselProps) => {
   type RootStore = ReturnType<typeof rootReducer>;
-  const productList1 =
+  const productCartList =
     useSelector((state: RootStore) => state?.reduceProducts?.myState) || [];
 
-  const productList2 =
+  const productWishList =
     useSelector((state: RootStore) => state?.reduceWishlist?.wishlist) || [];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -91,9 +91,10 @@ const SlideCarousel = ({ show, productArray }: SlideCarouselProps) => {
                     quantity={iter.quantity}
                     addedToCart={iter.addedToCart}
                     addedToWishlist={iter.addedToWishlist}
-                    productList={productList1[0] ? productList1 : productList2}
-                    navigateString={productList1[0] ? 'View Cart' : 'Wishlist'}
-                    navigateLink={productList1[0] ? '../cart' : '../wishlist'}
+                    productCartList={productCartList}
+                    productWishList={productWishList}
+                    navigateString={'View Cart'}
+                    navigateLink={'../cart'}
                   />
                 </div>
               ))}
