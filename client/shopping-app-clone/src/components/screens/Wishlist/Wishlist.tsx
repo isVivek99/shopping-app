@@ -18,16 +18,16 @@ interface cartProductProps {
 const Wishlist = () => {
   type RootStore = ReturnType<typeof rootReducer>;
 
-  const productList =
+  const productWishList =
     useSelector((state: RootStore) => state?.reduceWishlist?.wishlist) || [];
   const state = useSelector((state: RootStore) => state);
-  console.log(productList, state);
+  console.log(productWishList, state);
 
   return (
     <div className='screen'>
       Wishlist
       <div className='d-flex flex-wrap'>
-        {productList.map((product, index) => (
+        {productWishList.map((product, index) => (
           <div key={index} className='mx-2 mb-5'>
             <ProductCardOne
               pName={product.pName}
@@ -40,7 +40,7 @@ const Wishlist = () => {
               quantity={product.quantity}
               addedToCart={product.addedToCart}
               addedToWishlist={product.addedToWishlist}
-              productList={productList}
+              productWishList={productWishList}
             />
           </div>
         ))}

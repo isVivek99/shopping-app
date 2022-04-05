@@ -15,20 +15,24 @@ interface productType {
   addedToWishlist: boolean;
 }
 
-interface DefaultState {
+interface DefaultState1 {
   myState: Array<productType>;
+}
+const defaultStateCartItems: DefaultState1 = {
+  myState: [],
+};
+
+interface DefaultState2 {
   wishlist: Array<productType>;
 }
-
-const defaultState: DefaultState = {
-  myState: [],
+const defaultStateWishlist: DefaultState2 = {
   wishlist: [],
 };
 
 const reduceProducts = (
-  state = defaultState || [],
+  state = defaultStateCartItems || [],
   action: { type: string; payload: productType }
-): DefaultState => {
+): DefaultState1 => {
   switch (action.type) {
     case 'ADD_TO_CART':
       console.log(state);
@@ -37,7 +41,6 @@ const reduceProducts = (
           ...state.myState,
           { ...action.payload, addedToCart: true, addedToWishlist: false },
         ],
-        wishlist: [],
       };
 
     case 'REMOVE_FROM_CART':
@@ -45,7 +48,7 @@ const reduceProducts = (
         (product) => product.id !== action.payload.id
       );
       console.log(arr1);
-      return { myState: arr1, wishlist: [] };
+      return { myState: arr1 };
 
     case 'ADD_QUANTITY':
       const arr2 = state.myState.map((product) =>
@@ -55,7 +58,7 @@ const reduceProducts = (
       );
       console.log(arr2);
 
-      return { myState: arr2, wishlist: [] };
+      return { myState: arr2 };
 
     case 'SUBTRACT_QUANTITY':
       const arr3 = state.myState.map((product) =>
@@ -65,7 +68,7 @@ const reduceProducts = (
       );
       console.log(arr3);
 
-      return { myState: arr3, wishlist: [] };
+      return { myState: arr3 };
 
     default:
       return state;
@@ -73,14 +76,13 @@ const reduceProducts = (
 };
 
 const reduceWishlist = (
-  state = defaultState || [],
+  state = defaultStateWishlist || [],
   action: { type: string; payload: productType }
-): DefaultState => {
+): DefaultState2 => {
   switch (action.type) {
     case 'ADD_TO_WISHLIST':
       console.log('wishliststate:', state);
       return {
-        myState: [],
         wishlist: [
           ...state.wishlist,
           { ...action.payload, addedToCart: false, addedToWishlist: true },
@@ -94,7 +96,6 @@ const reduceWishlist = (
       );
       console.log('newwishList:', arr1);
       return {
-        myState: [],
         wishlist: [...arr1],
       };
     default:

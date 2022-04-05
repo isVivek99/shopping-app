@@ -25,7 +25,8 @@ interface productCardProps {
 }
 
 interface productCardArrayProps extends productCardProps {
-  productList?: Array<productCardProps>;
+  productCartList?: Array<productCardProps>;
+  productWishList?: Array<productCardProps>;
 }
 
 const ProductCardOne = ({
@@ -40,18 +41,19 @@ const ProductCardOne = ({
   quantity,
   addedToCart,
   addedToWishlist,
-  productList,
+  productCartList,
+  productWishList,
   navigateString,
   navigateLink,
 }: productCardArrayProps) => {
-  const product = productList
-    ? productList.filter((product) => product.id === id)
+  const product = productCartList
+    ? productCartList.filter((product) => product.id === id)
     : [];
 
   const navigate = useNavigate();
 
   const [showCartBtn, setShowCartBtn] = useState(
-    product[0] ? product[0].addedToCart || product[0].addedToWishlist : false
+    product[0] ? product[0].addedToCart : false
   );
   const dispatch = useDispatch();
   console.log(
