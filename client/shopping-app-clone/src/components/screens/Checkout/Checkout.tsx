@@ -12,12 +12,15 @@ interface itemProps {
 const Cart = () => {
   type RootStore = ReturnType<typeof rootReducer>;
 
-  const productList =
+  const productCartList =
     useSelector((state: RootStore) => state?.reduceProducts?.myState) || [];
-  const state = useSelector((state: RootStore) => state);
-  console.log(productList, state);
 
-  const priceArray = productList.map((item) => {
+  const productWishList =
+    useSelector((state: RootStore) => state?.reduceWishlist?.wishlist) || [];
+
+  console.log(productCartList);
+
+  const priceArray = productCartList.map((item) => {
     const quantity = item.quantity;
     const itemPrice = calculateDiscount(
       item.price,
@@ -58,7 +61,7 @@ const Cart = () => {
                 state.
               </p>
               <div className='cart__products'>
-                {productList.map((product, index) => (
+                {productCartList.map((product, index) => (
                   <div key={index}>
                     <CartProduct
                       pName={product.pName}
@@ -71,6 +74,8 @@ const Cart = () => {
                       id={product.id}
                       quantity={product.quantity}
                       addedToCart={product.addedToCart}
+                      productCartList={productCartList}
+                      productWishList={productWishList}
                     />
                   </div>
                 ))}

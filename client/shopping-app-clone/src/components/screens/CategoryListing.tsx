@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import ProductCardOne from 'components/common/card/ProductCardOne';
+import RangeSlider from 'components/common/slider/RangeSlider';
 import 'assets/scss/common.scss';
 
 interface categoryListingProps {
@@ -22,7 +23,7 @@ interface productCardProps {
 
 const CategoryListing = ({ productListDetails }: categoryListingProps) => {
   const { category } = useParams();
-  //   const temp: string = category ? category : 'bakery';
+
   return (
     <div className='screen'>
       <div className='f-12 p-3 '>
@@ -30,7 +31,9 @@ const CategoryListing = ({ productListDetails }: categoryListingProps) => {
         <span className='page__path'>Homepage /</span> {category}
       </div>
       <div className='d-flex mx-auto'>
-        <div className='col-3'></div>
+        <div className='col-3'>
+          <RangeSlider />
+        </div>
         <div className='col-9'>
           <div className='category__listing__products d-flex flex-wrap justify-content-around'>
             {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}

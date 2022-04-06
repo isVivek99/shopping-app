@@ -1,4 +1,4 @@
-import 'assets/scss/screens/checkout/cartProduct.scss';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   removeProducts,
@@ -7,21 +7,26 @@ import {
   addToWishlist,
 } from 'actions';
 import Rating from 'components/common/rating/Rating';
-import { useSelector } from 'react-redux';
-import rootReducer from 'reducers';
 import { calculateDiscount } from 'utils/calculateDiscountPrice';
 import useCustomToast from 'components/common/toast/CustomToast';
-interface cartProductProps {
+import 'assets/scss/screens/checkout/cartProduct.scss';
+
+interface cartProductProps extends CartproductArrayProps {
   discount?: string;
   pName: string;
   pDesc: string;
   price: number;
   img: string;
-  isCart: boolean;
+  isCart?: boolean;
   rating: number;
   id: number;
   quantity: number;
   addedToCart: boolean;
+}
+
+interface CartproductArrayProps {
+  productCartList?: Array<cartProductProps> | [];
+  productWishList?: Array<cartProductProps> | [];
 }
 
 const CartProduct = ({
@@ -30,55 +35,67 @@ const CartProduct = ({
   pDesc,
   price,
   img,
-  isCart,
   rating,
   id,
   quantity,
   addedToCart,
+  productWishList,
+  productCartList,
 }: cartProductProps) => {
-  const dispatch = useDispatch();
-
-  type RootStore = ReturnType<typeof rootReducer>;
-  const productList =
-    useSelector((state: RootStore) => state?.reduceProducts?.myState) || [];
-
-  const { openToast, ToastComponent } = useCustomToast({
+  const toastProp = {
     message: 'cannot add more than 5 products',
     variant: 'error',
     style: {},
-  });
+  };
+  const dispatch = useDispatch();
+
+  const { openToast, ToastComponent } = useCustomToast();
 
   const removeProductClickHandler = () => {
     dispatch(removeProducts({ id }));
   };
 
   const addToWishlistClickHandler = () => {
-    dispatch(
-      addToWishlist({
-        pName,
-        pDesc,
-        price,
-        img,
-        rating,
-        discount,
-        id,
-        quantity,
-        addedToCart,
-      })
-    );
-    removeProductClickHandler();
+    const product = productWishList?.filter((iter) => iter.id === id);
+
+    const checkWishlistPresent = product
+      ? product.length
+        ? false
+        : true
+      : false;
+    console.log(product, checkWishlistPresent);
+    if (checkWishlistPresent) {
+      dispatch(
+        addToWishlist({
+          pName,
+          pDesc,
+          price,
+          img,
+          rating,
+          discount,
+          id,
+          quantity,
+          addedToCart,
+        })
+      );
+      removeProductClickHandler();
+    } else {
+      openToast('already exist in wishlist', 'error');
+    }
   };
 
   const addProductsClickHandler = () => {
-    const filterProduct = productList.filter((item) => item.id === id);
-    if (filterProduct[0].quantity < 5) {
+    let filterProduct = productCartList?.filter((item) => item.id === id);
+    filterProduct = filterProduct ? filterProduct : [];
+    if (filterProduct[0]?.quantity < 5) {
       dispatch(addQuantity({ id }));
     } else {
-      openToast();
+      openToast('cannot add more than 5', 'error');
     }
   };
   const subtractProductsClickHandler = () => {
-    const filterProduct = productList.filter((item) => item.id === id);
+    let filterProduct = productCartList?.filter((item) => item.id === id);
+    filterProduct = filterProduct ? filterProduct : [];
     if (filterProduct[0].quantity > 1) {
       dispatch(subtractQuantity({ id }));
     } else {

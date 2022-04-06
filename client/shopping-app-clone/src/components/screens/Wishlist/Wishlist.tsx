@@ -20,8 +20,8 @@ const Wishlist = () => {
 
   const productWishList =
     useSelector((state: RootStore) => state?.reduceWishlist?.wishlist) || [];
-  const state = useSelector((state: RootStore) => state);
-  console.log(productWishList, state);
+  const productCartList =
+    useSelector((state: RootStore) => state?.reduceProducts?.myState) || [];
 
   return (
     <div className='screen'>
@@ -41,6 +41,7 @@ const Wishlist = () => {
               addedToCart={product.addedToCart}
               addedToWishlist={product.addedToWishlist}
               productWishList={productWishList}
+              productCartList={productCartList}
             />
           </div>
         ))}
