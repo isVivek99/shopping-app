@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import Button from '../button/Button';
+import { useState } from 'react';
+import Button from 'components/common/button/Button';
 import 'assets/scss/common/card/productCardOne.scss';
 import Tags from 'components/common/tags/Tags';
 import { useDispatch } from 'react-redux';
@@ -50,6 +50,19 @@ const ProductCardOne = ({
 }: productCardArrayProps) => {
   const { openToast, ToastComponent } = useCustomToast();
 
+  const propProduct = {
+    pName,
+    pDesc,
+    price,
+    img,
+    rating,
+    discount,
+    id,
+    quantity,
+    addedToCart,
+    addedToWishlist,
+  };
+
   const productFromCart = productCartList
     ? productCartList.filter((product) => product.id === id)
     : [];
@@ -60,53 +73,61 @@ const ProductCardOne = ({
 
   const navigate = useNavigate();
 
-  const [showCartBtn, setShowCartBtn] = useState(
+  const [isInCart, setIsInCart] = useState(
     productFromCart[0] ? productFromCart[0].addedToCart : false
   );
+  const [isInWishlist, setIsInWishlist] = useState(
+    productFromWishlist[0] ? productFromWishlist[0].addedToWishlist : false
+  );
+
   const dispatch = useDispatch();
-  console.log(productFromCart[0], showCartBtn, productWishList);
 
-  const productClickHandler = () => {
-    console.log('click');
-
-    if (productFromCart[0]?.id !== productFromWishlist[0]?.id) {
-      dispatch(
-        addProducts({
-          pName,
-          pDesc,
-          price,
-          img,
-          rating,
-          discount,
-          id,
-          quantity,
-          addedToCart,
-          addedToWishlist,
-        })
-      );
+  const productAddToCartHandler = () => {
+    if (window.location.pathname.substring(1) !== 'wishlist') {
+      dispatch(addProducts(propProduct));
+      setIsInCart(true);
     }
-    setShowCartBtn(true);
 
-    if (
-      productFromWishlist[0]?.addedToWishlist &&
-      !productFromCart[0]?.addedToCart &&
-      window.location.pathname.substring(1) !== ''
-    ) {
+    if (checkIfInWishlist() && checkIfInCart()) {
+      console.log('publish error already in cart');
+      openToast('product already in cart,please delete to add more', 'error');
+    } else if (checkIfInWishlist()) {
       console.log('delete from wishlist');
-      dispatch(removeFromWishlist({ id }));
+      //product should be deleted only if user is clicking from wishlist page else we just add it to cart
+      if (window.location.pathname.substring(1) === 'wishlist') {
+        dispatch(addProducts(propProduct));
+        dispatch(removeFromWishlist({ id }));
+      }
     }
-    console.log(productFromCart[0]?.id, productFromWishlist[0]?.id);
+  };
 
-    if (productFromCart[0]?.id === productFromWishlist[0]?.id) {
-      console.log(productFromCart[0]?.id === productFromWishlist[0]?.id);
-      openToast('already exist in cart', 'error');
+  const checkIfInCart = () => {
+    if (productCartList?.length === 0) return false;
+    const cartPoduct = productCartList?.find((product) => product.id === id);
+    if (cartPoduct) {
+      setIsInCart(true);
+      return true;
     }
+    return false;
+  };
+
+  const checkIfInWishlist = () => {
+    if (productWishList?.length === 0) return false;
+    const wishListPoduct = productWishList?.find(
+      (product) => product.id === id
+    );
+    if (wishListPoduct) {
+      setIsInWishlist(true);
+      return true;
+    }
+    return false;
   };
 
   const showCartClickHandler = () => {
     navigate(navigateLink || '../cart');
   };
 
+  console.log('rerender');
   return (
     <div>
       <ToastComponent />
@@ -130,9 +151,9 @@ const ProductCardOne = ({
             <div className='details'>
               <span className='title'>{pName}</span>
               <span className='summary'>{pDesc}</span>
-              <p>
+              <div className='mb-3'>
                 <Rating type='static' stars={rating} />
-              </p>
+              </div>
             </div>
             <div className='buy'>
               {discount ? (
@@ -147,29 +168,18 @@ const ProductCardOne = ({
                   <p className='discount__price mb-1'>₹ {price}</p>
                 </div>
               )}
-              {showCartBtn ? (
+              {isInCart &&
+              window.location.pathname.substring(1) !== 'wishlist' ? (
                 <div>
-                  {productFromCart[0]?.addedToCart &&
-                    window.location.pathname.substring(1) === '' && (
-                      <Button
-                        type={'pri'}
-                        size={'sml'}
-                        text={navigateString || 'View Cart'}
-                        arrow={'ra'}
-                        clickHandle={isCart ? showCartClickHandler : () => null}
-                      />
-                    )}
-
-                  {productFromCart[0]?.addedToCart &&
-                    window.location.pathname.substring(1) !== '' && (
-                      <Button
-                        type={'pri'}
-                        size={'sml'}
-                        text={'Add to Cart'}
-                        arrow={'ra'}
-                        clickHandle={isCart ? productClickHandler : () => null}
-                      />
-                    )}
+                  {
+                    <Button
+                      type={'pri'}
+                      size={'sml'}
+                      text={navigateString || 'View Cart'}
+                      arrow={'ra'}
+                      clickHandle={isCart ? showCartClickHandler : () => null}
+                    />
+                  }
                 </div>
               ) : (
                 <Button
@@ -177,7 +187,7 @@ const ProductCardOne = ({
                   size={'sml'}
                   text={'Add to Cart'}
                   arrow={'ra'}
-                  clickHandle={isCart ? productClickHandler : () => null}
+                  clickHandle={isCart ? productAddToCartHandler : () => null}
                 />
               )}
             </div>

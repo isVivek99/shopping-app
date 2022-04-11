@@ -5,7 +5,7 @@ import Checkout from 'components/screens/Checkout/Checkout';
 import Product from 'components/screens/Product';
 import CategoryListing from 'components/screens/CategoryListing';
 import Wishlist from 'components/screens/Wishlist/Wishlist';
-import { productListDetails } from 'utils/productDetails.js';
+import { productListDetails } from 'utils/productDetails';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {

@@ -45,3 +45,16 @@ export const removeFromWishlist = (id) => {
     payload: { ...id },
   };
 };
+export const setPriceRange = (minMaxObject) => {
+  return {
+    type: 'SET_PRICE_RANGE',
+    payload: minMaxObject,
+  };
+};
+
+export const setSortFilter = (sortString) => {
+  return {
+    type: 'SET_SORT_FILTER',
+    payload: sortString,
+  };
+};

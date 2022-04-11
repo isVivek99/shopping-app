@@ -9,8 +9,10 @@ import { Link } from 'react-router-dom';
 
 function Navbar() {
   type RootStore = ReturnType<typeof rootReducer>;
-  const productList =
+  const productCartList =
     useSelector((state: RootStore) => state?.reduceProducts?.myState) || [];
+  const productWishList =
+    useSelector((state: RootStore) => state?.reduceWishlist?.wishlist) || [];
   return (
     <div>
       <div
@@ -36,8 +38,11 @@ function Navbar() {
           <img src={brandImage} alt='brandImage' />
         </Link>
         <InputElementOne />
-        <div>
+        <div className='position-relative'>
           <Link to='/wishlist'>
+            <div className='position-absolute text-center wishlist__item__count'>
+              <span className='f-12'>{productWishList.length}</span>
+            </div>
             <div className='fa__icon__size px-3'>
               <i className='fas fa-heart mx-0'></i>
             </div>
@@ -49,7 +54,7 @@ function Navbar() {
         <div className='position-relative'>
           <Link to='/cart'>
             <div className='position-absolute text-center cart__item__count'>
-              <span className='f-12'>{productList.length}</span>
+              <span className='f-12'>{productCartList.length}</span>
             </div>
             <div className='fa__icon__size px-3'>
               <i className='fas fa-bag-shopping'></i>

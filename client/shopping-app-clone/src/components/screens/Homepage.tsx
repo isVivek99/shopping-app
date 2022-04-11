@@ -1,5 +1,6 @@
 import RecipeCard from 'components/common/card/RecipeCard';
 import CategoryProductList from 'components/common/categoryProductList/CategoryProductList';
+import Footer from 'components/common/footer/Footer';
 import { recipeDetails } from 'utils/recipeDetails';
 import { categoryListDetails } from 'utils/categoryListDetails';
 import 'assets/scss/screens/homepage.scss';
@@ -43,6 +44,7 @@ function Homepage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -14,12 +14,27 @@ interface productType {
   addedToCart: boolean;
   addedToWishlist: boolean;
 }
+interface filters {
+  sortBy: string;
+  min: number;
+  max: number;
+  category: string;
+  rating: number;
+}
 
 interface DefaultState1 {
   myState: Array<productType>;
+  filters?: object;
 }
 const defaultStateCartItems: DefaultState1 = {
   myState: [],
+  filters: {
+    sortBy: '',
+    minValue: 0,
+    maxValue: 1000,
+    category: '',
+    rating: 0,
+  },
 };
 
 interface DefaultState2 {
@@ -31,7 +46,7 @@ const defaultStateWishlist: DefaultState2 = {
 
 const reduceProducts = (
   state = defaultStateCartItems || [],
-  action: { type: string; payload: productType }
+  action: { type: string; payload: productType & filters }
 ): DefaultState1 => {
   switch (action.type) {
     case 'ADD_TO_CART':
@@ -41,6 +56,9 @@ const reduceProducts = (
           ...state.myState,
           { ...action.payload, addedToCart: true, addedToWishlist: false },
         ],
+        filters: {
+          ...state.filters,
+        },
       };
 
     case 'REMOVE_FROM_CART':
@@ -48,7 +66,12 @@ const reduceProducts = (
         (product) => product.id !== action.payload.id
       );
       console.log(arr1);
-      return { myState: arr1 };
+      return {
+        myState: arr1,
+        filters: {
+          ...state.filters,
+        },
+      };
 
     case 'ADD_QUANTITY':
       const arr2 = state.myState.map((product) =>
@@ -58,7 +81,12 @@ const reduceProducts = (
       );
       console.log(arr2);
 
-      return { myState: arr2 };
+      return {
+        myState: arr2,
+        filters: {
+          ...state.filters,
+        },
+      };
 
     case 'SUBTRACT_QUANTITY':
       const arr3 = state.myState.map((product) =>
@@ -68,7 +96,31 @@ const reduceProducts = (
       );
       console.log(arr3);
 
-      return { myState: arr3 };
+      return {
+        myState: arr3,
+        filters: {
+          ...state.filters,
+        },
+      };
+
+    case 'SET_PRICE_RANGE':
+      return {
+        myState: [...state.myState],
+        filters: {
+          ...state.filters,
+          minValue: action.payload.min,
+          maxValue: action.payload.max,
+        },
+      };
+
+    case 'SET_SORT_FILTER':
+      return {
+        myState: [...state.myState],
+        filters: {
+          ...state.filters,
+          sortBy: action.payload,
+        },
+      };
 
     default:
       return state;

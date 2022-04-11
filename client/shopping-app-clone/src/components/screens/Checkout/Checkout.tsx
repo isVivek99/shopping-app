@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import CartProduct from 'components/screens/Checkout/CartProduct';
+import Footer from 'components/common/footer/Footer';
 import rootReducer from 'reducers';
 import 'assets/scss/screens/checkout/checkout.scss';
 import { calculateDiscount } from 'utils/calculateDiscountPrice';
@@ -121,6 +122,7 @@ const Cart = () => {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </div>
   );

@@ -104,13 +104,13 @@ const Product = () => {
                     onClick={toggleDropdown}
                   >
                     <div className='dropdown__content '>
-                      <p className='mb-0 py-1 text-center'>1kg</p>
+                      <p className='mb-0 py-1 ps-2'>1kg</p>
                     </div>
                     <div className='dropdown__content'>
-                      <p className='mb-0  py-1 text-center'>2kg</p>
+                      <p className='mb-0  py-1 ps-2'>2kg</p>
                     </div>
                     <div className='dropdown__content'>
-                      <p className='mb-0  py-1 text-center'>3kg</p>
+                      <p className='mb-0  py-1 ps-2'>3kg</p>
                     </div>
                   </div>
                 )}
