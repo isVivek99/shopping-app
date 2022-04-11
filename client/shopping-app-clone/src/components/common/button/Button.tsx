@@ -5,7 +5,7 @@ interface BtnProps {
   type: string;
   size: string;
   text: string;
-  arrow: string;
+  arrow?: string;
   clickHandle?: () => unknown;
 }
 

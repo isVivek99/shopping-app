@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import 'typeface-poppins';
@@ -7,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import reduceProducts from 'reducers';
+import rootReducer from 'reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { persistStore, persistReducer } from 'redux-persist';
 import { PersistGate } from 'redux-persist/lib/integration/react';
@@ -18,7 +17,7 @@ const persistConfig = {
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, reduceProducts);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = createStore(persistedReducer, composeWithDevTools());
 const persistor = persistStore(store);
 ReactDOM.render(

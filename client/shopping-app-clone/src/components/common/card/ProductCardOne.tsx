@@ -1,15 +1,34 @@
-import Button from '../button/Button';
+import { useState } from 'react';
+import Button from 'components/common/button/Button';
 import 'assets/scss/common/card/productCardOne.scss';
-import Tags from '../tags/Tags';
+import Tags from 'components/common/tags/Tags';
 import { useDispatch } from 'react-redux';
 import { addProducts } from 'actions';
+import Rating from 'components/common/rating/Rating';
+import { useNavigate } from 'react-router-dom';
+import { calculateDiscount } from 'utils/calculateDiscountPrice';
+import { removeFromWishlist } from 'actions';
+import useCustomToast from 'components/common/toast/CustomToast';
+
 interface productCardProps {
   discount?: string;
   pName: string;
   pDesc: string;
   price: number;
   img: string;
-  isCart: boolean;
+  isCart?: boolean;
+  rating: number;
+  id: number;
+  quantity: number;
+  addedToCart: boolean;
+  addedToWishlist: boolean;
+  navigateLink?: string;
+  navigateString?: string;
+}
+
+interface productCardArrayProps extends productCardProps {
+  productCartList?: Array<productCardProps>;
+  productWishList?: Array<productCardProps>;
 }
 
 const ProductCardOne = ({
@@ -19,43 +38,159 @@ const ProductCardOne = ({
   price,
   img,
   isCart,
-}: productCardProps) => {
-  const dispatch = useDispatch();
-  const productClickHandler = () => {
-    dispatch(addProducts({ pName, pDesc, price, img }));
+  rating,
+  id,
+  quantity,
+  addedToCart,
+  addedToWishlist,
+  productCartList,
+  productWishList,
+  navigateString,
+  navigateLink,
+}: productCardArrayProps) => {
+  const { openToast, ToastComponent } = useCustomToast();
+
+  const propProduct = {
+    pName,
+    pDesc,
+    price,
+    img,
+    rating,
+    discount,
+    id,
+    quantity,
+    addedToCart,
+    addedToWishlist,
   };
 
+  const productFromCart = productCartList
+    ? productCartList.filter((product) => product.id === id)
+    : [];
+
+  const productFromWishlist = productWishList
+    ? productWishList.filter((product) => product.id === id)
+    : [];
+
+  const navigate = useNavigate();
+
+  const [isInCart, setIsInCart] = useState(
+    productFromCart[0] ? productFromCart[0].addedToCart : false
+  );
+  const [isInWishlist, setIsInWishlist] = useState(
+    productFromWishlist[0] ? productFromWishlist[0].addedToWishlist : false
+  );
+
+  const dispatch = useDispatch();
+
+  const productAddToCartHandler = () => {
+    if (window.location.pathname.substring(1) !== 'wishlist') {
+      dispatch(addProducts(propProduct));
+      setIsInCart(true);
+    }
+
+    if (checkIfInWishlist() && checkIfInCart()) {
+      console.log('publish error already in cart');
+      openToast('product already in cart,please delete to add more', 'error');
+    } else if (checkIfInWishlist()) {
+      console.log('delete from wishlist');
+      //product should be deleted only if user is clicking from wishlist page else we just add it to cart
+      if (window.location.pathname.substring(1) === 'wishlist') {
+        dispatch(addProducts(propProduct));
+        dispatch(removeFromWishlist({ id }));
+      }
+    }
+  };
+
+  const checkIfInCart = () => {
+    if (productCartList?.length === 0) return false;
+    const cartPoduct = productCartList?.find((product) => product.id === id);
+    if (cartPoduct) {
+      setIsInCart(true);
+      return true;
+    }
+    return false;
+  };
+
+  const checkIfInWishlist = () => {
+    if (productWishList?.length === 0) return false;
+    const wishListPoduct = productWishList?.find(
+      (product) => product.id === id
+    );
+    if (wishListPoduct) {
+      setIsInWishlist(true);
+      return true;
+    }
+    return false;
+  };
+
+  const showCartClickHandler = () => {
+    navigate(navigateLink || '../cart');
+  };
+
+  console.log('rerender');
   return (
     <div>
-      <div className='ctn mx-auto'>
-        <div className='product__card__image__wrapper position-relative'>
-          <img
-            className='product__card__image'
-            src={require('assets/' + img)}
-          />
-          <span className='discountTag position-absolute'>
-            <Tags
-              type={'priT'}
-              size={'smlT'}
-              text={discount || ''}
-              close={false}
+      <ToastComponent />
+      <div>
+        <div className='ctn mx-auto'>
+          <div className='product__card__image__wrapper position-relative'>
+            <img
+              className='product__card__image'
+              src={require('assets/' + img)}
             />
-          </span>
-        </div>
-        <div className='content mt-3'>
-          <div className='details'>
-            <span className='title'>{pName}</span>
-            <span className='summary'>{pDesc}</span>
+            <span className='discountTag position-absolute'>
+              <Tags
+                type={'priT'}
+                size={'smlT'}
+                text={discount || ''}
+                close={false}
+              />
+            </span>
           </div>
-          <div className='buy'>
-            <span className='price'>₹ {price}</span>
-            <Button
-              type={'pri'}
-              size={'sml'}
-              text={'Buy Now'}
-              arrow={'ra'}
-              clickHandle={isCart ? () => null : productClickHandler}
-            />
+          <div className='content mt-3'>
+            <div className='details'>
+              <span className='title'>{pName}</span>
+              <span className='summary'>{pDesc}</span>
+              <div className='mb-3'>
+                <Rating type='static' stars={rating} />
+              </div>
+            </div>
+            <div className='buy'>
+              {discount ? (
+                <div className='d-flex flex-column'>
+                  <p className='discount__price mb-1'>
+                    ₹ {calculateDiscount(price, discount)}
+                  </p>
+                  <p className='actual__price mb-1'>₹ {price}</p>
+                </div>
+              ) : (
+                <div>
+                  <p className='discount__price mb-1'>₹ {price}</p>
+                </div>
+              )}
+              {isInCart &&
+              window.location.pathname.substring(1) !== 'wishlist' ? (
+                <div>
+                  {
+                    <Button
+                      type={'pri'}
+                      size={'sml'}
+                      text={navigateString || 'View Cart'}
+                      arrow={'ra'}
+                      clickHandle={isCart ? showCartClickHandler : () => null}
+                    />
+                  }
+                </div>
+              ) : (
+                <Button
+                  type={'pri'}
+                  size={'sml'}
+                  text={'Add to Cart'}
+                  arrow={'ra'}
+                  clickHandle={isCart ? productAddToCartHandler : () => null}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>

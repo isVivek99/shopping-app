@@ -77,6 +77,18 @@ ul {
   }
 }
 
+.wishlist__item__count {
+  background-color: $bg-color-orange;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  top: 10px;
+  left: 4px;
+  span {
+    color: $color-white;
+  }
+}
+
 .navbar__dropdown {
   height: 55px;
   background-color: #f9f9f9;

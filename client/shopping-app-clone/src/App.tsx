@@ -1,10 +1,11 @@
 import './assets/scss/App.scss';
 import Homepage from './components/screens/Homepage';
 import Navbar from 'components/common/navbar/Navbar';
-import Cart from 'components/screens/Cart';
+import Checkout from 'components/screens/Checkout/Checkout';
 import Product from 'components/screens/Product';
 import CategoryListing from 'components/screens/CategoryListing';
-import { productListDetails } from 'utils/productDetails.js';
+import Wishlist from 'components/screens/Wishlist/Wishlist';
+import { productListDetails } from 'utils/productDetails';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -19,8 +20,9 @@ function App() {
         </div>
         <Routes>
           <Route path='/' element={<Homepage />} />
-          <Route path='/cart' element={<Cart />} />
+          <Route path='/cart' element={<Checkout />} />
           <Route path='/product' element={<Product />} />
+          <Route path='/wishlist' element={<Wishlist />} />
           <Route
             path='/:category'
             element={

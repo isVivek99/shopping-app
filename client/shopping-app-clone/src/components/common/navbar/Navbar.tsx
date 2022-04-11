@@ -4,12 +4,15 @@ import brandImage from 'assets/images/Brand.png';
 import InputElementOne from 'components/common/input/InputElementOne';
 import NavbarMobile from 'components/common/navbar/NavbarMobile';
 import { useSelector } from 'react-redux';
-import reduceProducts from 'reducers';
+import rootReducer from 'reducers';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
-  type RootStore = ReturnType<typeof reduceProducts>;
-  const productList = useSelector((state: RootStore) => state.myState);
+  type RootStore = ReturnType<typeof rootReducer>;
+  const productCartList =
+    useSelector((state: RootStore) => state?.reduceProducts?.myState) || [];
+  const productWishList =
+    useSelector((state: RootStore) => state?.reduceWishlist?.wishlist) || [];
   return (
     <div>
       <div
@@ -31,16 +34,27 @@ function Navbar() {
         <hr className='d-flex d-none d-lg-flex mt-1 mb-4' />
       </div>
       <div className='d-flex align-items-center mx-3 d-none d-lg-flex mb-4'>
-        <img src={brandImage} alt='brandImage' />
+        <Link to='/'>
+          <img src={brandImage} alt='brandImage' />
+        </Link>
         <InputElementOne />
-
+        <div className='position-relative'>
+          <Link to='/wishlist'>
+            <div className='position-absolute text-center wishlist__item__count'>
+              <span className='f-12'>{productWishList.length}</span>
+            </div>
+            <div className='fa__icon__size px-3'>
+              <i className='fas fa-heart mx-0'></i>
+            </div>
+          </Link>
+        </div>
         <div className='fa__icon__size px-3'>
           <i className='fas fa-user'></i>
         </div>
         <div className='position-relative'>
           <Link to='/cart'>
             <div className='position-absolute text-center cart__item__count'>
-              <span className='f-12'>{productList.length}</span>
+              <span className='f-12'>{productCartList.length}</span>
             </div>
             <div className='fa__icon__size px-3'>
               <i className='fas fa-bag-shopping'></i>
