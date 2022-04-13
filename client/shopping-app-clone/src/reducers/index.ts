@@ -122,6 +122,14 @@ const reduceProducts = (
         },
       };
 
+    case 'RESET_SORT_FILTER':
+      return {
+        myState: [...state.myState],
+        filters: {
+          ...action.payload,
+        },
+      };
+
     default:
       return state;
   }

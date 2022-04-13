@@ -65,7 +65,7 @@ function NavbarMobile() {
         }
       >
         <ul className='nav-menu-items p-0'>
-          <li className='navbar-toggle d-flex justify-content-between align-items-center'>
+          <li className='navbar-toggle d-flex justify-content-between align-items-center mt-0'>
             <p className='f-18 bold text-white my-2 ps-2 '>HOME</p>
             <div className='fa__icon__size__lg px-3'>
               <i className='fas fa-x' onClick={showSidebar}></i>

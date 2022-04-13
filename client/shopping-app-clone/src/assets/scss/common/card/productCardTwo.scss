@@ -1,12 +1,12 @@
-@import "assets/scss/_variables.scss";
+@import 'assets/scss/_variables.scss';
 
 .ctn2 {
   border: 1px solid $border-color-primary;
   box-sizing: border-box;
   border-radius: 12px;
   padding: 0px;
-  width: 869px;
-  min-height: 280px;
+  min-width: auto;
+  min-height: 250px;
   justify-content: space-between;
 }
 .product__card__image2 {
@@ -35,10 +35,9 @@
 }
 
 .order {
-  flex-direction: column;
   margin-top: 32px;
-  padding-right: 32px;
-  margin-left: 32px;
+
+  min-width: 168px;
 }
 
 .shipping {
@@ -53,4 +52,9 @@
 
 .title1 {
   font-weight: 600;
+}
+
+.card__two {
+  top: 60px;
+  left: 30px;
 }

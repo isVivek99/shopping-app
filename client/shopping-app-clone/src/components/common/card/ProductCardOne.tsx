@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'components/common/button/Button';
 import 'assets/scss/common/card/productCardOne.scss';
 import Tags from 'components/common/tags/Tags';
@@ -126,6 +126,10 @@ const ProductCardOne = ({
   const showCartClickHandler = () => {
     navigate(navigateLink || '../cart');
   };
+
+  useEffect(() => {
+    checkIfInCart();
+  }, [productCartList]);
 
   console.log('rerender');
   return (

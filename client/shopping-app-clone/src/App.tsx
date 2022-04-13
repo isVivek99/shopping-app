@@ -3,7 +3,7 @@ import Homepage from './components/screens/Homepage';
 import Navbar from 'components/common/navbar/Navbar';
 import Checkout from 'components/screens/Checkout/Checkout';
 import Product from 'components/screens/Product';
-import CategoryListing from 'components/screens/CategoryListing';
+import CategoryListing from 'components/screens/ListingPage/CategoryListing';
 import Wishlist from 'components/screens/Wishlist/Wishlist';
 import { productListDetails } from 'utils/productDetails';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';

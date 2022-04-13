@@ -1,7 +1,14 @@
 @import 'assets/scss/_variables.scss';
 
-.horizontal__filters {
+.page__name__header {
+  font-size: 22px;
+  line-height: 32px;
+  @include sm {
+    font-size: 32px;
+    line-height: 48px;
+  }
 }
+
 .sort__container {
   z-index: 5;
 }
@@ -47,13 +54,14 @@
   z-index: 5;
   border-left: 1px solid $border-color-primary;
   border-right: 1px solid $border-color-primary;
+  border-bottom: 1px solid $border-color-primary;
   background-color: $color-white;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   top: 35px;
   li {
     padding: 9px 14px;
-    width: 255px;
+
     cursor: pointer;
     position: relative;
     input[type='radio'] {
@@ -63,7 +71,7 @@
   li:last-child {
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
-    border-bottom: 1px solid $border-color-primary;
+    // border-bottom: 1px solid $border-color-primary;
   }
 
   li:hover {
@@ -74,6 +82,9 @@
 .sort__list__item__active {
   font-weight: 600;
 }
+.sort__list__item {
+  margin-left: 0px;
+}
 
 .fa-angle-down {
   transform: rotate(0deg);
@@ -83,4 +94,44 @@
 .fa-angle-down.rotate {
   transform: rotate(-180deg);
   transition: all 0.5s ease;
+}
+.down__arrow {
+  right: 16px;
+}
+.sort {
+  width: 100%;
+  @include lg {
+    width: 255px;
+  }
+}
+.sort__list {
+  width: 100%;
+  @include lg {
+    width: 255px;
+  }
+}
+.filter__btn {
+  border: 1px solid $border-color-primary;
+  bottom: 2rem;
+  padding: 0.5rem 1rem;
+  position: fixed;
+  right: 1.5rem;
+  z-index: 1;
+  border-radius: 12px;
+  background-color: $background-color-gray;
+
+  .fa-sliders-h {
+    color: $primary-color;
+  }
+}
+
+.vertical__filters {
+  position: fixed;
+  left: -100%;
+  z-index: 1;
+  @include lg {
+    position: unset;
+    left: unset;
+    z-index: unset;
+  }
 }
