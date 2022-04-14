@@ -136,7 +136,7 @@ const ProductCardOne = ({
     <div>
       <ToastComponent />
       <div>
-        <div className='ctn mx-auto'>
+        <div className='ctn mx-auto cursor-pointer'>
           <div className='product__card__image__wrapper position-relative'>
             <img
               className='product__card__image'

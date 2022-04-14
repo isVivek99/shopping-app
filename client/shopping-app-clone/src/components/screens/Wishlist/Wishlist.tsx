@@ -1,7 +1,9 @@
 import { useSelector } from 'react-redux';
 import rootReducer from 'reducers';
 import ProductCardOne from 'components/common/card/ProductCardOne';
-
+import Footer from 'components/common/footer/Footer';
+import JeffLaugh from 'assets/images/jeff_bezzos_laugh.gif';
+import 'assets/scss/screens/wishlist.scss';
 interface cartProductProps {
   discount?: string;
   pName: string;
@@ -25,27 +27,43 @@ const Wishlist = () => {
 
   return (
     <div className='screen'>
-      Wishlist
-      <div className='d-flex flex-wrap'>
-        {productWishList.map((product, index) => (
-          <div key={index} className='mx-2 mb-5'>
-            <ProductCardOne
-              pName={product.pName}
-              pDesc={product.pDesc}
-              price={product.price}
-              img={product.img}
-              isCart={true}
-              rating={product.rating}
-              id={product.id}
-              quantity={product.quantity}
-              addedToCart={product.addedToCart}
-              addedToWishlist={product.addedToWishlist}
-              productWishList={productWishList}
-              productCartList={productCartList}
+      {productWishList.length ? (
+        <div className='d-flex flex-wrap py-2'>
+          {productWishList.map((product, index) => (
+            <div key={index} className='mx-2 mb-5'>
+              <ProductCardOne
+                pName={product.pName}
+                pDesc={product.pDesc}
+                price={product.price}
+                img={product.img}
+                isCart={true}
+                rating={product.rating}
+                id={product.id}
+                quantity={product.quantity}
+                addedToCart={product.addedToCart}
+                addedToWishlist={product.addedToWishlist}
+                productWishList={productWishList}
+                productCartList={productCartList}
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className='empty__wishlist  mx-auto padding-default'>
+          <div className='position-relative'>
+            <img
+              src={JeffLaugh}
+              alt='jeff-laughing'
+              className='jeff__laugh__image empty__cart__gif '
             />
+            <p className='empty__wishlist__text position-absolute'>
+              Your wishlist is empty
+            </p>
           </div>
-        ))}
-      </div>
+          <p>Please add some products to your wishlist</p>
+        </div>
+      )}
+      <Footer />
     </div>
   );
 };

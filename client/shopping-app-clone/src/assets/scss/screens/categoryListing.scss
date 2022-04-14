@@ -129,9 +129,23 @@
   position: fixed;
   left: -100%;
   z-index: 1;
+  top: 0;
+  opacity: 1;
+  transition: 1000ms;
   @include lg {
     position: unset;
     left: unset;
     z-index: unset;
   }
+}
+.vertical__filters__active {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0px;
+  z-index: 7;
+  transition: 500ms;
+  background-color: $color-white;
+  height: 100%;
+  opacity: 1;
 }

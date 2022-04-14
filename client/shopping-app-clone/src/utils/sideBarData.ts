@@ -7,10 +7,10 @@ export const SidebarData = [
     data: [
       {
         subcategories: [
-          'Bakery',
-          'Fruit and vegetables',
-          'meat and fish',
-          'Drinks',
+          { title: 'Bakery', path: '/bakery' },
+          { title: 'Fruit and vegetables', path: '/fruits&vegetables' },
+          { title: 'meat and fish', path: '/meat&fish' },
+          { title: 'Drinks', path: '/drinks' },
         ],
         contact: [],
       },

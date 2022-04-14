@@ -4,6 +4,7 @@ import Footer from 'components/common/footer/Footer';
 import rootReducer from 'reducers';
 import 'assets/scss/screens/checkout/checkout.scss';
 import { calculateDiscount } from 'utils/calculateDiscountPrice';
+import tenMinuteCeo from 'assets/images/10_min_ceo_2.jpeg';
 
 interface itemProps {
   quantity: number;
@@ -62,24 +63,41 @@ const Cart = () => {
                 state.
               </p>
               <div className='cart__products'>
-                {productCartList.map((product, index) => (
-                  <div key={index}>
-                    <CartProduct
-                      pName={product.pName}
-                      pDesc={product.pDesc}
-                      price={product.price}
-                      img={product.img}
-                      isCart={false}
-                      rating={product.rating}
-                      discount={product.discount}
-                      id={product.id}
-                      quantity={product.quantity}
-                      addedToCart={product.addedToCart}
-                      productCartList={productCartList}
-                      productWishList={productWishList}
+                {productCartList.length ? (
+                  productCartList.map((product, index) => (
+                    <div key={index}>
+                      <CartProduct
+                        pName={product.pName}
+                        pDesc={product.pDesc}
+                        price={product.price}
+                        img={product.img}
+                        isCart={false}
+                        rating={product.rating}
+                        discount={product.discount}
+                        id={product.id}
+                        quantity={product.quantity}
+                        addedToCart={product.addedToCart}
+                        productCartList={productCartList}
+                        productWishList={productWishList}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <div className='position-relative'>
+                    <img
+                      src={tenMinuteCeo}
+                      alt=''
+                      className='empty__cart__image'
                     />
+                    <p className='position-absolute empty__cart__text__1 text-600'>
+                      ready for a 10 min delivery, which is totally unsafe but
+                      we have to do it because, I dont know...
+                    </p>
+                    <p className='position-absolute empty__cart__text__2 text-600'>
+                      Also please add products to cart!
+                    </p>
                   </div>
-                ))}
+                )}
               </div>
               <div className='cart__coupon__code position-relative mx-auto mb-5'>
                 <input

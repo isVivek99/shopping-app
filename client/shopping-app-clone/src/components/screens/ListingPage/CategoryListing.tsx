@@ -135,9 +135,26 @@ const CategoryListing = ({ productListDetails }: any) => {
     toggleDropdown();
   };
 
+  const toggleFilters = () => setToggleMobileFilters((prev) => !prev);
+
+  const toggleFiltersHelper = () => {
+    if (window.innerWidth > 990) {
+      setToggleMobileFilters(false);
+      window.removeEventListener('resize', toggleFiltersHelper);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', toggleFiltersHelper);
+    return () => window.removeEventListener('resize', toggleFiltersHelper);
+  }, [window.innerWidth < 990]);
+
   return (
     <div>
-      <span className='filter__btn d-flex align-items-center d-lg-none'>
+      <span
+        className='filter__btn d-flex align-items-center d-lg-none'
+        onClick={toggleFilters}
+      >
         <i className='fas fa-sliders-h px-2'></i>
         <p className='f-14 text-600 mb-0'>filter</p>
       </span>
@@ -158,7 +175,7 @@ const CategoryListing = ({ productListDetails }: any) => {
           </div>
         </div>
         <div className='horizontal__filters d-lg-flex justify-content-end my-3'>
-          <div className='sort__container position-relative me-lg-3 mx-4'>
+          <div className='sort__container position-relative mx-4'>
             <div
               className={`sort ${dropdownStatus ? 'sort__active' : ''} `}
               onClick={toggleDropdown}

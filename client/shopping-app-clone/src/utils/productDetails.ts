@@ -9,9 +9,9 @@ export const productListDetails = [
         price: 25,
         img: 'images/products/bakery/bread/bread1.webp',
         rating: 4,
-
         id: 100,
         quantity: 1,
+        category: 'bakery',
       },
       {
         pName: 'brown eggs',
@@ -25,6 +25,7 @@ export const productListDetails = [
         discount: '26%',
         id: 101,
         quantity: 1,
+        category: 'bakery',
       },
       {
         pName: 'cheese slices',

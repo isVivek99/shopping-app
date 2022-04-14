@@ -87,7 +87,7 @@ const RangeSlider = ({
   };
 
   return (
-    <div className='slider__container d-flex justify-content-center'>
+    <div className='slider__container d-flex justify-content-lg-center justify-content-start px-3'>
       <input
         className={`thumb thumb--zindex-3 ${
           minVal > max - 100 && `thumb--zindex-5`
