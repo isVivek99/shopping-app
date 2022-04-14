@@ -16,7 +16,7 @@ const Product = () => {
 
   const toggleDropdown = () => setDropdownStatus(!dropdownStatus);
   return (
-    <div className='productpage'>
+    <div className='productpage screen'>
       <div className='page__path py-3 ps-3'>
         <p>Homepage/Fruit and vegetables/Carrots from Tomissy Farm</p>
       </div>

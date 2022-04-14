@@ -8,6 +8,7 @@
   border-radius: 12px;
   padding: 16px;
   width: 268px;
+  height: 361px;
   max-height: 370px;
 }
 
@@ -64,4 +65,7 @@
   margin-top: 8px;
   top: 0;
   display: flex;
+}
+.cursor-pointer {
+  cursor: pointer;
 }

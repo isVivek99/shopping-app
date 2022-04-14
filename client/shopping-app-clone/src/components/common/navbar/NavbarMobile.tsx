@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import 'assets/scss/common.scss';
 import 'assets/scss/common/navbar.scss';
 import brandImageWhite from 'assets/images/brand-white.png';
@@ -7,11 +7,15 @@ import InputElementOne from '../input/InputElementOne';
 import { SidebarData } from 'utils/sideBarData';
 import { useSelector } from 'react-redux';
 import rootReducer from 'reducers';
+import { Link } from 'react-router-dom';
 
 function NavbarMobile() {
   // redux
   type RootStore = ReturnType<typeof rootReducer>;
-  const productList =
+
+  const productWishList =
+    useSelector((state: RootStore) => state?.reduceWishlist?.wishlist) || [];
+  const productCartList =
     useSelector((state: RootStore) => state?.reduceProducts?.myState) || [];
 
   // navbar
@@ -23,35 +27,68 @@ function NavbarMobile() {
     if (activeTab === index) return setActiveTab(-1);
     setActiveTab(index);
   };
+  type EffectCallback = () => void;
+
+  useEffect((): EffectCallback => {
+    if (sidebar) {
+      document.body.style.overflow = 'hidden';
+      const screen: any = document.getElementsByClassName('screen');
+      screen[0].style.pointerEvents = 'none';
+    } else {
+      document.body.style.overflow = 'unset';
+      const screen: any = document.getElementsByClassName('screen');
+      screen[0].style.pointerEvents = 'unset';
+    }
+
+    return () => (document.body.style.overflow = 'unset');
+  }, [sidebar]);
 
   return (
     <div>
       <div className='d-block d-lg-none '>
         <div className='navbar__sidebar'>
-          <div className='fa__icon__size__lg px-3'>
+          <div className='fa__icon__size__lg px-3 d-flex align-items-center'>
             <i className='fas fa-bars' onClick={showSidebar}></i>
           </div>
-          <img
-            src={brandImageWhite}
-            alt='brandImage'
-            className='d-none d-sm-block'
-          />
-          <img
-            src={brandImageWhiteMobile}
-            alt='brandImage'
-            className='d-block d-sm-none'
-          />
+          <div>
+            <Link to='/'>
+              <img
+                src={brandImageWhite}
+                alt='brandImage'
+                className='d-none d-sm-block'
+              />
+            </Link>
+            <Link to='/'>
+              <img
+                src={brandImageWhiteMobile}
+                alt='brandImage'
+                className='d-block d-sm-none'
+              />
+            </Link>
+          </div>
           <div className='d-flex'>
+            <Link to='/wishlist'>
+              <div className='position-relative'>
+                <div className='position-absolute text-center wishlist__item__count'>
+                  <span className='f-12'>{productWishList.length}</span>
+                </div>
+              </div>
+              <div className='fa__icon__size__lg px-3'>
+                <i className='fas fa-heart mx-0'></i>
+              </div>
+            </Link>
             <div className='fa__icon__size__lg px-3'>
               <i className='fas fa-user'></i>
             </div>
             <div className='position-relative'>
               <div className='position-absolute text-center cart__item__count'>
-                <span className='f-12'>{productList.length}</span>
+                <span className='f-12'>{productCartList.length}</span>
               </div>
-              <div className='fa__icon__size__lg px-3'>
-                <i className='fas fa-bag-shopping'></i>
-              </div>
+              <Link to='/cart'>
+                <div className='fa__icon__size__lg px-3'>
+                  <i className='fas fa-bag-shopping'></i>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -65,8 +102,10 @@ function NavbarMobile() {
         }
       >
         <ul className='nav-menu-items p-0'>
-          <li className='navbar-toggle d-flex justify-content-between align-items-center'>
-            <p className='f-18 bold text-white my-2 ps-2 '>HOME</p>
+          <li className='navbar-toggle d-flex justify-content-between align-items-center mt-0'>
+            <Link to='/' className='text__link'>
+              <p className='f-18 bold text-white my-2 ps-2 '>HOME</p>
+            </Link>
             <div className='fa__icon__size__lg px-3'>
               <i className='fas fa-x' onClick={showSidebar}></i>
             </div>
@@ -101,10 +140,18 @@ function NavbarMobile() {
                         >
                           {dataItem.subcategories.map(
                             (category, categoryIndex) => (
-                              <div key={categoryIndex}>
-                                <p className='my-2 px-2 f-14'>{category}</p>
-                                <hr className='my-0' />
-                              </div>
+                              <Link
+                                key={categoryIndex}
+                                to={`${category.path}`}
+                                className='text__link'
+                              >
+                                <div>
+                                  <p className='my-2 px-2 f-14'>
+                                    {category.title}
+                                  </p>
+                                  <hr className='my-0' />
+                                </div>
+                              </Link>
                             )
                           )}
                           {dataItem.contact.map(

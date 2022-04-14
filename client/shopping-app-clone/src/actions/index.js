@@ -58,3 +58,16 @@ export const setSortFilter = (sortString) => {
     payload: sortString,
   };
 };
+
+export const resetFilters = () => {
+  return {
+    type: 'RESET_SORT_FILTER',
+    payload: {
+      sortBy: '',
+      minValue: 0,
+      maxValue: 1000,
+      category: '',
+      rating: 0,
+    },
+  };
+};

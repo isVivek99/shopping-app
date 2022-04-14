@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'components/common/button/Button';
 import 'assets/scss/common/card/productCardOne.scss';
 import Tags from 'components/common/tags/Tags';
@@ -127,12 +127,16 @@ const ProductCardOne = ({
     navigate(navigateLink || '../cart');
   };
 
+  useEffect(() => {
+    checkIfInCart();
+  }, [productCartList]);
+
   console.log('rerender');
   return (
     <div>
       <ToastComponent />
       <div>
-        <div className='ctn mx-auto'>
+        <div className='ctn mx-auto cursor-pointer'>
           <div className='product__card__image__wrapper position-relative'>
             <img
               className='product__card__image'

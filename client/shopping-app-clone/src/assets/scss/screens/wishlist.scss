@@ -1,0 +1,16 @@
+@import 'assets/scss/_variables.scss';
+
+.empty__wishlist {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  .empty__wishlist__gif {
+    border-radius: 12px;
+    margin: auto;
+  }
+  .empty__wishlist__text {
+    top: 40px;
+    left: 150px;
+    color: $color-white;
+  }
+}

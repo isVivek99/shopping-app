@@ -14,6 +14,7 @@ interface SliderProps {
   max: number;
   minGlobal: number;
   maxGlobal: number;
+  category: string;
   setMinMaxvalue: Dispatch<SetStateAction<{ min: number; max: number }>>;
 }
 
@@ -22,6 +23,7 @@ const RangeSlider = ({
   max,
   minGlobal,
   maxGlobal,
+  category,
   setMinMaxvalue,
 }: SliderProps) => {
   const [minVal, setMinVal] = useState(minGlobal);
@@ -34,6 +36,12 @@ const RangeSlider = ({
   const getPercent = (value: number) => {
     return Math.round(((value - min) / (max - min)) * 100);
   };
+
+  useEffect(() => {
+    setMinMaxvalue({ min: min, max: max });
+    setMinVal(min);
+    setMaxVal(max);
+  }, [category]);
 
   useEffect(() => {
     const rangeRef = range.current || {
@@ -79,7 +87,7 @@ const RangeSlider = ({
   };
 
   return (
-    <div className='slider__container d-flex justify-content-center'>
+    <div className='slider__container d-flex justify-content-lg-center justify-content-start px-3'>
       <input
         className={`thumb thumb--zindex-3 ${
           minVal > max - 100 && `thumb--zindex-5`
