@@ -2,9 +2,13 @@ import { useState, useEffect } from 'react';
 import ListElementOne from 'components/common/lists/ListElementOne';
 import SlideCarousel from 'components/common/carousels/SlideCarousel';
 
+interface objType {
+  pName: string;
+  id: number;
+}
 interface CategoryProductListProps {
   listHeader: string | undefined;
-  listSubTopicArray: Array<string> | undefined;
+  listSubTopicArray: unknown;
   productArray: Array<ObjProp>;
 }
 
@@ -52,14 +56,11 @@ const CategoryProductList = ({
     return () => window.removeEventListener('resize', updateMedia);
   }, []);
   return (
-    <div className='d-flex align-items-center justify-content-center justify-content-lg-around justify-content-md-between  flex-wrap'>
-      <div className='me-5'>
+    <div className='d-flex align-items-start justify-content-center justify-content-lg-around justify-content-md-between  flex-wrap'>
+      <div className='me-5 mt-3'>
         <ListElementOne
           listHeader={listHeader}
           listSubTopicArray={listSubTopicArray}
-          onClick={function (): void {
-            throw new Error('Function not implemented.');
-          }}
         />
       </div>
       <div className='d-flex flex-wrap'>

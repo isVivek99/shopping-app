@@ -2,10 +2,22 @@ export const categoryListDetails = [
   {
     categoryName: 'Best selling products',
     categorySubTopicList: [
-      'Blueberries',
-      'Pomegranate',
-      'chicken breast',
-      'tuna',
+      {
+        pName: 'Blueberries',
+        id: 107,
+      },
+      {
+        pName: 'Pomegranate',
+        id: 150,
+      },
+      {
+        pName: 'chicken breast',
+        id: 112,
+      },
+      {
+        pName: 'tuna',
+        id: 119,
+      },
     ],
     products: [
       {
@@ -63,7 +75,24 @@ export const categoryListDetails = [
   },
   {
     categoryName: 'Best from Farmers',
-    categorySubTopicList: ['Carrots', 'Brown eggs', 'Milk', 'mutton'],
+    categorySubTopicList: [
+      {
+        pName: 'Carrots',
+        id: 108,
+      },
+      {
+        pName: 'Brown eggs',
+        id: 101,
+      },
+      {
+        pName: 'Milk',
+        id: 104,
+      },
+      {
+        pName: 'Mutton',
+        id: 116,
+      },
+    ],
     products: [
       {
         pName: 'Carrots',
@@ -76,6 +105,7 @@ export const categoryListDetails = [
         quantity: 1,
         addedToCart: false,
         addedToWishlist: false,
+        category: 'fruits&vegetables',
       },
       {
         pName: 'Brown eggs',

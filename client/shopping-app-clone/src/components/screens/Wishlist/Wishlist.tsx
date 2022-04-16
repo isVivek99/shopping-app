@@ -4,18 +4,6 @@ import ProductCardOne from 'components/common/card/ProductCardOne';
 import Footer from 'components/common/footer/Footer';
 import JeffLaugh from 'assets/images/jeff_bezzos_laugh.gif';
 import 'assets/scss/screens/wishlist.scss';
-interface cartProductProps {
-  discount?: string;
-  pName: string;
-  pDesc: string;
-  price: number;
-  img: string;
-  isCart: boolean;
-  rating: number;
-  id: number;
-  quantity: number;
-  addedToCart: boolean;
-}
 
 const Wishlist = () => {
   type RootStore = ReturnType<typeof rootReducer>;

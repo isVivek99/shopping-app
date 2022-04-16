@@ -36,16 +36,23 @@ function NavbarMobile() {
       screen[0].style.pointerEvents = 'none';
     } else {
       document.body.style.overflow = 'unset';
-      const screen: any = document.getElementsByClassName('screen');
-      screen[0].style.pointerEvents = 'unset';
+      checkScreenClass('screen');
     }
-
     return () => (document.body.style.overflow = 'unset');
   }, [sidebar]);
 
+  const checkScreenClass = (screen: string) => {
+    try {
+      const screenObj: any = document.getElementsByClassName(screen);
+      screenObj[0].style.pointerEvents = 'unset';
+    } catch (e: any) {
+      console.log(e.message);
+    }
+  };
+
   return (
-    <div>
-      <div className='d-block d-lg-none '>
+    <>
+      <div className='d-block d-lg-none'>
         <div className='navbar__sidebar'>
           <div className='fa__icon__size__lg px-3 d-flex align-items-center'>
             <i className='fas fa-bars' onClick={showSidebar}></i>
@@ -194,7 +201,7 @@ function NavbarMobile() {
           })}
         </ul>
       </nav>
-    </div>
+    </>
   );
 }
 

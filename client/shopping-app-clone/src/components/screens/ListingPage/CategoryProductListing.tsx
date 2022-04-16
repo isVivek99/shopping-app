@@ -25,7 +25,7 @@ interface productCardProps {
   addedToWishlist: boolean;
 }
 
-const CategoryListing = ({ productListDetails }: any) => {
+const CategoryProductListing = ({ categoryListProductDetails }: any) => {
   const { category } = useParams();
 
   const dispatch = useDispatch();
@@ -33,7 +33,6 @@ const CategoryListing = ({ productListDetails }: any) => {
   type RootStore = ReturnType<typeof rootReducer>;
   const filters: any =
     useSelector((state: RootStore) => state?.reduceProducts?.filters) || [];
-  // console.log('logfilters:', filters);
 
   const productCartList =
     useSelector((state: RootStore) => state?.reduceProducts?.myState) || [];
@@ -57,11 +56,6 @@ const CategoryListing = ({ productListDetails }: any) => {
   }, [minMaxValue]);
 
   useEffect(() => {
-    console.log(filters);
-    // dispatch(setPriceRange({ min: filters.minValue, max: filters.maxValue }));
-  }, [filters]);
-
-  useEffect(() => {
     console.log(dropdownValue, filters);
     dispatch(setSortFilter(dropdownValue));
   }, [dropdownValue]);
@@ -81,8 +75,8 @@ const CategoryListing = ({ productListDetails }: any) => {
     const productsCategory = category || 'bakery';
 
     const productArray =
-      productListDetails[0][
-        productsCategory as keyof typeof productListDetails[0]
+      categoryListProductDetails[0][
+        productsCategory as keyof typeof categoryListProductDetails[0]
       ];
 
     const filteredProductList = productArray || [];
@@ -318,4 +312,4 @@ const CategoryListing = ({ productListDetails }: any) => {
   );
 };
 
-export default CategoryListing;
+export default CategoryProductListing;

@@ -47,6 +47,7 @@
 .carousel__custom__content__img {
   height: 500px;
   width: 500px;
+  object-fit: cover;
   @include rwd(200) {
     height: 220px;
     width: 220px;
