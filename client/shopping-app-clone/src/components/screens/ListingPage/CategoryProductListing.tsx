@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setPriceRange, setSortFilter, resetFilters } from 'actions';
+import rootReducer from 'reducers';
 import ProductCardOne from 'components/common/card/ProductCardOne';
 import ProductCardTwo from 'components/common/card/ProductCardTwo';
 import Footer from 'components/common/footer/Footer';
-import rootReducer from 'reducers';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { setPriceRange, setSortFilter, resetFilters } from 'actions';
+import DropdownListOne from 'components/common/dropdown/DropdownListOne';
 import RangeSlider from 'components/common/slider/RangeSlider';
 import Tags from 'components/common/tags/Tags';
 import 'assets/scss/screens/categoryListing.scss';
@@ -24,6 +24,12 @@ interface productCardProps {
   addedToCart: boolean;
   addedToWishlist: boolean;
 }
+
+const sortArrayParams = [
+  { title: 'high to low' },
+  { title: 'low to high' },
+  { title: 'rating' },
+];
 
 const CategoryProductListing = ({ categoryListProductDetails }: any) => {
   const { category } = useParams();
@@ -125,7 +131,8 @@ const CategoryProductListing = ({ categoryListProductDetails }: any) => {
       toggleDropdown();
       return;
     }
-    setStateDropdownValue(e.target.value);
+    // console.log('here', e.target, e.target.value);
+    setStateDropdownValue('Recommended');
     toggleDropdown();
   };
 
@@ -170,75 +177,14 @@ const CategoryProductListing = ({ categoryListProductDetails }: any) => {
         </div>
         <div className='horizontal__filters d-lg-flex justify-content-end my-3'>
           <div className='sort__container position-relative mx-4'>
-            <div
-              className={`sort ${dropdownStatus ? 'sort__active' : ''} `}
-              onClick={toggleDropdown}
-            >
-              <span className='sort__by f-12'>Sort by :</span>
-              <span className='sort__list__category recommended f-14 pe-5'>
-                {dropdownValue}
-              </span>
-              <span className='down__arrow position-absolute'>
-                <i
-                  className={`fas fa-angle-down ${
-                    dropdownStatus ? 'rotate' : ''
-                  }`}
-                ></i>
-              </span>
-            </div>
-            {dropdownStatus && (
-              <ul
-                className='sort__list position-absolute px-0'
-                onClick={(e) => setDropdownValue(e)}
-              >
-                <li
-                  className={
-                    dropdownValue === 'low to high'
-                      ? 'sort__list__item__active'
-                      : 'sort__list__item'
-                  }
-                >
-                  <input
-                    type='radio'
-                    value='low to high'
-                    checked={dropdownValue === 'low to high'}
-                    readOnly={true}
-                  />
-                  low to high
-                </li>
-                <li
-                  className={
-                    dropdownValue === 'high to low'
-                      ? 'sort__list__item__active'
-                      : 'sort__list__item'
-                  }
-                >
-                  <input
-                    type='radio'
-                    value='high to low'
-                    checked={dropdownValue === 'high to low'}
-                    readOnly={true}
-                  />
-                  high to low
-                </li>
-
-                <li
-                  className={
-                    dropdownValue === 'rating'
-                      ? 'sort__list__item__active'
-                      : 'sort__list__item'
-                  }
-                >
-                  <input
-                    type='radio'
-                    value='rating'
-                    checked={dropdownValue === 'rating'}
-                    readOnly={true}
-                  />
-                  rating
-                </li>
-              </ul>
-            )}
+            <DropdownListOne
+              listArray={sortArrayParams}
+              setDropdownStatus={setDropdownStatus}
+              dropdownStatus={dropdownStatus}
+              dropdownValue={dropdownValue}
+              setStateDropdownValue={setStateDropdownValue}
+              listHeader='Sort by: '
+            />
           </div>
         </div>
         <div className='d-flex mx-auto'>

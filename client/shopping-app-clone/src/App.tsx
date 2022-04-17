@@ -31,7 +31,7 @@ function App() {
           <Route path='/product' element={<Product />} />
           <Route path='/wishlist' element={<Wishlist />} />
           <Route
-            path='/products/:category'
+            path='/v1/list/:category'
             element={
               <CategoryProductListing
                 categoryListProductDetails={categoryListProductDetails}

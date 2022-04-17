@@ -64,25 +64,25 @@ function Navbar() {
       </div>
 
       <ul className='d-lg-flex justify-content-around align-items-center px-2 my-1 navbar__dropdown  d-none w-100'>
-        <Link to='products/bakery' className='text__link'>
+        <Link to='/v1/list/bakery' className='text__link'>
           <li className='d-flex align-items-center navbar__dropdown__item mt-0'>
             <p className='px-1 f-14 m-0 py-2'>Bakery</p>
             <i className='fas fa-angle-down'></i>
           </li>
         </Link>
-        <Link to='/products/fruits&vegetables' className='text__link'>
+        <Link to='/v1/list/fruits&vegetables' className='text__link'>
           <li className='d-flex align-items-center navbar__dropdown__item mt-0'>
             <p className='px-1 f-14 m-0 py-2'>Fruits and vegetables</p>
             <i className='fas fa-angle-down'></i>
           </li>
         </Link>
-        <Link to='/products/meat&fish' className='text__link'>
+        <Link to='/v1/list/meat&fish' className='text__link'>
           <li className='d-flex align-items-center navbar__dropdown__item mt-0'>
             <p className='px-1 f-14 m-0 py-2'>Meat and fish</p>
             <i className='fas fa-angle-down'></i>
           </li>
         </Link>
-        <Link to='/products/drinks' className='text__link'>
+        <Link to='/v1/list/drinks' className='text__link'>
           <li className='d-flex align-items-center navbar__dropdown__item mt-0'>
             <p className='px-1 f-14 m-0 py-2'>drinks</p>
             <i className='fas fa-angle-down'></i>

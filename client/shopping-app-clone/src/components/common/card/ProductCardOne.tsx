@@ -123,6 +123,19 @@ const ProductCardOne = ({
     return false;
   };
 
+  // const checkImage = (imgLink: string) => {
+  //   console.log(img);
+  //   try {
+  //     // eslint-disable-next-line @typescript-eslint/no-var-requires
+  //     const img = require(imgLink);
+  //     console.log(img);
+
+  //     return require(imgLink);
+  //   } catch (e: any) {
+  //     console.log(e.message);
+  //   }
+  // };
+
   const showCartClickHandler = () => {
     navigate(navigateLink || '../cart');
   };
