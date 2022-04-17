@@ -7,6 +7,7 @@ import useCustomToast from 'components/common/toast/CustomToast';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addProducts, removeFromWishlist } from 'actions';
+import { Link } from 'react-router-dom';
 import { calculateDiscount } from 'utils/calculateDiscountPrice';
 import 'assets/scss/common/card/productCardTwo.scss';
 interface productCardProps {
@@ -133,54 +134,62 @@ const ProductCardTwo = ({
     <div>
       <ToastComponent />
       <div className='d-flex flex-column flex-md-row ctn2'>
-        <div className='d-flex '>
-          <div className='d-flex card__two__image position-relative'>
-            <img
-              className='product__card__image2 mx-4'
-              src={require('assets/' + img)}
-            ></img>
-            <span className='discount__tag card__two position-absolute'>
-              <Tags
-                type={'priT'}
-                size={'smlT'}
-                text={discount || ''}
-                close={false}
-              />
-            </span>
+        <Link to={`/v1/product/${id}/${pName}`} className='text__link'>
+          <div className='d-flex '>
+            <div className='d-flex card__two__image position-relative'>
+              <img
+                className='product__card__image2 mx-4'
+                src={require('assets/' + img)}
+              ></img>
+              <span className='discount__tag card__two position-absolute'>
+                <Tags
+                  type={'priT'}
+                  size={'smlT'}
+                  text={discount || ''}
+                  close={false}
+                />
+              </span>
+            </div>
+            <div className='d-flex details2'>
+              <span className='f-18 title1'>{pName}</span>
+              <span className='f-12 desc'>{pDesc}</span>
+              <Rating type='static' stars={rating} />
+              <span className='list'>
+                <ListItemsCard
+                  category='Farm'
+                  value='Grocery Tarm Fields'
+                  color='gray'
+                />
+                <ListItemsCard
+                  category='Delivery'
+                  value='Europe'
+                  color='gray'
+                />
+                <ListItemsCard category='Stock' value='320 pcs' color='green' />
+              </span>
+            </div>
           </div>
-          <div className='d-flex details2'>
-            <span className='f-18 title1'>{pName}</span>
-            <span className='f-12 desc'>{pDesc}</span>
-            <Rating type='static' stars={rating} />
-            <span className='list'>
-              <ListItemsCard
-                category='Farm'
-                value='Grocery Tarm Fields'
-                color='gray'
-              />
-              <ListItemsCard category='Delivery' value='Europe' color='gray' />
-              <ListItemsCard category='Stock' value='320 pcs' color='green' />
-            </span>
-          </div>
-        </div>
-        <div className='d-flex order  flex-row flex-md-column justify-content-center pe-md-3'>
-          <div className='mx-auto'>
-            {discount ? (
-              <div className='d-flex flex-column'>
-                <p className='discount__price mb-1'>
-                  ₹ {calculateDiscount(price, discount)}
-                </p>
-                <p className='actual__price mb-1'>₹ {price}</p>
-              </div>
-            ) : (
-              <div>
-                <p className='discount__price mb-1'>₹ {price}</p>
-              </div>
-            )}
-            <p className='f-12 shipping mb-1'>Free Shipping</p>
-            <p className='f-12 ship-time mb-1'>Delivery in 1 day</p>
-          </div>
-          <div className=' order-btn mx-auto my-auto'>
+        </Link>
+        <div className='d-flex order  flex-row flex-md-column justify-content-around    pe-md-3'>
+          <Link to={`/v1/product/${id}/${pName}`} className='text__link '>
+            <div className='mx-auto'>
+              {discount ? (
+                <div className='d-flex flex-column'>
+                  <p className='discount__price mb-1'>
+                    ₹ {calculateDiscount(price, discount)}
+                  </p>
+                  <p className='actual__price mb-1'>₹ {price}</p>
+                </div>
+              ) : (
+                <div>
+                  <p className='discount__price mb-1'>₹ {price}</p>
+                </div>
+              )}
+              <p className='f-12 shipping mb-1'>Free Shipping</p>
+              <p className='f-12 ship-time mb-1'>Delivery in 1 day</p>
+            </div>
+          </Link>
+          <div className=' order-btn my-auto'>
             {isInCart &&
             window.location.pathname.substring(1) !== 'wishlist' ? (
               <div>

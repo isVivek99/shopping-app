@@ -148,10 +148,9 @@ const ProductCardOne = ({
   return (
     <div>
       <ToastComponent />
-
       <div>
         <div className='ctn mx-auto cursor-pointer position-relative'>
-          <Link to={`/${id}/${pName}`} className='text__link'>
+          <Link to={`/v1/product/${id}/${pName}`} className='text__link'>
             <div className='product__card__image__wrapper position-relative'>
               <img
                 className='product__card__image'
@@ -168,7 +167,7 @@ const ProductCardOne = ({
             </div>
           </Link>
           <div className='content mt-3'>
-            <Link to={`/${id}/${pName}`} className='text__link'>
+            <Link to={`/v1/product/${id}/${pName}`} className='text__link'>
               <div className='details'>
                 <span className='title'>{pName}</span>
                 <span className='summary'>{pDesc}</span>

@@ -39,7 +39,7 @@ function App() {
             }
           />
           <Route
-            path='/:id/:productName'
+            path='/v1/product/:id/:productName'
             element={<Product productDetails={productDetails} />}
           />
           <Route path='/*' element={<PageNotFound />} />
