@@ -1,12 +1,5 @@
 @import 'assets/scss/_variables.scss';
 
-.productpage {
-  max-width: 1440px;
-  margin: auto;
-  background-color: $background-color-white;
-  filter: drop-shadow(1px 1px 5px $background-color-gray-2);
-}
-
 .product__page__heading {
   font-size: 32px;
   line-height: 46px;
@@ -50,21 +43,7 @@
   border-radius: 12px;
   width: 100%;
   padding: 16px;
-  .product__page__price {
-    .product__page__price__discounted {
-      font-size: 26px;
-      color: $primary-color;
-      line-height: 39px;
-      font-weight: 600;
-    }
-    .product__page__price__original {
-      color: $listItems-color;
-      font-size: 12px;
-      line-height: 18px;
-      font-weight: 600;
-      text-decoration: line-through;
-    }
-  }
+
   .product__page__select__options {
     .add__to__cart__count {
       .add__to__cart__dropdown__btn {
@@ -112,30 +91,23 @@
   }
 }
 
-.product__promises__section {
-  width: fit-content;
-  margin: auto;
-  .promises__header {
-    padding-left: 0;
-    margin-bottom: 16px;
-    font-size: 16px;
-  }
-  .promises__container {
-    grid-template-columns: 64px 2fr;
-    .promises__container__img__div {
-      .promises__container__img {
-        height: 56px;
-        width: auto;
-      }
-    }
-    @include sm {
-      width: 528px;
-    }
-    @include lg {
-      width: 450px;
-    }
-    @include xl {
-      width: 528px;
-    }
-  }
+.product__page__price__discounted {
+  font-size: 26px;
+  color: $primary-color;
+  line-height: 39px;
+  font-weight: 600;
+}
+.product__page__price__original {
+  color: $listItems-color;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 600;
+  text-decoration: line-through;
+}
+
+.product__page__price__undiscounted {
+  font-size: 26px;
+  color: $primary-color;
+  line-height: 39px;
+  font-weight: 600;
 }

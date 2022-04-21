@@ -1,0 +1,13 @@
+@import 'assets/scss/_variables.scss';
+.coupon__container {
+  background-color: $primary-color;
+  height: 0;
+  opacity: 0;
+  z-index: 1;
+  transition: all 0.5s ease-in-out;
+}
+.coupon__container.active {
+  z-index: 1;
+  height: 50px;
+  opacity: 1;
+}

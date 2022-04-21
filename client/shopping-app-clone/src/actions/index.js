@@ -71,3 +71,21 @@ export const resetFilters = () => {
     },
   };
 };
+
+export const setCoupon = (couponObject) => {
+  return {
+    type: 'ADD_COUPONCODE',
+    payload: {
+      ...couponObject,
+    },
+  };
+};
+
+export const resetCoupon = (couponObject) => {
+  return {
+    type: 'RESET_COUPONCODE',
+    payload: {
+      ...couponObject,
+    },
+  };
+};

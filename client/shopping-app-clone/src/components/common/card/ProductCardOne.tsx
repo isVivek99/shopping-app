@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import Button from 'components/common/button/Button';
 import 'assets/scss/common/card/productCardOne.scss';
 import Tags from 'components/common/tags/Tags';
-import { useDispatch } from 'react-redux';
-import { addProducts } from 'actions';
+import { addProducts, removeFromWishlist } from 'actions';
 import Rating from 'components/common/rating/Rating';
-import { useNavigate } from 'react-router-dom';
 import { calculateDiscount } from 'utils/calculateDiscountPrice';
-import { removeFromWishlist } from 'actions';
 import useCustomToast from 'components/common/toast/CustomToast';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 interface productCardProps {
   discount?: string;
@@ -76,6 +76,17 @@ const ProductCardOne = ({
   const [isInCart, setIsInCart] = useState(
     productFromCart[0] ? productFromCart[0].addedToCart : false
   );
+  console.log(
+    console.log(
+      addedToCart
+        ? addedToCart && window.location.pathname.substring(1) !== 'wishlist'
+          ? 'view'
+          : 'add'
+        : isInCart && window.location.pathname.substring(1) !== 'wishlist'
+        ? 'view'
+        : 'add'
+    )
+  );
   const [isInWishlist, setIsInWishlist] = useState(
     productFromWishlist[0] ? productFromWishlist[0].addedToWishlist : false
   );
@@ -123,12 +134,26 @@ const ProductCardOne = ({
     return false;
   };
 
+  // const checkImage = (imgLink: string) => {
+  //   console.log(img);
+  //   try {
+  //     // eslint-disable-next-line @typescript-eslint/no-var-requires
+  //     const img = require(imgLink);
+  //     console.log(img);
+
+  //     return require(imgLink);
+  //   } catch (e: any) {
+  //     console.log(e.message);
+  //   }
+  // };
+
   const showCartClickHandler = () => {
     navigate(navigateLink || '../cart');
   };
 
   useEffect(() => {
     checkIfInCart();
+    console.log('as');
   }, [productCartList]);
 
   console.log('rerender');
@@ -136,29 +161,33 @@ const ProductCardOne = ({
     <div>
       <ToastComponent />
       <div>
-        <div className='ctn mx-auto cursor-pointer'>
-          <div className='product__card__image__wrapper position-relative'>
-            <img
-              className='product__card__image'
-              src={require('assets/' + img)}
-            />
-            <span className='discountTag position-absolute'>
-              <Tags
-                type={'priT'}
-                size={'smlT'}
-                text={discount || ''}
-                close={false}
+        <div className='ctn mx-auto cursor-pointer position-relative'>
+          <Link to={`/v1/product/${id}/${pName}`} className='text__link'>
+            <div className='product__card__image__wrapper position-relative'>
+              <img
+                className='product__card__image'
+                src={require('assets/' + img)}
               />
-            </span>
-          </div>
-          <div className='content mt-3'>
-            <div className='details'>
-              <span className='title'>{pName}</span>
-              <span className='summary'>{pDesc}</span>
-              <div className='mb-3'>
-                <Rating type='static' stars={rating} />
-              </div>
+              <span className='discountTag position-absolute'>
+                <Tags
+                  type={'priT'}
+                  size={'smlT'}
+                  text={discount || ''}
+                  close={false}
+                />
+              </span>
             </div>
+          </Link>
+          <div className='content mt-3'>
+            <Link to={`/v1/product/${id}/${pName}`} className='text__link'>
+              <div className='details'>
+                <span className='title'>{pName}</span>
+                <span className='summary'>{pDesc}</span>
+                <div className='mb-3'>
+                  <Rating type='static' stars={rating} />
+                </div>
+              </div>
+            </Link>
             <div className='buy'>
               {discount ? (
                 <div className='d-flex flex-column'>
@@ -172,9 +201,21 @@ const ProductCardOne = ({
                   <p className='discount__price mb-1'>₹ {price}</p>
                 </div>
               )}
-              {isInCart &&
-              window.location.pathname.substring(1) !== 'wishlist' ? (
-                <div>
+              {addedToCart ? (
+                <div className='action__btn'>
+                  {
+                    <Button
+                      type={'pri'}
+                      size={'sml'}
+                      text={navigateString || 'View Cart'}
+                      arrow={'ra'}
+                      clickHandle={isCart ? showCartClickHandler : () => null}
+                    />
+                  }
+                </div>
+              ) : isInCart &&
+                window.location.pathname.substring(1) !== 'wishlist' ? (
+                <div className='action__btn'>
                   {
                     <Button
                       type={'pri'}

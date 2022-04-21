@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import ListElementOne from 'components/common/lists/ListElementOne';
 import SlideCarousel from 'components/common/carousels/SlideCarousel';
-
+import DropDownTwo from 'components/common/dropdown/DropdownListTwo';
+interface objType {
+  pName: string;
+  id: number;
+}
 interface CategoryProductListProps {
   listHeader: string | undefined;
-  listSubTopicArray: Array<string> | undefined;
+  listSubTopicArray: any;
   productArray: Array<ObjProp>;
 }
 
@@ -52,15 +56,20 @@ const CategoryProductList = ({
     return () => window.removeEventListener('resize', updateMedia);
   }, []);
   return (
-    <div className='d-flex align-items-center justify-content-center justify-content-lg-around justify-content-md-between  flex-wrap'>
-      <div className='me-5'>
-        <ListElementOne
-          listHeader={listHeader}
-          listSubTopicArray={listSubTopicArray}
-          onClick={function (): void {
-            throw new Error('Function not implemented.');
-          }}
-        />
+    <div className='d-flex align-items-start flex-column flex-md-row align-items-center justify-content-center justify-content-lg-around justify-content-md-between  flex-wrap'>
+      <div className='me-md-5 mt-3 mb-3'>
+        <div className='d-none d-md-block'>
+          <ListElementOne
+            listHeader={listHeader}
+            listSubTopicArray={listSubTopicArray}
+          />
+        </div>
+        <div className='d-block d-md-none'>
+          <DropDownTwo
+            listHeader={listHeader}
+            listSubTopicArray={listSubTopicArray}
+          />
+        </div>
       </div>
       <div className='d-flex flex-wrap'>
         <div className=''>

@@ -21,10 +21,20 @@ interface filters {
   category: string;
   rating: number;
 }
+interface coupon {
+  applied: boolean;
+  discountCode: string;
+  couponType: string;
+  valuePercentage: number;
+  email: string;
+  status: number;
+  message: string;
+}
 
 interface DefaultState1 {
   myState: Array<productType>;
   filters?: object;
+  coupon?: object;
 }
 const defaultStateCartItems: DefaultState1 = {
   myState: [],
@@ -34,6 +44,15 @@ const defaultStateCartItems: DefaultState1 = {
     maxValue: 1000,
     category: '',
     rating: 0,
+  },
+  coupon: {
+    applied: false,
+    discountCode: '',
+    couponType: null,
+    valuePercentage: null,
+    email: '',
+    status: null,
+    message: '',
   },
 };
 
@@ -46,7 +65,7 @@ const defaultStateWishlist: DefaultState2 = {
 
 const reduceProducts = (
   state = defaultStateCartItems || [],
-  action: { type: string; payload: productType & filters }
+  action: { type: string; payload: productType & filters & coupon }
 ): DefaultState1 => {
   switch (action.type) {
     case 'ADD_TO_CART':
@@ -59,6 +78,9 @@ const reduceProducts = (
         filters: {
           ...state.filters,
         },
+        coupon: {
+          ...state.coupon,
+        },
       };
 
     case 'REMOVE_FROM_CART':
@@ -70,6 +92,9 @@ const reduceProducts = (
         myState: arr1,
         filters: {
           ...state.filters,
+        },
+        coupon: {
+          ...state.coupon,
         },
       };
 
@@ -86,6 +111,9 @@ const reduceProducts = (
         filters: {
           ...state.filters,
         },
+        coupon: {
+          ...state.coupon,
+        },
       };
 
     case 'SUBTRACT_QUANTITY':
@@ -101,6 +129,9 @@ const reduceProducts = (
         filters: {
           ...state.filters,
         },
+        coupon: {
+          ...state.coupon,
+        },
       };
 
     case 'SET_PRICE_RANGE':
@@ -111,6 +142,9 @@ const reduceProducts = (
           minValue: action.payload.min,
           maxValue: action.payload.max,
         },
+        coupon: {
+          ...state.coupon,
+        },
       };
 
     case 'SET_SORT_FILTER':
@@ -120,12 +154,42 @@ const reduceProducts = (
           ...state.filters,
           sortBy: action.payload,
         },
+        coupon: {
+          ...state.coupon,
+        },
       };
 
     case 'RESET_SORT_FILTER':
       return {
         myState: [...state.myState],
         filters: {
+          ...action.payload,
+        },
+        coupon: {
+          ...state.coupon,
+        },
+      };
+
+    case 'ADD_COUPONCODE':
+      console.log(action.payload);
+
+      return {
+        myState: [...state.myState],
+        filters: {
+          ...state.filters,
+        },
+        coupon: {
+          ...action.payload,
+        },
+      };
+
+    case 'RESET_COUPONCODE':
+      return {
+        myState: [...state.myState],
+        filters: {
+          ...state.filters,
+        },
+        coupon: {
           ...action.payload,
         },
       };

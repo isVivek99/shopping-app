@@ -1,0 +1,28 @@
+@import 'assets/scss/_variables.scss';
+.product__promises__section {
+  width: fit-content;
+  margin: auto;
+  .promises__header {
+    padding-left: 0;
+    margin-bottom: 16px;
+    font-size: 16px;
+  }
+  .promises__container {
+    grid-template-columns: 64px 2fr;
+    .promises__container__img__div {
+      .promises__container__img {
+        height: 56px;
+        width: auto;
+      }
+    }
+    @include sm {
+      width: 528px;
+    }
+    @include lg {
+      width: 450px;
+    }
+    @include xl {
+      width: 528px;
+    }
+  }
+}
