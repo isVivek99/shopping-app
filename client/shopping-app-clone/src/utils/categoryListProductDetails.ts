@@ -51,7 +51,7 @@ export const categoryListProductDetails = [
         quantity: 1,
       },
       {
-        pName: 'white egss',
+        pName: 'white eggs',
         pDesc: 'fresh',
         pWeight: '12 units',
         weights: ['12 units', '24 units'],
@@ -99,7 +99,7 @@ export const categoryListProductDetails = [
     ],
     'fruits&vegetables': [
       {
-        pName: 'Blueberries',
+        pName: 'blueberries',
         pDesc: 'exotic & fresh',
         pWeight: '125g',
         price: 149,
@@ -110,7 +110,7 @@ export const categoryListProductDetails = [
       },
 
       {
-        pName: 'Carrots',
+        pName: 'carrots',
         pDesc: 'local & fresh',
         pWeight: '250g',
         price: 14.49,
@@ -130,7 +130,7 @@ export const categoryListProductDetails = [
         quantity: 1,
       },
       {
-        pName: 'Pomegranate',
+        pName: 'pomegranate',
         pDesc: 'local & fresh',
         pWeight: '1kg',
         price: 14.49,
@@ -163,7 +163,7 @@ export const categoryListProductDetails = [
     ],
     'meat&fish': [
       {
-        pName: 'Chicken Breast-Boneless',
+        pName: 'chicken Breast-Boneless',
         pDesc: 'Boneless | Fillet',
         pWeight: '450g',
         price: 229,
@@ -174,7 +174,7 @@ export const categoryListProductDetails = [
         quantity: 1,
       },
       {
-        pName: 'Chicken Curry-Cut',
+        pName: 'chicken Curry-Cut',
         pDesc: 'Boneless | Fillet',
         pWeight: '450g',
         price: 229,
@@ -185,7 +185,7 @@ export const categoryListProductDetails = [
         quantity: 1,
       },
       {
-        pName: 'Chicken Drumstick',
+        pName: 'chicken Drumstick',
         pDesc: 'fresh',
         pWeight: '450g',
         price: 229,
@@ -206,7 +206,7 @@ export const categoryListProductDetails = [
         quantity: 1,
       },
       {
-        pName: 'Mutton lean goat curry-cut',
+        pName: 'mutton lean goat curry-cut',
         pDesc: 'fresh',
         pWeight: '450g',
         price: 529,
@@ -236,7 +236,7 @@ export const categoryListProductDetails = [
         quantity: 1,
       },
       {
-        pName: 'Yellowfin Tuna',
+        pName: 'yellowfin Tuna',
         pDesc: 'Seawater fish',
         pWeight: '300g',
         rating: 4,

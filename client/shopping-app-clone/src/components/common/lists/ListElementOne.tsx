@@ -16,7 +16,7 @@ function ListElementOne({ listSubTopicArray, listHeader }: listProps) {
         {listSubTopicArray?.map((item: any, index: number) => (
           <Link
             key={index}
-            to={`/${item.id}/${item.pName}`}
+            to={`/v1/product/${item.id}/${item.pName}`}
             className='text__link'
           >
             <li className='f-14 text-green list__item'>{item.pName}</li>

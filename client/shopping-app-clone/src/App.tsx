@@ -5,6 +5,7 @@ import Checkout from 'components/screens/Checkout/Checkout';
 import Product from 'components/screens/Product/Product';
 import CategoryProductListing from 'components/screens/ListingPage/CategoryProductListing';
 import Wishlist from 'components/screens/Wishlist/Wishlist';
+import Suggestions from 'components/screens/Suggestions/Suggestions';
 import PageNotFound from 'components/screens/PageNotFound';
 import { categoryListProductDetails } from 'utils/categoryListProductDetails';
 import { productDetails } from 'utils/productDetails';
@@ -37,6 +38,12 @@ function App() {
                 categoryListProductDetails={categoryListProductDetails}
               />
             }
+          />
+          <Route
+            path='/v1/suggestions/:searchString'
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            element={<Suggestions productDetails={productDetails} />}
           />
           <Route
             path='/v1/product/:id/:productName'

@@ -76,6 +76,17 @@ const ProductCardOne = ({
   const [isInCart, setIsInCart] = useState(
     productFromCart[0] ? productFromCart[0].addedToCart : false
   );
+  console.log(
+    console.log(
+      addedToCart
+        ? addedToCart && window.location.pathname.substring(1) !== 'wishlist'
+          ? 'view'
+          : 'add'
+        : isInCart && window.location.pathname.substring(1) !== 'wishlist'
+        ? 'view'
+        : 'add'
+    )
+  );
   const [isInWishlist, setIsInWishlist] = useState(
     productFromWishlist[0] ? productFromWishlist[0].addedToWishlist : false
   );
@@ -142,6 +153,7 @@ const ProductCardOne = ({
 
   useEffect(() => {
     checkIfInCart();
+    console.log('as');
   }, [productCartList]);
 
   console.log('rerender');
@@ -189,8 +201,20 @@ const ProductCardOne = ({
                   <p className='discount__price mb-1'>₹ {price}</p>
                 </div>
               )}
-              {isInCart &&
-              window.location.pathname.substring(1) !== 'wishlist' ? (
+              {addedToCart ? (
+                <div className='action__btn'>
+                  {
+                    <Button
+                      type={'pri'}
+                      size={'sml'}
+                      text={navigateString || 'View Cart'}
+                      arrow={'ra'}
+                      clickHandle={isCart ? showCartClickHandler : () => null}
+                    />
+                  }
+                </div>
+              ) : isInCart &&
+                window.location.pathname.substring(1) !== 'wishlist' ? (
                 <div className='action__btn'>
                   {
                     <Button

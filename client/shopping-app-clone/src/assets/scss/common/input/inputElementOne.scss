@@ -10,7 +10,7 @@
   border-right: none;
   border-bottom: 1px solid $border-color-primary;
   border-left: 1px solid $border-color-primary;
-  background-color: #fff;
+  background-color: $background-color-white;
   border-radius: 12px;
   border-top-left-radius: 12px;
   border-top-right-radius: 0px;
@@ -36,11 +36,65 @@
 }
 .input__ele__one:focus {
   outline: none;
+  border-bottom-right-radius: 0px;
 }
+.input__ele__one:focus + .search__icon__btn {
+  border-bottom-left-radius: 0px;
+  background-color: red;
+}
+
 .vertical__line {
   background-color: $border-color-primary;
   height: 20px;
   width: 2px;
   left: 10px;
   top: 12px;
+}
+
+.data__result {
+  top: 41px;
+  z-index: 1;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  // overflow-y: scroll;
+  background-color: $background-color-white;
+  border: 1px solid $background-color-gray;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  .data__result__products {
+    background-color: $background-color-gray;
+    border: 1px solid $border-color-primary;
+  }
+  @include sm {
+  }
+  .data__result__list {
+    cursor: pointer;
+  }
+  .data__result__list__element:hover {
+    transition: 0.3s;
+    background-color: $background-color-gray;
+  }
+}
+.searchbar__content__section__one__img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+
+.data__result::-webkit-scrollbar {
+  width: 8px;
+  height: 20px;
+  overflow: hidden;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $primary-color;
+  border-radius: 10px;
 }

@@ -8,6 +8,7 @@ import { SidebarData } from 'utils/sideBarData';
 import { useSelector } from 'react-redux';
 import rootReducer from 'reducers';
 import { Link } from 'react-router-dom';
+import { productDetails } from 'utils/productDetails';
 
 function NavbarMobile() {
   // redux
@@ -19,9 +20,11 @@ function NavbarMobile() {
     useSelector((state: RootStore) => state?.reduceProducts?.myState) || [];
 
   // navbar
-
   const [sidebar, setSidebar] = useState(false);
   const [activeTab, setActiveTab] = useState(-1);
+  const [searchString, setSearchString] = useState('');
+  const [searchClickArray, setSearchClickArray] = useState([]);
+
   const showSidebar = () => setSidebar(!sidebar);
   const showSubcategories = (index: number) => {
     if (activeTab === index) return setActiveTab(-1);
@@ -100,7 +103,11 @@ function NavbarMobile() {
           </div>
         </div>
         <div className='my-2'>
-          <InputElementOne />
+          <InputElementOne
+            productArray={productDetails}
+            setSearchClickArray={setSearchClickArray}
+            setSearchString={setSearchString}
+          />
         </div>
       </div>
       <nav
