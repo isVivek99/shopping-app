@@ -168,14 +168,18 @@ const ProductCardOne = ({
                 className='product__card__image'
                 src={require('assets/' + img)}
               />
-              <span className='discountTag position-absolute'>
-                <Tags
-                  type={'priT'}
-                  size={'smlT'}
-                  text={discount || ''}
-                  close={false}
-                />
-              </span>
+              {parseInt(discount?.substring(0, 2) || '00%') === 0 ? (
+                <span></span>
+              ) : (
+                <span className='discountTag position-absolute'>
+                  <Tags
+                    type={'priT'}
+                    size={'smlT'}
+                    text={discount || ''}
+                    close={false}
+                  />
+                </span>
+              )}
             </div>
           </Link>
           <div className='content mt-3'>
@@ -189,16 +193,16 @@ const ProductCardOne = ({
               </div>
             </Link>
             <div className='buy'>
-              {discount ? (
-                <div className='d-flex flex-column'>
-                  <p className='discount__price mb-1'>
-                    ₹ {calculateDiscount(price, discount)}
-                  </p>
-                  <p className='actual__price mb-1'>₹ {price}</p>
-                </div>
-              ) : (
+              {parseInt(discount?.substring(0, 2) || '00%') === 0 ? (
                 <div>
                   <p className='discount__price mb-1'>₹ {price}</p>
+                </div>
+              ) : (
+                <div className='d-flex flex-column'>
+                  <p className='discount__price mb-1'>
+                    ₹ {calculateDiscount(price, discount || '00%')}
+                  </p>
+                  <p className='actual__price mb-1'>₹ {price}</p>
                 </div>
               )}
               {addedToCart ? (

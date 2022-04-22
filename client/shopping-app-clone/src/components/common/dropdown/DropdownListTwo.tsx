@@ -47,7 +47,7 @@ const DropdownListOne = ({
         {listSubTopicArray?.map((item, index) => (
           <Link
             key={index}
-            to={`/${item.id}/${item.pName}`}
+            to={`/v1/product/${item.id}/${item.pName}`}
             className='text__link'
           >
             <li className={'sort__list__item'}>{item.pName}</li>
