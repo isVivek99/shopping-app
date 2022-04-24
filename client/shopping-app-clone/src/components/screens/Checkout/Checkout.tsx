@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CartProduct from 'components/screens/Checkout/CartProduct';
-import Footer from 'components/common/footer/Footer';
 import rootReducer from 'reducers';
 import 'assets/scss/screens/checkout/checkout.scss';
 import { calculateDiscount } from 'utils/calculateDiscountPrice';
@@ -10,6 +9,8 @@ import { setCoupon, resetCoupon } from 'actions';
 import { getDeliveryDate } from 'utils/getDeliveryDate';
 import tenMinuteCeo from 'assets/images/10_min_ceo_2.jpeg';
 import useCustomToast from 'components/common/toast/CustomToast';
+import BillingUserInfo from 'components/screens/Checkout/BillingUserInfo';
+import Button from 'components/common/button/Button';
 
 interface itemProps {
   quantity: number;
@@ -35,7 +36,7 @@ const Cart = () => {
 
   const { openToast, ToastComponent } = useCustomToast();
 
-  console.log(productCartList);
+  console.log(productCartList.length);
 
   const [couponCode, setCouponCode] = useState(couponObject.discountCode);
 
@@ -121,11 +122,21 @@ const Cart = () => {
       <ToastComponent />
       <div className='col-12'>
         <div className='d-flex'>
-          <div className='col-1 col-lg-7'>
-            <div className='div1'></div>
+          <div className='col-7 padding-default'>
+            <div className='billing__user__info '>
+              <BillingUserInfo />
+            </div>
+            <div className='mt-3'>
+              <Button
+                type={'pri'}
+                size={'lg'}
+                text={'Complete order'}
+                clickHandle={() => null}
+              />
+            </div>
           </div>
-          <div className='col-11 col-lg-5 '>
-            <div className='cart m-4  px-3 mx-auto'>
+          <div className='col-5 '>
+            <div className='cart  my-4  px-3 mx-auto '>
               <h2 className='cart__header '>Order Summary</h2>
               <p className='cart__line f-12 mb-1'>
                 Price can change depending on shipping method and taxes of your
@@ -233,7 +244,11 @@ const Cart = () => {
                     <p className='cart__total__order__text mb-2 f-12'>
                       Total Order
                     </p>
-                    <p className='cart__total__order__delivery__date mb-0 color__green f-12'>
+                    <p
+                      className={`cart__total__order__delivery__date mb-0 color__green f-12 ${
+                        productCartList.length === 0 ? 'd-none' : ''
+                      }`}
+                    >
                       Guaranteed delivery day: {ddmmyy}
                     </p>
                   </div>
@@ -251,7 +266,6 @@ const Cart = () => {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     </div>
   );

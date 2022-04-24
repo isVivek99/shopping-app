@@ -9,6 +9,7 @@ import Footer from 'components/common/footer/Footer';
 import DropdownListOne from 'components/common/dropdown/DropdownListOne';
 import RangeSlider from 'components/common/slider/RangeSlider';
 import Tags from 'components/common/tags/Tags';
+import { calculateDiscount } from 'utils/calculateDiscountPrice';
 import 'assets/scss/screens/categoryListing.scss';
 
 interface productCardProps {
@@ -98,7 +99,10 @@ const CategoryProductListing = ({ categoryListProductDetails }: any) => {
       if (filters.sortBy === 'low to high') {
         newFilteredProductList = newFilteredProductList.sort(
           (a: productCardProps, b: productCardProps) => {
-            return a.price - b.price;
+            return (
+              calculateDiscount(a.price, a.discount || '00%') -
+              calculateDiscount(b.price, b.discount || '00%')
+            );
           }
         );
       }
@@ -106,7 +110,10 @@ const CategoryProductListing = ({ categoryListProductDetails }: any) => {
       if (filters.sortBy === 'high to low') {
         newFilteredProductList = newFilteredProductList.sort(
           (a: productCardProps, b: productCardProps) => {
-            return b.price - a.price;
+            return (
+              calculateDiscount(b.price, b.discount || '00%') -
+              calculateDiscount(a.price, a.discount || '00%')
+            );
           }
         );
       }
