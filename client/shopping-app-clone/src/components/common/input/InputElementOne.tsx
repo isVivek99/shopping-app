@@ -38,7 +38,7 @@ function InputElementOne({
   };
 
   const showSearchElementHandler = () => {
-    console.log(input, inputEle.current.value);
+    console.log('click');
     setInput(inputEle.current.value);
     setShowSearchElement(true);
   };
@@ -47,7 +47,6 @@ function InputElementOne({
   };
 
   const navigateLiHandler = (id: number | string, name: string) => {
-    console.log(id, name);
     navigate(`/v1/product/${id}/${name}`);
     inputEle.current.value = name;
   };
@@ -55,7 +54,6 @@ function InputElementOne({
   useEffect(() => {
     const newArray = sortElementsByInput();
     setProductArrayLocal(newArray);
-    console.log('rerender');
   }, [input]);
 
   const sortElementsByInput = () => {
@@ -66,14 +64,20 @@ function InputElementOne({
   };
 
   const setSearchArrayHandler = () => {
-    console.log('click');
-    setSearchClickArray(productArrayLocal);
-    setSearchString(input);
+    if (inputEle.current.value !== '') {
+      setSearchClickArray(productArrayLocal);
+      setSearchString(input);
+    }
+  };
+  const setEnterKeySearchArrayHandler = (e: any) => {
+    if (e.key === 'Enter') {
+      setSearchArrayHandler();
+    }
   };
 
   useEffect(() => {
     inputEle.current.value = '';
-    console.log('rerender2');
+    console.log('render');
   }, []);
 
   return (
@@ -102,6 +106,7 @@ function InputElementOne({
               onChange={(e) => setInputHandler(e)}
               onFocus={showSearchElementHandler}
               onBlur={(e) => removeSearchElementHandler(e)}
+              onKeyPress={(e) => setEnterKeySearchArrayHandler(e)}
               ref={inputEle}
             />
             <img

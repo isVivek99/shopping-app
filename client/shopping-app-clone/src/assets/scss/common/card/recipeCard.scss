@@ -3,8 +3,12 @@
 .recipe__card__img__wrapper {
   margin: 1rem;
   border-radius: 12px;
-  height: 280px;
-  width: 420px;
+  height: 220px;
+  width: 320px;
+  @include sm {
+    height: 280px;
+    width: 420px;
+  }
 }
 
 .recipe__card__img {
@@ -20,10 +24,14 @@
 .recipe__overlay {
   border-radius: 8px;
   background-color: $tag-primary-color;
-  height: 280px;
-  width: 420px;
+  height: 220px;
+  width: 320px;
   opacity: 1;
   transition: 0.3s;
+  @include sm {
+    height: 280px;
+    width: 420px;
+  }
 }
 
 .recipe__card__banner {
