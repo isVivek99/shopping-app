@@ -18,6 +18,20 @@ interface itemProps {
   subtotal: number;
 }
 
+const loadRazorpayScript = async (src: string) => {
+  return new Promise((resolve) => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = () => {
+      resolve(true);
+    };
+    script.onerror = () => {
+      resolve(false);
+    };
+    document.body.appendChild(script);
+  });
+};
+
 const Cart = () => {
   const dispatch = useDispatch();
   type RootStore = ReturnType<typeof rootReducer>;
@@ -25,6 +39,7 @@ const Cart = () => {
   const couponCodeInput: any = useRef(null);
   const couponTTL = 1210000000;
 
+  //redux store
   const productCartList =
     useSelector((state: RootStore) => state?.reduceProducts?.myState) || [];
 
@@ -34,15 +49,58 @@ const Cart = () => {
   const productWishList =
     useSelector((state: RootStore) => state?.reduceWishlist?.wishlist) || [];
 
+  //hooks
   const { openToast, ToastComponent } = useCustomToast();
-
-  console.log(productCartList.length);
-
   const [couponCode, setCouponCode] = useState(couponObject.discountCode);
+  //methods
+
+  const displayRazorpay = async () => {
+    const res = await loadRazorpayScript(
+      'https://checkout.razorpay.com/v1/checkout.js'
+    );
+    console.log(res);
+    if (!res) {
+      openToast('razorpay sdk failed to laod!', 'error');
+      return;
+    }
+    const data = await fetch('http://localhost:1337/razorpay', {
+      method: 'POST',
+    }).then((data) => data.json());
+    console.log(data);
+
+    const options = {
+      key: process.env.RAZORPAY_TEST_API, // Enter the Key ID generated from the Dashboard
+      amount: data.amount,
+      currency: data.currency,
+      name: 'Freshness pvt. ltd.',
+      description: 'thankyou for using freshness!!',
+      image: 'https://example.com/your_logo',
+      order_id: data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      handler: function (response: {
+        razorpay_payment_id: any;
+        razorpay_order_id: any;
+        razorpay_signature: any;
+      }) {
+        // alert(response.razorpay_payment_id);
+        // alert(response.razorpay_order_id);
+        // alert(response.razorpay_signature);
+        openToast('payment successfull', 'success');
+      },
+      prefill: {
+        name: 'Gaurav Kumar',
+        email: 'gaurav.kumar@example.com',
+        contact: '9999999999',
+      },
+    };
+    const _window = window as any;
+    const paymentObject = new _window.Razorpay(options);
+    paymentObject.open();
+  };
 
   const setCouponValue = (e: any) => {
     setCouponCode(e.target.value);
   };
+
   const clearInputField = () => {
     dispatch(
       resetCoupon({
@@ -131,7 +189,7 @@ const Cart = () => {
                 type={'pri'}
                 size={'lg'}
                 text={'Complete order'}
-                clickHandle={() => null}
+                clickHandle={displayRazorpay}
               />
             </div>
           </div>
