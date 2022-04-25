@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import InputElementTwo from 'components/common/input/InputElementTwo';
-
+import 'assets/scss/screens/checkout/billUserInfo.scss';
 const BillingUserInfo = () => {
   const [userInfo, setUserInfo] = useState({
     firstName: '',

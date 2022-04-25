@@ -83,7 +83,7 @@ function InputElementOne({
   return (
     <div className='w-100'>
       <div className=''>
-        <div className='d-lg-flex  justify-content-center col-11 col-xl-8 mx-auto position-relative'>
+        <div className='d-lg-flex  justify-content-center col-11 col-xl-8 mx-auto position-relative pb-2'>
           <button className=' search__icon__btn ps-3 f-14 bold d-none d-lg-block'>
             <span className='pe-1'>All categories</span>
 

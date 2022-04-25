@@ -6,9 +6,19 @@
   font-weight: 600;
 }
 .cart {
-  width: 468px;
+  width: 368px;
   border: 1px solid $border-color-primary;
   border-radius: 12px;
+  @include rwd(375) {
+    width: auto;
+  }
+  @include sm {
+    width: 468px;
+  }
+
+  @include md {
+    width: 468px;
+  }
 }
 .cart__line {
   color: $listItems-color;

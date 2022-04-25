@@ -2,10 +2,7 @@ import { useState, useEffect } from 'react';
 import ListElementOne from 'components/common/lists/ListElementOne';
 import SlideCarousel from 'components/common/carousels/SlideCarousel';
 import DropDownTwo from 'components/common/dropdown/DropdownListTwo';
-interface objType {
-  pName: string;
-  id: number;
-}
+
 interface CategoryProductListProps {
   listHeader: string | undefined;
   listSubTopicArray: any;

@@ -121,8 +121,8 @@ const Cart = () => {
     <div className='screen d-flex mx-auto'>
       <ToastComponent />
       <div className='col-12'>
-        <div className='d-flex'>
-          <div className='col-7 padding-default'>
+        <div className='d-flex flex-column flex-xl-row flex-column-reverse'>
+          <div className='col-12 col-xl-7 padding-default'>
             <div className='billing__user__info '>
               <BillingUserInfo />
             </div>
@@ -135,7 +135,7 @@ const Cart = () => {
               />
             </div>
           </div>
-          <div className='col-5 '>
+          <div className='col-12 col-xl-5 '>
             <div className='cart  my-4  px-3 mx-auto '>
               <h2 className='cart__header '>Order Summary</h2>
               <p className='cart__line f-12 mb-1'>
