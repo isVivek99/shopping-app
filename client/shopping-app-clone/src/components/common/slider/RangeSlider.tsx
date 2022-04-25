@@ -7,7 +7,7 @@ import {
   Dispatch,
 } from 'react';
 import Button from 'components/common/button/Button';
-import 'assets/scss/common/rangeslider/rangeSlider.scss';
+import 'assets/scss/common/rangeslider/RangeSlider.scss';
 
 interface SliderProps {
   min: number;

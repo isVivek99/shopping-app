@@ -48,6 +48,8 @@ const ProductCardOne = ({
   navigateString,
   navigateLink,
 }: productCardArrayProps) => {
+  // console.log(pName, rating);
+
   const { openToast, ToastComponent } = useCustomToast();
 
   const propProduct = {
@@ -76,17 +78,7 @@ const ProductCardOne = ({
   const [isInCart, setIsInCart] = useState(
     productFromCart[0] ? productFromCart[0].addedToCart : false
   );
-  console.log(
-    console.log(
-      addedToCart
-        ? addedToCart && window.location.pathname.substring(1) !== 'wishlist'
-          ? 'view'
-          : 'add'
-        : isInCart && window.location.pathname.substring(1) !== 'wishlist'
-        ? 'view'
-        : 'add'
-    )
-  );
+
   const [isInWishlist, setIsInWishlist] = useState(
     productFromWishlist[0] ? productFromWishlist[0].addedToWishlist : false
   );
@@ -153,7 +145,6 @@ const ProductCardOne = ({
 
   useEffect(() => {
     checkIfInCart();
-    console.log('as');
   }, [productCartList]);
 
   console.log('rerender');

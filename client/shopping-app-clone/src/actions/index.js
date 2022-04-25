@@ -52,6 +52,13 @@ export const setPriceRange = (minMaxObject) => {
   };
 };
 
+export const setRating = (rating) => {
+  return {
+    type: 'SET_RATING',
+    payload: { rating },
+  };
+};
+
 export const setSortFilter = (sortString) => {
   return {
     type: 'SET_SORT_FILTER',
@@ -67,7 +74,7 @@ export const resetFilters = () => {
       minValue: 0,
       maxValue: 1000,
       category: '',
-      rating: 0,
+      rating: null,
     },
   };
 };
