@@ -90,11 +90,20 @@
 .cart__coupon__code {
   width: fit-content;
   .cart__coupon__input {
-    width: 422px;
+    width: 322px;
     border-radius: 12px;
     font-size: 14px;
     border: 1px solid $border-color-primary;
     background-color: $background-color-gray;
+    @include rwd(375) {
+      width: 300px;
+    }
+    @include sm {
+      width: 422px;
+    }
+    @include md {
+      width: 422px;
+    }
   }
   .cart__coupon__input:focus {
     outline: none;

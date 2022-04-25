@@ -211,7 +211,9 @@ const CategoryProductListing = ({ categoryListProductDetails }: any) => {
               />
             </div>
           </div>
-          <div className='col-12 col-lg-9'>
+          <div
+            className={`col-12 col-lg-9 ${toggleMobileFilters ? 'd-none' : ''}`}
+          >
             <div className='category__listing__products d-flex flex-wrap justify-content-around'>
               {newFilteredProductList.map(
                 (iter: productCardProps, index: string) => (
@@ -259,7 +261,9 @@ const CategoryProductListing = ({ categoryListProductDetails }: any) => {
             </div>
           </div>
         </div>
-        <Footer />
+        <div className={`${toggleMobileFilters ? 'd-none' : ''}`}>
+          <Footer />
+        </div>
       </div>
     </div>
   );
