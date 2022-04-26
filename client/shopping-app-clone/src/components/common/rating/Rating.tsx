@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import 'assets/scss/common/rating/rating.scss';
 
 interface ratingProps {
@@ -8,7 +8,8 @@ interface ratingProps {
 }
 
 const Rating = ({ type, stars, sizePx }: ratingProps) => {
-  const [rating, setRating] = useState(stars);
+  // const [rating, setRating] = useState(stars);
+  const rating = stars;
   const [hover, setHover] = useState(0);
 
   return (
@@ -21,7 +22,7 @@ const Rating = ({ type, stars, sizePx }: ratingProps) => {
               type='button'
               key={index}
               className={index <= (hover || rating) ? 'on' : 'off'}
-              onClick={() => setRating(index)}
+              // onClick={() => setRating(index)}
               onMouseEnter={() => setHover(index)}
               onMouseLeave={() => setHover(rating)}
             >

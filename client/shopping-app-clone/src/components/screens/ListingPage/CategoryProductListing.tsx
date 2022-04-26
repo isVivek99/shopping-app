@@ -249,7 +249,6 @@ const CategoryProductListing = ({ categoryListProductDetails }: any) => {
               {newFilteredProductList.map(
                 (iter: productCardProps, index: string) => (
                   <div key={index}>
-                    {iter.rating}
                     <div className='m-3 d-block d-sm-none d-lg-block'>
                       <ProductCardOne
                         pName={iter.pName}

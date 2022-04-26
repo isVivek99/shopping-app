@@ -48,9 +48,10 @@ const ProductCardOne = ({
   navigateString,
   navigateLink,
 }: productCardArrayProps) => {
-  // console.log(pName, rating);
-
   const { openToast, ToastComponent } = useCustomToast();
+  useEffect(() => {
+    if (pName === 'Mangoes') console.log('mango-rating:', rating);
+  }, [rating]);
 
   const propProduct = {
     pName,
