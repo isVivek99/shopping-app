@@ -48,8 +48,6 @@ const ProductCardOne = ({
   navigateString,
   navigateLink,
 }: productCardArrayProps) => {
-  // console.log(pName, rating);
-
   const { openToast, ToastComponent } = useCustomToast();
 
   const propProduct = {
@@ -78,7 +76,17 @@ const ProductCardOne = ({
   const [isInCart, setIsInCart] = useState(
     productFromCart[0] ? productFromCart[0].addedToCart : false
   );
-
+  console.log(
+    console.log(
+      addedToCart
+        ? addedToCart && window.location.pathname.substring(1) !== 'wishlist'
+          ? 'view'
+          : 'add'
+        : isInCart && window.location.pathname.substring(1) !== 'wishlist'
+        ? 'view'
+        : 'add'
+    )
+  );
   const [isInWishlist, setIsInWishlist] = useState(
     productFromWishlist[0] ? productFromWishlist[0].addedToWishlist : false
   );
@@ -145,6 +153,7 @@ const ProductCardOne = ({
 
   useEffect(() => {
     checkIfInCart();
+    console.log('as');
   }, [productCartList]);
 
   console.log('rerender');
@@ -159,18 +168,14 @@ const ProductCardOne = ({
                 className='product__card__image'
                 src={require('assets/' + img)}
               />
-              {parseInt(discount?.substring(0, 2) || '00%') === 0 ? (
-                <span></span>
-              ) : (
-                <span className='discountTag position-absolute'>
-                  <Tags
-                    type={'priT'}
-                    size={'smlT'}
-                    text={discount || ''}
-                    close={false}
-                  />
-                </span>
-              )}
+              <span className='discountTag position-absolute'>
+                <Tags
+                  type={'priT'}
+                  size={'smlT'}
+                  text={discount || ''}
+                  close={false}
+                />
+              </span>
             </div>
           </Link>
           <div className='content mt-3'>
@@ -184,16 +189,16 @@ const ProductCardOne = ({
               </div>
             </Link>
             <div className='buy'>
-              {parseInt(discount?.substring(0, 2) || '00%') === 0 ? (
-                <div>
-                  <p className='discount__price mb-1'>₹ {price}</p>
-                </div>
-              ) : (
+              {discount ? (
                 <div className='d-flex flex-column'>
                   <p className='discount__price mb-1'>
-                    ₹ {calculateDiscount(price, discount || '00%')}
+                    ₹ {calculateDiscount(price, discount)}
                   </p>
                   <p className='actual__price mb-1'>₹ {price}</p>
+                </div>
+              ) : (
+                <div>
+                  <p className='discount__price mb-1'>₹ {price}</p>
                 </div>
               )}
               {addedToCart ? (

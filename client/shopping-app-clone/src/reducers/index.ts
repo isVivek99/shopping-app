@@ -147,20 +147,6 @@ const reduceProducts = (
         },
       };
 
-    case 'SET_RATING':
-      console.log(action.payload, 'here');
-
-      return {
-        myState: [...state.myState],
-        filters: {
-          ...state.filters,
-          rating: action.payload.rating,
-        },
-        coupon: {
-          ...state.coupon,
-        },
-      };
-
     case 'SET_SORT_FILTER':
       return {
         myState: [...state.myState],

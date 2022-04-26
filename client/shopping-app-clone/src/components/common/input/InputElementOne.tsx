@@ -38,7 +38,7 @@ function InputElementOne({
   };
 
   const showSearchElementHandler = () => {
-    console.log('click');
+    console.log(input, inputEle.current.value);
     setInput(inputEle.current.value);
     setShowSearchElement(true);
   };
@@ -47,6 +47,7 @@ function InputElementOne({
   };
 
   const navigateLiHandler = (id: number | string, name: string) => {
+    console.log(id, name);
     navigate(`/v1/product/${id}/${name}`);
     inputEle.current.value = name;
   };
@@ -54,6 +55,7 @@ function InputElementOne({
   useEffect(() => {
     const newArray = sortElementsByInput();
     setProductArrayLocal(newArray);
+    console.log('rerender');
   }, [input]);
 
   const sortElementsByInput = () => {
@@ -64,26 +66,20 @@ function InputElementOne({
   };
 
   const setSearchArrayHandler = () => {
-    if (inputEle.current.value !== '') {
-      setSearchClickArray(productArrayLocal);
-      setSearchString(input);
-    }
-  };
-  const setEnterKeySearchArrayHandler = (e: any) => {
-    if (e.key === 'Enter') {
-      setSearchArrayHandler();
-    }
+    console.log('click');
+    setSearchClickArray(productArrayLocal);
+    setSearchString(input);
   };
 
   useEffect(() => {
     inputEle.current.value = '';
-    console.log('render');
+    console.log('rerender2');
   }, []);
 
   return (
     <div className='w-100'>
       <div className=''>
-        <div className='d-lg-flex  justify-content-center col-11 col-xl-8 mx-auto position-relative pb-2'>
+        <div className='d-lg-flex  justify-content-center col-11 col-xl-8 mx-auto position-relative'>
           <button className=' search__icon__btn ps-3 f-14 bold d-none d-lg-block'>
             <span className='pe-1'>All categories</span>
 
@@ -106,7 +102,6 @@ function InputElementOne({
               onChange={(e) => setInputHandler(e)}
               onFocus={showSearchElementHandler}
               onBlur={(e) => removeSearchElementHandler(e)}
-              onKeyPress={(e) => setEnterKeySearchArrayHandler(e)}
               ref={inputEle}
             />
             <img

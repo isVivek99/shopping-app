@@ -1,16 +1,14 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setPriceRange, setSortFilter, resetFilters, setRating } from 'actions';
+import { setPriceRange, setSortFilter, resetFilters } from 'actions';
 import rootReducer from 'reducers';
 import ProductCardOne from 'components/common/card/ProductCardOne';
 import ProductCardTwo from 'components/common/card/ProductCardTwo';
 import Footer from 'components/common/footer/Footer';
 import DropdownListOne from 'components/common/dropdown/DropdownListOne';
 import RangeSlider from 'components/common/slider/RangeSlider';
-import StarList from 'components/common/starList/starList';
 import Tags from 'components/common/tags/Tags';
-import { calculateDiscount } from 'utils/calculateDiscountPrice';
 import 'assets/scss/screens/categoryListing.scss';
 
 interface productCardProps {
@@ -52,11 +50,11 @@ const CategoryProductListing = ({ categoryListProductDetails }: any) => {
     min: filters.minValue,
     max: filters.maxValue,
   });
+  console.log(minMaxValue);
 
   const [dropdownStatus, setDropdownStatus] = useState(false);
   const [dropdownValue, setStateDropdownValue] = useState('Recommended');
   const [toggleMobileFilters, setToggleMobileFilters] = useState(false);
-  const [listingRating, setListingRating] = useState(null);
 
   useEffect(() => {
     console.log(minMaxValue, filters);
@@ -67,10 +65,6 @@ const CategoryProductListing = ({ categoryListProductDetails }: any) => {
     console.log(dropdownValue, filters);
     dispatch(setSortFilter(dropdownValue));
   }, [dropdownValue]);
-
-  useEffect(() => {
-    dispatch(setRating(listingRating));
-  }, [listingRating]);
 
   useEffect(() => {
     return () => {
@@ -100,48 +94,29 @@ const CategoryProductListing = ({ categoryListProductDetails }: any) => {
           product.price > filters.minValue && product.price < filters.maxValue
       );
     }
-    if (filters.rating) {
-      console.log(typeof filters.rating);
-      const rating = parseInt(filters.rating);
-      newFilteredProductList = newFilteredProductList.filter(
-        (product: productCardProps) => product.rating === rating
-      );
-    }
-
     if (filters.sortBy !== 'Recommended') {
       if (filters.sortBy === 'low to high') {
-        console.log('l-h');
         newFilteredProductList = newFilteredProductList.sort(
           (a: productCardProps, b: productCardProps) => {
-            return (
-              calculateDiscount(a.price, a.discount || '00%') -
-              calculateDiscount(b.price, b.discount || '00%')
-            );
+            return a.price - b.price;
           }
         );
       }
 
       if (filters.sortBy === 'high to low') {
-        console.log('h-l');
         newFilteredProductList = newFilteredProductList.sort(
           (a: productCardProps, b: productCardProps) => {
-            return (
-              calculateDiscount(b.price, b.discount || '00%') -
-              calculateDiscount(a.price, a.discount || '00%')
-            );
+            return b.price - a.price;
           }
         );
       }
 
       if (filters.sortBy === 'rating') {
-        console.log('sort by rating');
-
         newFilteredProductList = newFilteredProductList.sort(
-          (a: productCardProps, b: productCardProps) =>
-            a.rating > b.rating ? 1 : -1
+          (a: productCardProps, b: productCardProps) => {
+            return a.rating - b.rating;
+          }
         );
-
-        console.log(newFilteredProductList);
       }
     }
   };
@@ -219,10 +194,6 @@ const CategoryProductListing = ({ categoryListProductDetails }: any) => {
             } `}
           >
             <div className='mt-5'>
-              <div className='d-flex jsutify-content-start ms-5 mb-1'>
-                <h3 className='f-18'>Price</h3>
-              </div>
-
               <RangeSlider
                 category={category || 'bakery'}
                 min={0}
@@ -232,24 +203,12 @@ const CategoryProductListing = ({ categoryListProductDetails }: any) => {
                 maxGlobal={filters.maxValue}
               />
             </div>
-            <div className='mt-5'>
-              <div className='d-flex jsutify-content-start ms-5 mb-1'>
-                <h3 className='f-18'>Rating</h3>
-              </div>
-              <StarList
-                setListingRating={setListingRating}
-                category={category || 'bakery'}
-              />
-            </div>
           </div>
-          <div
-            className={`col-12 col-lg-9 ${toggleMobileFilters ? 'd-none' : ''}`}
-          >
+          <div className='col-12 col-lg-9'>
             <div className='category__listing__products d-flex flex-wrap justify-content-around'>
               {newFilteredProductList.map(
                 (iter: productCardProps, index: string) => (
                   <div key={index}>
-                    {iter.rating}
                     <div className='m-3 d-block d-sm-none d-lg-block'>
                       <ProductCardOne
                         pName={iter.pName}
@@ -293,9 +252,7 @@ const CategoryProductListing = ({ categoryListProductDetails }: any) => {
             </div>
           </div>
         </div>
-        <div className={`${toggleMobileFilters ? 'd-none' : ''}`}>
-          <Footer />
-        </div>
+        <Footer />
       </div>
     </div>
   );

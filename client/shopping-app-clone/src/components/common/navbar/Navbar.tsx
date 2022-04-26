@@ -22,7 +22,9 @@ function Navbar() {
   const [searchClickArray, setSearchClickArray] = useState([]);
   const [searchString, setSearchString] = useState('');
   useEffect(() => {
-    if (searchClickArray.length > 0 || searchString.length > 0) {
+    if (searchClickArray.length > 0) {
+      console.log(searchClickArray);
+      console.log(`../v1/suggestions/${searchString}`, searchClickArray.length);
       navigate(`../v1/suggestions/${searchString}`);
     }
   }, [searchClickArray]);
