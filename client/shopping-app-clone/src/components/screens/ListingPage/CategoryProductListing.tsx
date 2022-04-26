@@ -27,7 +27,11 @@ interface productCardProps {
   addedToWishlist: boolean;
 }
 
-const sortArrayParams = [{ title: 'high to low' }, { title: 'low to high' }];
+const sortArrayParams = [
+  { title: 'high to low' },
+  { title: 'low to high' },
+  { title: 'rating' },
+];
 
 const CategoryProductListing = ({ categoryListProductDetails }: any) => {
   const { category } = useParams();
@@ -100,7 +104,7 @@ const CategoryProductListing = ({ categoryListProductDetails }: any) => {
       console.log(typeof filters.rating);
       const rating = parseInt(filters.rating);
       newFilteredProductList = newFilteredProductList.filter(
-        (product: productCardProps) => product.rating <= rating
+        (product: productCardProps) => product.rating === rating
       );
     }
 
