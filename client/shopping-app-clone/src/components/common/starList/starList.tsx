@@ -44,7 +44,7 @@ const starList = ({ setListingRating, category }: StarListProps) => {
         />
         <Rating type='static' stars={4} />
       </div>
-      <div className='d-flex align-items-center'>
+      <div className='d-flex  align-items-center'>
         <input
           type='radio'
           className='mx-2'
