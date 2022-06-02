@@ -1,0 +1,24 @@
+@import 'assets/scss/_variables.scss';
+
+.input__ele__two__content {
+  border-radius: 12px;
+  border: 1px solid $border-color-primary;
+  font-size: 14px;
+  background-color: $background-color-gray;
+  color: $primary-color;
+}
+.input__ele__two__content:focus {
+  outline: none;
+}
+
+.input__ele__two__label {
+  line-height: 18px;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}

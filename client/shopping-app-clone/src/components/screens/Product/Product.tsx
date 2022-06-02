@@ -1,20 +1,19 @@
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import rootReducer from 'reducers';
-import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { calculateDiscount } from 'utils/calculateDiscountPrice';
-import { addProducts, removeFromWishlist } from 'actions';
-import Rating from 'components/common/rating/Rating';
-import ListItemsCard from 'components/common/lists/ListItemsCard';
-import Button from 'components/common/button/Button';
-import SingleSlideCarousel from 'components/common/carousels/SingleSlideCarousel';
-import ProductFastDelivery from './ProductFastDelivery';
-import Footer from 'components/common/footer/Footer';
-import 'assets/scss/common.scss';
-import 'assets/scss/screens/product/product.scss';
-import useCustomToast from 'components/common/toast/CustomToast';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import rootReducer from "reducers";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { calculateDiscount } from "utils/calculateDiscountPrice";
+import { addProducts, removeFromWishlist } from "actions";
+import Rating from "components/common/rating/Rating";
+import ListItemsCard from "components/common/lists/ListItemsCard";
+import Button from "components/common/button/Button";
+import SingleSlideCarousel from "components/common/carousels/SingleSlideCarousel";
+import ProductFastDelivery from "./ProductFastDelivery";
+import Footer from "components/common/footer/Footer";
+import "assets/scss/screens/product/product.scss";
+import useCustomToast from "components/common/toast/CustomToast";
+import { useNavigate } from "react-router-dom";
 
 interface productCardProps {
   discount?: string;
@@ -42,7 +41,7 @@ const Product = ({ productDetails }: any) => {
   const { openToast, ToastComponent } = useCustomToast();
   const dispatch = useDispatch();
   const { id, productName } = useParams();
-  const productId = id || '1';
+  const productId = id || "1";
   const product = productDetails.find(
     (product: productCardProps) => product.id === parseInt(productId)
   );
@@ -76,18 +75,18 @@ const Product = ({ productDetails }: any) => {
   );
 
   const productAddToCartHandler = () => {
-    if (window.location.pathname.substring(1) !== 'wishlist') {
+    if (window.location.pathname.substring(1) !== "wishlist") {
       dispatch(addProducts(product));
       setIsInCart(true);
     }
 
     if (checkIfInWishlist() && checkIfInCart()) {
-      console.log('publish error already in cart');
-      openToast('product already in cart,please delete to add more', 'error');
+      console.log("publish error already in cart");
+      openToast("product already in cart,please delete to add more", "error");
     } else if (checkIfInWishlist()) {
-      console.log('delete from wishlist');
+      console.log("delete from wishlist");
       //product should be deleted only if user is clicking from wishlist page else we just add it to cart
-      if (window.location.pathname.substring(1) === 'wishlist') {
+      if (window.location.pathname.substring(1) === "wishlist") {
         dispatch(addProducts(product));
         dispatch(removeFromWishlist({ id }));
       }
@@ -95,7 +94,7 @@ const Product = ({ productDetails }: any) => {
   };
 
   const showCartClickHandler = () => {
-    navigate('../cart');
+    navigate("../cart");
   };
 
   const checkIfInCart = () => {
@@ -124,114 +123,114 @@ const Product = ({ productDetails }: any) => {
   }, [productCartList]);
 
   return (
-    <div className='screen '>
+    <div className="screen ">
       <ToastComponent />
-      <div className='page__path py-3 ps-3'>
+      <div className="page__path py-3 ps-3">
         <p>
           <span>Homepage/</span> <span>{product.category}/ </span>
           {productName}
         </p>
       </div>
-      <div className=' d-flex flex-column flex-lg-row mx-auto'>
-        <div className='col-lg-6 col-12'>
-          <div className='mb-2'>
+      <div className=" d-flex flex-column flex-lg-row mx-auto">
+        <div className="col-lg-6 col-12">
+          <div className="mb-2">
             <SingleSlideCarousel carouselImages={product.carouselImages} />
           </div>
         </div>
-        <div className='col-lg-6 col-12 px-4 px-lg-5'>
-          <h1 className='product__page__heading mb-0'>{productName}</h1>
+        <div className="col-lg-6 col-12 px-4 px-lg-5">
+          <h1 className="product__page__heading mb-0">{productName}</h1>
 
-          <div className='mb-4'>
-            <Rating type='static' stars={product.rating} />
+          <div className="mb-4">
+            <Rating type="static" stars={product.rating} />
           </div>
-          <div className='mb-5'>
-            <p className='product__page__description'>
+          <div className="mb-5">
+            <p className="product__page__description">
               Carrots from Tomissy Farm are one of the best on the market.
               Tomisso and his family are giving a full love to his Bio products.
               Tomisso’s carrots are growing on the fields naturally.
             </p>
           </div>
-          <div className='d-flex justify-content-around flex-column flex-lg-row justify-content-center mb-5'>
+          <div className="d-flex justify-content-around flex-column flex-lg-row justify-content-center mb-5">
             <div>
-              <ListItemsCard category='SKU:' value='76645' color='black' />
+              <ListItemsCard category="SKU:" value="76645" color="black" />
 
               <ListItemsCard
-                category='Category:'
-                value='Vegetables'
-                color='black'
+                category="Category:"
+                value="Vegetables"
+                color="black"
               />
-              <ListItemsCard category='Stock' value='In Stock' color='green' />
+              <ListItemsCard category="Stock" value="In Stock" color="green" />
               <ListItemsCard
-                category='Farm:'
-                value='Grocery Fields'
-                color='black'
+                category="Farm:"
+                value="Grocery Fields"
+                color="black"
               />
             </div>
             <div>
               <ListItemsCard
-                category='Freshness:'
-                value='1 days old'
-                color='black'
+                category="Freshness:"
+                value="1 days old"
+                color="black"
               />
 
-              <ListItemsCard category='Unit:' value='kgs' color='black' />
+              <ListItemsCard category="Unit:" value="kgs" color="black" />
               <ListItemsCard
-                category='Delivery:'
-                value='in 2 days'
-                color='gray'
+                category="Delivery:"
+                value="in 2 days"
+                color="gray"
               />
               <ListItemsCard
-                category='Delivery area:'
-                value='pune'
-                color='black'
+                category="Delivery area:"
+                value="pune"
+                color="black"
               />
             </div>
           </div>
-          <div className='product__page__price__box d-flex justify-content-around mx-auto '>
+          <div className="product__page__price__box d-flex justify-content-around mx-auto ">
             {product.discount ? (
-              <div className='d-flex flex-column'>
-                <h1 className='product__page__price__discounted mb-1'>
-                  {' '}
+              <div className="d-flex flex-column">
+                <h1 className="product__page__price__discounted mb-1">
+                  {" "}
                   ₹ {calculateDiscount(product.price, product.discount)}
                 </h1>
-                <h2 className='product__page__price__original'>₹ 20.49</h2>
+                <h2 className="product__page__price__original">₹ 20.49</h2>
               </div>
             ) : (
               <div>
-                <p className='product__page__price__undiscounted mb-1'>
+                <p className="product__page__price__undiscounted mb-1">
                   ₹ {product.price}
                 </p>
               </div>
             )}
-            <div className='product__page__select__options d-flex align-items-center'>
-              <div className='add__to__cart__count me-3 position-relative'>
+            <div className="product__page__select__options d-flex align-items-center">
+              <div className="add__to__cart__count me-3 position-relative">
                 <button
-                  className='add__to__cart__dropdown__btn d-flex'
+                  className="add__to__cart__dropdown__btn d-flex"
                   onClick={toggleDropdown}
                 >
-                  <span className='color__gray'>{productCount} | </span>
+                  <span className="color__gray">{productCount} | </span>
                   <span>
-                    <div className='px-1 d-flex align-items-center'>
-                      <span className='add__to__cart__unit'>units </span>
-                      <div className='angle__down ps-1'>
-                        <i className='fas fa-angle-down'></i>
+                    <div className="px-1 d-flex align-items-center">
+                      <span className="add__to__cart__unit">units </span>
+                      <div className="angle__down ps-1">
+                        <i className="fas fa-angle-down"></i>
                       </div>
                     </div>
                   </span>
                 </button>
                 {dropdownStatus && (
                   <div
-                    className='add__to__cart__dropdown__btn__content position-absolute w-100'
+                    className="add__to__cart__dropdown__btn__content position-absolute w-100"
                     onClick={toggleDropdown}
                   >
-                    <div className='dropdown__content '>
-                      <p className='mb-0 py-1 ps-2'>1kg</p>
+                    <div className="dropdown__content ">
+                      <p className="mb-0 py-1 ps-2">1kg</p>
                     </div>
-                    <div className='dropdown__content'>
-                      <p className='mb-0  py-1 ps-2'>2kg</p>
+                    <div className="dropdown__content">
+                      <p className="mb-0  py-1 ps-2">2kg</p>
                     </div>
-                    <div className='dropdown__content'>
-                      <p className='mb-0  py-1 ps-2'>3kg</p>
+                    <div className="dropdown__content">
+                      <p className="mb-0  py-1 ps-2">3kg</p>
                     </div>
                   </div>
                 )}
@@ -246,41 +245,41 @@ const Product = ({ productDetails }: any) => {
                 />
               </div> */}
               {isInCart &&
-              window.location.pathname.substring(1) !== 'wishlist' ? (
-                <div className='action__btn'>
+              window.location.pathname.substring(1) !== "wishlist" ? (
+                <div className="action__btn">
                   {
                     <Button
-                      type={'pri'}
-                      size={'sml'}
-                      text={'View Cart'}
-                      arrow={'ra'}
+                      type={"pri"}
+                      size={"sml"}
+                      text={"View Cart"}
+                      arrow={"ra"}
                       clickHandle={showCartClickHandler}
                     />
                   }
                 </div>
               ) : (
                 <Button
-                  type={'pri'}
-                  size={'sml'}
-                  text={'Add to Cart'}
-                  arrow={'ra'}
+                  type={"pri"}
+                  size={"sml"}
+                  text={"Add to Cart"}
+                  arrow={"ra"}
                   clickHandle={productAddToCartHandler}
                 />
               )}
             </div>
           </div>
-          <div className='wishlist d-flex mt-4'>
-            <div className='wishlist__heart ps-1'>
-              <i className='fas fa-heart mx-2'></i>
+          <div className="wishlist d-flex mt-4">
+            <div className="wishlist__heart ps-1">
+              <i className="fas fa-heart mx-2"></i>
             </div>
-            <p className='wishlist__text'>Add to my wish list</p>
+            <p className="wishlist__text">Add to my wish list</p>
           </div>
-          <div className='mt-4'>
+          <div className="mt-4">
             <ProductFastDelivery />
           </div>
         </div>
       </div>
-      <div className='mt-5'>
+      <div className="mt-5">
         <Footer />
       </div>
     </div>

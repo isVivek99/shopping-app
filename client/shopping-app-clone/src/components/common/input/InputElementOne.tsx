@@ -1,10 +1,9 @@
-import { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import searchIcon from 'assets/images/search-icon.png';
-import dropDownArrow from 'assets/images/ic-chevron-down.png';
-import 'assets/scss/common.scss';
-import 'assets/scss/common/input/inputElementOne.scss';
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import searchIcon from "assets/images/search-icon.png";
+import dropDownArrow from "assets/images/ic-chevron-down.png";
+import "assets/scss/common/input/inputElementOne.scss";
 
 interface productArrayElementProps {
   pName: string;
@@ -25,12 +24,12 @@ function InputElementOne({
   setSearchClickArray,
   setSearchString,
 }: InputElementOneprops) {
-  const inputEle = useRef<HTMLInputElement>(document.createElement('input'));
+  const inputEle = useRef<HTMLInputElement>(document.createElement("input"));
   const navigate = useNavigate();
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [showSearchElement, setShowSearchElement] = useState(false);
   const [productArrayLocal, setProductArrayLocal] = useState(
-    productArray || [{ pName: '', id: '', img: '' }]
+    productArray || [{ pName: "", id: "", img: "" }]
   );
 
   const setInputHandler = (e: any) => {
@@ -38,7 +37,7 @@ function InputElementOne({
   };
 
   const showSearchElementHandler = () => {
-    console.log('click');
+    console.log("click");
     setInput(inputEle.current.value);
     setShowSearchElement(true);
   };
@@ -64,45 +63,45 @@ function InputElementOne({
   };
 
   const setSearchArrayHandler = () => {
-    if (inputEle.current.value !== '') {
+    if (inputEle.current.value !== "") {
       setSearchClickArray(productArrayLocal);
       setSearchString(input);
     }
   };
   const setEnterKeySearchArrayHandler = (e: any) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       setSearchArrayHandler();
     }
   };
 
   useEffect(() => {
-    inputEle.current.value = '';
-    console.log('render');
+    inputEle.current.value = "";
+    console.log("render");
   }, []);
 
   return (
-    <div className='w-100'>
-      <div className=''>
-        <div className='d-lg-flex  justify-content-center col-11 col-xl-8 mx-auto position-relative pb-2'>
-          <button className=' search__icon__btn ps-3 f-14 bold d-none d-lg-block'>
-            <span className='pe-1'>All categories</span>
+    <div className="w-100">
+      <div className="">
+        <div className="d-lg-flex  justify-content-center col-11 col-xl-8 mx-auto position-relative pb-2">
+          <button className=" search__icon__btn ps-3 f-14 bold d-none d-lg-block">
+            <span className="pe-1">All categories</span>
 
             <img
               src={dropDownArrow}
-              alt=''
-              className='img-fluid '
-              style={{ height: '16px', width: '16px' }}
+              alt=""
+              className="img-fluid "
+              style={{ height: "16px", width: "16px" }}
             />
           </button>
           <div
-            className='col-12 col-lg-8 position-relative'
-            style={{ flexGrow: '1' }}
+            className="col-12 col-lg-8 position-relative"
+            style={{ flexGrow: "1" }}
           >
-            <div className='vertical__line position-absolute d-none d-lg-block'></div>
+            <div className="vertical__line position-absolute d-none d-lg-block"></div>
             <input
-              type='text'
-              placeholder='Search Products, categories...'
-              className=' input__ele__one col-12 ps-2 ps-lg-5 f-14'
+              type="text"
+              placeholder="Search Products, categories..."
+              className=" input__ele__one col-12 ps-2 ps-lg-5 f-14"
               onChange={(e) => setInputHandler(e)}
               onFocus={showSearchElementHandler}
               onBlur={(e) => removeSearchElementHandler(e)}
@@ -111,19 +110,19 @@ function InputElementOne({
             />
             <img
               src={searchIcon}
-              alt=''
-              className='img-fluid search__icon'
-              style={{ height: '16px' }}
+              alt=""
+              className="img-fluid search__icon"
+              style={{ height: "16px" }}
               onClick={setSearchArrayHandler}
             />
           </div>
           <div
             className={`data__result position-absolute w-100 ${
-              showSearchElement ? '' : 'd-none'
+              showSearchElement ? "" : "d-none"
             }`}
           >
-            <ul className='px-0 mb-0 data__result__list'>
-              <li className='data__result__products py-2 mt-0 f-12 px-2'>
+            <ul className="px-0 mb-0 data__result__list">
+              <li className="data__result__products py-2 mt-0 f-12 px-2">
                 PRODUCTS
               </li>
               {input.length
@@ -131,20 +130,20 @@ function InputElementOne({
                     <Link
                       key={product.id}
                       to={`/v1/product/${product.id}/${product.pName}`}
-                      className='text__link__nohover'
+                      className="text__link__nohover"
                     >
                       <li
-                        className='d-flex data__result__list__element justify-content-start align-items-center px-2 mt-1 mb-3 f-12'
+                        className="d-flex data__result__list__element justify-content-start align-items-center px-2 mt-1 mb-3 f-12"
                         onMouseDown={() =>
                           navigateLiHandler(product.id, product.pName)
                         }
                       >
                         <img
                           src={product.img.substring(6)}
-                          alt=''
-                          className='searchbar__content__section__one__img'
+                          alt=""
+                          className="searchbar__content__section__one__img"
                         />
-                        <p className='mb-0 ps-2'>{product.pName}</p>
+                        <p className="mb-0 ps-2">{product.pName}</p>
                       </li>
                     </Link>
                   ))
@@ -152,21 +151,21 @@ function InputElementOne({
                     <Link
                       key={product.id}
                       to={`/v1/product/${product.id}/${product.pName}`}
-                      className='text__link__nohover'
+                      className="text__link__nohover"
                     >
                       <li
                         key={product.id}
-                        className='d-flex data__result__list__element justify-content-start align-items-center px-2 mt-1 mb-3 f-12'
+                        className="d-flex data__result__list__element justify-content-start align-items-center px-2 mt-1 mb-3 f-12"
                         onMouseDown={() =>
                           navigateLiHandler(product.id, product.pName)
                         }
                       >
                         <img
                           src={product.img.substring(6)}
-                          alt=''
-                          className='searchbar__content__section__one__img'
+                          alt=""
+                          className="searchbar__content__section__one__img"
                         />
-                        <p className='mb-0 ps-2'>{product.pName}</p>
+                        <p className="mb-0 ps-2">{product.pName}</p>
                       </li>
                     </Link>
                   ))}

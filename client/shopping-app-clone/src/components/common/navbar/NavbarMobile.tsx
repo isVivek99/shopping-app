@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react';
-import 'assets/scss/common.scss';
-import 'assets/scss/common/navbar.scss';
-import brandImageWhite from 'assets/images/brand-white.png';
-import brandImageWhiteMobile from 'assets/images/brand-white-mobile.png';
-import InputElementOne from '../input/InputElementOne';
-import { SidebarData } from 'utils/sideBarData';
-import { useSelector } from 'react-redux';
-import rootReducer from 'reducers';
-import { Link } from 'react-router-dom';
-import { productDetails } from 'utils/productDetails';
+import { useState, useEffect } from "react";
+import "assets/scss/common/navbar.scss";
+import brandImageWhite from "assets/images/brand-white.png";
+import brandImageWhiteMobile from "assets/images/brand-white-mobile.png";
+import InputElementOne from "../input/InputElementOne";
+import { SidebarData } from "utils/sideBarData";
+import { useSelector } from "react-redux";
+import rootReducer from "reducers";
+import { Link } from "react-router-dom";
+import { productDetails } from "utils/productDetails";
 
 function NavbarMobile() {
   // redux
@@ -22,7 +21,7 @@ function NavbarMobile() {
   // navbar
   const [sidebar, setSidebar] = useState(false);
   const [activeTab, setActiveTab] = useState(-1);
-  const [searchString, setSearchString] = useState('');
+  const [searchString, setSearchString] = useState("");
   const [searchClickArray, setSearchClickArray] = useState([]);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -34,20 +33,20 @@ function NavbarMobile() {
 
   useEffect((): EffectCallback => {
     if (sidebar) {
-      document.body.style.overflow = 'hidden';
-      const screen: any = document.getElementsByClassName('screen');
-      screen[0].style.pointerEvents = 'none';
+      document.body.style.overflow = "hidden";
+      const screen: any = document.getElementsByClassName("screen");
+      screen[0].style.pointerEvents = "none";
     } else {
-      document.body.style.overflow = 'unset';
-      checkScreenClass('screen');
+      document.body.style.overflow = "unset";
+      checkScreenClass("screen");
     }
-    return () => (document.body.style.overflow = 'unset');
+    return () => (document.body.style.overflow = "unset");
   }, [sidebar]);
 
   const checkScreenClass = (screen: string) => {
     try {
       const screenObj: any = document.getElementsByClassName(screen);
-      screenObj[0].style.pointerEvents = 'unset';
+      screenObj[0].style.pointerEvents = "unset";
     } catch (e: any) {
       console.log(e.message);
     }
@@ -55,54 +54,54 @@ function NavbarMobile() {
 
   return (
     <>
-      <div className='d-block d-lg-none'>
-        <div className='navbar__sidebar'>
-          <div className='fa__icon__size__lg px-3 d-flex align-items-center'>
-            <i className='fas fa-bars' onClick={showSidebar}></i>
+      <div className="d-block d-lg-none">
+        <div className="navbar__sidebar">
+          <div className="fa__icon__size__lg px-3 d-flex align-items-center">
+            <i className="fas fa-bars" onClick={showSidebar}></i>
           </div>
           <div>
-            <Link to='/'>
+            <Link to="/">
               <img
                 src={brandImageWhite}
-                alt='brandImage'
-                className='d-none d-sm-block'
+                alt="brandImage"
+                className="d-none d-sm-block"
               />
             </Link>
-            <Link to='/'>
+            <Link to="/">
               <img
                 src={brandImageWhiteMobile}
-                alt='brandImage'
-                className='d-block d-sm-none'
+                alt="brandImage"
+                className="d-block d-sm-none"
               />
             </Link>
           </div>
-          <div className='d-flex'>
-            <Link to='/wishlist'>
-              <div className='position-relative'>
-                <div className='position-absolute text-center wishlist__item__count'>
-                  <span className='f-12'>{productWishList.length}</span>
+          <div className="d-flex">
+            <Link to="/wishlist">
+              <div className="position-relative">
+                <div className="position-absolute text-center wishlist__item__count">
+                  <span className="f-12">{productWishList.length}</span>
                 </div>
               </div>
-              <div className='fa__icon__size__lg px-3'>
-                <i className='fas fa-heart mx-0'></i>
+              <div className="fa__icon__size__lg px-3">
+                <i className="fas fa-heart mx-0"></i>
               </div>
             </Link>
-            <div className='fa__icon__size__lg px-3'>
-              <i className='fas fa-user'></i>
+            <div className="fa__icon__size__lg px-3">
+              <i className="fas fa-user"></i>
             </div>
-            <div className='position-relative'>
-              <div className='position-absolute text-center cart__item__count'>
-                <span className='f-12'>{productCartList.length}</span>
+            <div className="position-relative">
+              <div className="position-absolute text-center cart__item__count">
+                <span className="f-12">{productCartList.length}</span>
               </div>
-              <Link to='/cart'>
-                <div className='fa__icon__size__lg px-3'>
-                  <i className='fas fa-bag-shopping'></i>
+              <Link to="/cart">
+                <div className="fa__icon__size__lg px-3">
+                  <i className="fas fa-bag-shopping"></i>
                 </div>
               </Link>
             </div>
           </div>
         </div>
-        <div className='my-2'>
+        <div className="my-2">
           <InputElementOne
             productArray={productDetails}
             setSearchClickArray={setSearchClickArray}
@@ -112,27 +111,27 @@ function NavbarMobile() {
       </div>
       <nav
         className={
-          sidebar ? 'nav__menu__active d-lg-none' : 'nav__menu d-lg-none'
+          sidebar ? "nav__menu__active d-lg-none" : "nav__menu d-lg-none"
         }
       >
-        <ul className='nav-menu-items p-0'>
-          <li className='navbar-toggle d-flex justify-content-between align-items-center mt-0'>
-            <Link to='/' className='text__link'>
-              <p className='f-18 bold text-white my-2 ps-2 '>HOME</p>
+        <ul className="nav-menu-items p-0">
+          <li className="navbar-toggle d-flex justify-content-between align-items-center mt-0">
+            <Link to="/" className="text__link">
+              <p className="f-18 bold text-white my-2 ps-2 ">HOME</p>
             </Link>
-            <div className='fa__icon__size__lg px-3'>
-              <i className='fas fa-x' onClick={showSidebar}></i>
+            <div className="fa__icon__size__lg px-3">
+              <i className="fas fa-x" onClick={showSidebar}></i>
             </div>
           </li>
 
           {SidebarData.map((item, index) => {
             return (
               <div key={index}>
-                <li className={item.cName + ' my-0'} style={{ color: 'black' }}>
-                  <div className=' d-flex justify-content-between'>
-                    <p className='my-2 px-2 f-14'>{item.title}</p>
+                <li className={item.cName + " my-0"} style={{ color: "black" }}>
+                  <div className=" d-flex justify-content-between">
+                    <p className="my-2 px-2 f-14">{item.title}</p>
                     {item.icon && (
-                      <div className='my-2 px-2 fa__icon__size__lg_black'>
+                      <div className="my-2 px-2 fa__icon__size__lg_black">
                         <i
                           className={item.icon}
                           onClick={() => showSubcategories(index)}
@@ -148,8 +147,8 @@ function NavbarMobile() {
                           key={i}
                           className={
                             activeTab === index
-                              ? 'navbar__subcategories__active'
-                              : 'navbar__subcategories'
+                              ? "navbar__subcategories__active"
+                              : "navbar__subcategories"
                           }
                         >
                           {dataItem.subcategories.map(
@@ -157,13 +156,13 @@ function NavbarMobile() {
                               <Link
                                 key={categoryIndex}
                                 to={`${category.path}`}
-                                className='text__link'
+                                className="text__link"
                               >
                                 <div>
-                                  <p className='my-2 px-2 f-14'>
+                                  <p className="my-2 px-2 f-14">
                                     {category.title}
                                   </p>
-                                  <hr className='my-0' />
+                                  <hr className="my-0" />
                                 </div>
                               </Link>
                             )
@@ -175,21 +174,21 @@ function NavbarMobile() {
                                   {contactType.twitter.map(
                                     (twitterLink, twitterIndex) => (
                                       <div key={twitterIndex}>
-                                        <div className='my-2'>
+                                        <div className="my-2">
                                           <a
                                             style={{
-                                              textDecoration: 'none',
-                                              color: 'black',
+                                              textDecoration: "none",
+                                              color: "black",
                                             }}
-                                            className=' px-2 f-14'
+                                            className=" px-2 f-14"
                                             href={twitterLink}
-                                            target='_blank'
-                                            rel='noreferrer'
+                                            target="_blank"
+                                            rel="noreferrer"
                                           >
                                             {twitterLink.substring(20)}
                                           </a>
                                         </div>
-                                        <hr className='my-0' />
+                                        <hr className="my-0" />
                                       </div>
                                     )
                                   )}
@@ -202,7 +201,7 @@ function NavbarMobile() {
                     })}
                   </div>
                 </li>
-                {activeTab !== index && <hr className='my-0' />}
+                {activeTab !== index && <hr className="my-0" />}
               </div>
             );
           })}
