@@ -17,11 +17,12 @@ const Login = () => {
           <InputElementTwo
             placeholder='Email Address'
             label='Email Address'
-            property='password'
+            property='emailAddress'
+            type='email'
             setUserInfo={setEmail}
             userInfo={email}
             padding='py-3'
-            errorString='please enter your email address'
+            errorString='please enter correct email address'
           />
         </div>
         <div className='my-2'>
@@ -29,10 +30,11 @@ const Login = () => {
             placeholder='password'
             label='Password'
             property='password'
+            type='password'
             setUserInfo={setPassword}
             userInfo={password}
             padding='py-3'
-            errorString='please enter password'
+            errorString='password length must be more than 6 characters'
           />
         </div>
         <div className='mt-3 w-100'>

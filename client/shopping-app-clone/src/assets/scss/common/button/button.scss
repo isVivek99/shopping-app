@@ -1,5 +1,12 @@
 @import 'assets/scss/_variables.scss';
 
+.button {
+  transition: background-color 250ms;
+}
+.button:hover {
+  opacity: 0.8;
+}
+
 .pri {
   background: $primary-color;
   color: $background-color-white;

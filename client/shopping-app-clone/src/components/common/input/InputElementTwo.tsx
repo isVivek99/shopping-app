@@ -59,6 +59,8 @@ const InputElementTwo = ({
     if (name === 'phoneNumber' && (value.length > 10 || value.length < 10)) {
       setInputError(true);
     }
+
+    if (name === 'password' && value.length < 6) setInputError(true);
   };
 
   return (

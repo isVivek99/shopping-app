@@ -218,7 +218,7 @@ const reduceWishlist = (
   action: { type: string; payload: productType }
 ): DefaultState2 => {
   switch (action.type) {
-    case 'ADD_TO_WISHLIST':
+    case types.ADD_TO_WISHLIST:
       console.log('wishliststate:', state);
       return {
         wishlist: [
@@ -227,7 +227,7 @@ const reduceWishlist = (
         ],
       };
 
-    case 'REMOVE_FROM_WISHLIST':
+    case types.REMOVE_FROM_WISHLIST:
       console.log('wishliststate:', state);
       const arr1 = state.wishlist.filter(
         (product) => product.id !== action.payload.id

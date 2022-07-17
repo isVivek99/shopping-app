@@ -21,13 +21,13 @@ const Button = ({
   return (
     <div>
       <button
-        className={`${type} ${size} w-${width}`}
+        className={`button ${type} ${size} w-${width}`}
         style={{ borderRadius: '12px', fontWeight: '700', fontSize: '15px' }}
         onClick={clickHandle}
       >
         {arrow === 'la' && <i className='fas fa-angle-left'></i>}
         {arrow === 'fav' && <i className='fas fa-heart'></i>}
-        {text}
+        <span className='button__text'>{text}</span>
         {arrow === 'ra' && <i className='fas fa-angle-right'></i>}
       </button>
     </div>
