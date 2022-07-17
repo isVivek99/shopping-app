@@ -3,14 +3,15 @@ import 'assets/scss/common/input/inputElementTwo.scss';
 import { emailValidationRegex } from 'utils/validateUserForm';
 
 interface userInfoProps {
-  firstName: string;
-  lastName: string;
-  emailAddress: string;
-  phoneNumber: string;
-  address: string;
-  townOrCity: string;
-  state: string;
-  zipOrPin: string;
+  firstName?: string;
+  lastName?: string;
+  emailAddress?: string;
+  phoneNumber?: string;
+  address?: string;
+  townOrCity?: string;
+  state?: string;
+  zipOrPin?: string;
+  password?: string;
 }
 
 interface InputEleTwoProps {
@@ -21,16 +22,18 @@ interface InputEleTwoProps {
   setUserInfo: any;
   userInfo: userInfoProps;
   errorString: string;
+  padding?: string;
 }
 
 const InputElementTwo = ({
   placeholder,
   label,
-  type = 'text ',
+  type = 'text',
   property,
   userInfo,
   setUserInfo,
   errorString,
+  padding = 'py-2',
 }: InputEleTwoProps) => {
   const inputEleRef = useRef<HTMLInputElement>(document.createElement('input'));
   const [inputError, setInputError] = useState(false);
@@ -43,6 +46,7 @@ const InputElementTwo = ({
     }));
     setInputError(false);
   };
+
   const setBlur = (e: any) => {
     const { name, value } = e.target;
 
@@ -67,7 +71,7 @@ const InputElementTwo = ({
           ref={inputEleRef}
           value={userInfo[property as keyof typeof userInfo]}
           type={type}
-          className={`w-100 input__ele__two__content py-2 px-4`}
+          className={`w-100 input__ele__two__content px-4 ${padding}`}
           placeholder={placeholder}
           name={property}
           onChange={(e) => setInput(e)}

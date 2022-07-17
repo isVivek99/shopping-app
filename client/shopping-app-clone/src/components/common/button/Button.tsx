@@ -6,6 +6,7 @@ interface BtnProps {
   size: string;
   text: string;
   arrow?: string;
+  width?: string;
   clickHandle?: () => unknown;
 }
 
@@ -14,12 +15,13 @@ const Button = ({
   size,
   text,
   arrow,
+  width = 'auto',
   clickHandle,
 }: BtnProps): JSX.Element => {
   return (
     <div>
       <button
-        className={`${type} ${size}`}
+        className={`${type} ${size} w-${width}`}
         style={{ borderRadius: '12px', fontWeight: '700', fontSize: '15px' }}
         onClick={clickHandle}
       >

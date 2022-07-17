@@ -1,0 +1,11 @@
+@import 'assets/scss/_variables.scss';
+
+.login {
+  padding: 3rem 1rem;
+}
+
+.login__modal {
+  border: 1px solid $border-color-primary;
+  border-radius: 12px;
+  padding: 1rem;
+}

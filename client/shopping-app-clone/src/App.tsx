@@ -1,4 +1,6 @@
 import './assets/scss/App.scss';
+import Login from 'components/screens/Login/Login';
+import Signup from 'components/screens/Signup/Signup';
 import Homepage from './components/screens/Homepage';
 import Navbar from 'components/common/navbar/Navbar';
 import Checkout from 'components/screens/Checkout/Checkout';
@@ -31,6 +33,8 @@ function App() {
           <Route path='/cart' element={<Checkout />} />
           <Route path='/product' element={<Product />} />
           <Route path='/wishlist' element={<Wishlist />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
           <Route
             path='/v1/list/:category'
             element={
