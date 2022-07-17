@@ -1,6 +1,6 @@
 /* eslint-disable no-case-declarations */
 import { combineReducers } from 'redux';
-
+import types from 'utils/actionTypes';
 interface productType {
   id: number;
   pName: string;
@@ -68,7 +68,7 @@ const reduceProducts = (
   action: { type: string; payload: productType & filters & coupon }
 ): DefaultState1 => {
   switch (action.type) {
-    case 'ADD_TO_CART':
+    case types.ADD_TO_CART:
       console.log(state);
       return {
         myState: [
@@ -83,7 +83,7 @@ const reduceProducts = (
         },
       };
 
-    case 'REMOVE_FROM_CART':
+    case types.REMOVE_FROM_CART:
       const arr1 = state.myState.filter(
         (product) => product.id !== action.payload.id
       );
@@ -98,7 +98,7 @@ const reduceProducts = (
         },
       };
 
-    case 'ADD_QUANTITY':
+    case types.ADD_QUANTITY:
       const arr2 = state.myState.map((product) =>
         product.id === action.payload.id
           ? { ...product, quantity: product.quantity + 1 }
@@ -116,7 +116,7 @@ const reduceProducts = (
         },
       };
 
-    case 'SUBTRACT_QUANTITY':
+    case types.SUBTRACT_QUANTITY:
       const arr3 = state.myState.map((product) =>
         product.id === action.payload.id
           ? { ...product, quantity: product.quantity - 1 }
@@ -134,7 +134,7 @@ const reduceProducts = (
         },
       };
 
-    case 'SET_PRICE_RANGE':
+    case types.SET_PRICE_RANGE:
       return {
         myState: [...state.myState],
         filters: {
@@ -147,7 +147,7 @@ const reduceProducts = (
         },
       };
 
-    case 'SET_RATING':
+    case types.SET_RATING:
       console.log(action.payload, 'here');
 
       return {
@@ -161,7 +161,7 @@ const reduceProducts = (
         },
       };
 
-    case 'SET_SORT_FILTER':
+    case types.SET_SORT_FILTER:
       return {
         myState: [...state.myState],
         filters: {
@@ -173,7 +173,7 @@ const reduceProducts = (
         },
       };
 
-    case 'RESET_SORT_FILTER':
+    case types.RESET_SORT_FILTER:
       return {
         myState: [...state.myState],
         filters: {
@@ -184,7 +184,7 @@ const reduceProducts = (
         },
       };
 
-    case 'ADD_COUPONCODE':
+    case types.ADD_COUPONCODE:
       console.log(action.payload);
 
       return {
@@ -197,7 +197,7 @@ const reduceProducts = (
         },
       };
 
-    case 'RESET_COUPONCODE':
+    case types.RESET_COUPONCODE:
       return {
         myState: [...state.myState],
         filters: {
@@ -218,7 +218,7 @@ const reduceWishlist = (
   action: { type: string; payload: productType }
 ): DefaultState2 => {
   switch (action.type) {
-    case 'ADD_TO_WISHLIST':
+    case types.ADD_TO_WISHLIST:
       console.log('wishliststate:', state);
       return {
         wishlist: [
@@ -227,7 +227,7 @@ const reduceWishlist = (
         ],
       };
 
-    case 'REMOVE_FROM_WISHLIST':
+    case types.REMOVE_FROM_WISHLIST:
       console.log('wishliststate:', state);
       const arr1 = state.wishlist.filter(
         (product) => product.id !== action.payload.id
