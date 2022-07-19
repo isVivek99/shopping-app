@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CartProduct from 'components/screens/Checkout/CartProduct';
-import rootReducer from 'reducers';
+import rootReducer from 'redux/reducers';
 import 'assets/scss/screens/checkout/checkout.scss';
 import { calculateDiscount } from 'utils/calculateDiscountPrice';
 import { validateCoupon, calculateCouponDiscount } from 'utils/validateCoupon';

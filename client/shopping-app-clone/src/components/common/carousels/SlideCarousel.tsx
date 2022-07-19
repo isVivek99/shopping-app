@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import ProductCardOne from 'components/common/card/ProductCardOne';
-import rootReducer from 'reducers';
+import rootReducer from 'redux/reducers';
 import { useSelector } from 'react-redux';
 import 'assets/scss/common/carousels/slideCarousel.scss';
 

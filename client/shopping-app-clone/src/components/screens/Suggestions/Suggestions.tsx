@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import rootReducer from 'reducers';
+import rootReducer from 'redux/reducers';
 import ProductCardOne from 'components/common/card/ProductCardOne';
 import ProductCardTwo from 'components/common/card/ProductCardTwo';
 

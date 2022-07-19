@@ -7,7 +7,7 @@ import InputElementOne from 'components/common/input/InputElementOne';
 import CouponModal from 'components/common/couponBanner/Coupon';
 import NavbarMobile from 'components/common/navbar/NavbarMobile';
 import { useSelector } from 'react-redux';
-import rootReducer from 'reducers';
+import rootReducer from 'redux/reducers';
 import { Link } from 'react-router-dom';
 import { productDetails } from 'utils/productDetails';
 
