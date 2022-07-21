@@ -6,6 +6,9 @@ import {
   SetStateAction,
   Dispatch,
 } from 'react';
+import rootReducer from 'redux/reducers';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Button from 'components/common/button/Button';
 import 'assets/scss/common/rangeslider/RangeSlider.scss';
 
@@ -26,6 +29,12 @@ const RangeSlider = ({
   category,
   setMinMaxvalue,
 }: SliderProps) => {
+  const navigate = useNavigate();
+
+  type RootStore = ReturnType<typeof rootReducer>;
+  const { userDetails, userLoggedIn } =
+    useSelector((state: RootStore) => state?.reduceUsers) || {};
+
   const [minVal, setMinVal] = useState(minGlobal);
   const [maxVal, setMaxVal] = useState(maxGlobal);
 
@@ -78,6 +87,10 @@ const RangeSlider = ({
   };
 
   const setMinMax = () => {
+    if (!userLoggedIn) {
+      navigate('../login');
+      return;
+    }
     setMinMaxvalue({ min: minVal, max: maxVal });
   };
   const resetMinMax = () => {

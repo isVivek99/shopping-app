@@ -9,9 +9,24 @@ const port = 4011;
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(
-  'mongodb+srv://vivek:XztbrjMuRMKIPQo8@cluster0.9o444.mongodb.net/?retryWrites=true&w=majority'
-);
+const connectDatabase = async () => {
+  try {
+    // mongoose.set('useNewUrlParser', true);
+    await mongoose.connect(
+      'mongodb+srv://vivek:XztbrjMuRMKIPQo8@cluster0.9o444.mongodb.net/?retryWrites=true&w=majority',
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    );
+    console.log('connected to database');
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+};
+
+connectDatabase();
 
 app.post('/api/register', async (req, res) => {
   console.log(req.body);

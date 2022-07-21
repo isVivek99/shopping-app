@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import 'assets/scss/common/navbar.scss';
 import brandImageWhite from 'assets/images/brand-white.png';
-import brandImageWhiteMobile from 'assets/images/brand-white-mobile.png';
+import brandImageWhiteMobile from 'assets/images/freshness-mobile-png.png';
 import InputElementOne from '../input/InputElementOne';
 import { SidebarData } from 'utils/sideBarData';
 import { useSelector } from 'react-redux';
@@ -17,6 +17,8 @@ function NavbarMobile() {
     useSelector((state: RootStore) => state?.reduceWishlist?.wishlist) || [];
   const productCartList =
     useSelector((state: RootStore) => state?.reduceProducts?.myState) || [];
+  const { userDetails, userLoggedIn } =
+    useSelector((state: RootStore) => state?.reduceUsers) || {};
 
   // navbar
   const [sidebar, setSidebar] = useState(false);
@@ -67,13 +69,6 @@ function NavbarMobile() {
                 className='d-none d-sm-block'
               />
             </Link>
-            <Link to='/'>
-              <img
-                src={brandImageWhiteMobile}
-                alt='brandImage'
-                className='d-block d-sm-none'
-              />
-            </Link>
           </div>
           <div className='d-flex'>
             <Link to='/wishlist'>
@@ -86,9 +81,12 @@ function NavbarMobile() {
                 <i className='fas fa-heart mx-0'></i>
               </div>
             </Link>
-            <div className='fa__icon__size__lg px-3'>
-              <i className='fas fa-user'></i>
-            </div>
+            <Link to={'/login'}>
+              <div className='fa__icon__size__lg px-3'>
+                <i className='fas fa-user'></i>
+              </div>
+            </Link>
+
             <div className='position-relative'>
               <div className='position-absolute text-center cart__item__count'>
                 <span className='f-12'>{productCartList.length}</span>
@@ -117,7 +115,14 @@ function NavbarMobile() {
         <ul className='nav-menu-items p-0'>
           <li className='navbar-toggle d-flex justify-content-between align-items-center mt-0'>
             <Link to='/' className='text__link'>
-              <p className='f-18 bold text-white my-2 ps-2 '>HOME</p>
+              <div className='d-flex justify-content-center align-items-center'>
+                <p className='f-18 bold text-white my-2 ps-2 '>HOME</p>
+                <img
+                  src={brandImageWhiteMobile}
+                  alt='brandImage'
+                  className='d-block d-sm-none px-2'
+                />
+              </div>
             </Link>
             <div className='fa__icon__size__lg px-3'>
               <i className='fas fa-x' onClick={showSidebar}></i>

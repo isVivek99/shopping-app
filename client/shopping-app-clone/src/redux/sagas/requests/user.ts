@@ -18,21 +18,20 @@ export function requestGetUser(UserPayloadObject: UserLoginPayload) {
   };
   return axios.request({
     method: 'post',
-    url: 'http://localhost:4010/api/login',
+    url: 'http://localhost:4011/api/login',
     headers: headerObject,
     data: body,
   });
 }
 
 export function requestAddUser(UserPayloadObject: any) {
-  console.log(UserPayloadObject);
   const body = UserPayloadObject;
   const headerObject = {
     'Content-type': 'application/json',
   };
   return axios.request({
     method: 'post',
-    url: 'http://localhost:4010/api/register',
+    url: 'http://localhost:4011/api/register',
     headers: headerObject,
     data: body,
   });

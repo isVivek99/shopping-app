@@ -1,5 +1,7 @@
+import types from 'redux/actionTypes';
 import { call, put } from 'redux-saga/effects';
 import { requestGetUser, requestAddUser } from 'redux/sagas/requests/user';
+import jwt from 'jwt-decode';
 
 interface UserInfoArray {
   config: object;
@@ -25,16 +27,19 @@ interface userLoginResponse {
 }
 
 //worker saga
-
 export function* handleLoginUser(action: ActionType) {
   try {
     const response: UserInfoArray = yield call(requestGetUser, action.payload);
     const data: any = { ...response.data };
     console.log('getUser:', data);
     if (data.user) {
-      localStorage.setItem('token', data.user);
-      alert('Login successfull');
-      window.location.href = '/';
+      // localStorage.setItem('token', data.user);
+      const user: string = jwt(data.user);
+      console.log(user);
+      yield put({
+        type: types.LOGIN_USER_SUCCESS,
+        payload: user,
+      });
     }
   } catch (error) {
     console.log(error);

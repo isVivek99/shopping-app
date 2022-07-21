@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import 'assets/scss/common/navbar.scss';
 import brandImage from 'assets/images/Brand.png';
 import InputElementOne from 'components/common/input/InputElementOne';
 import CouponModal from 'components/common/couponBanner/Coupon';
@@ -10,6 +8,7 @@ import { useSelector } from 'react-redux';
 import rootReducer from 'redux/reducers';
 import { Link } from 'react-router-dom';
 import { productDetails } from 'utils/productDetails';
+import 'assets/scss/common/navbar.scss';
 
 function Navbar() {
   const navigate = useNavigate();
@@ -18,6 +17,9 @@ function Navbar() {
     useSelector((state: RootStore) => state?.reduceProducts?.myState) || [];
   const productWishList =
     useSelector((state: RootStore) => state?.reduceWishlist?.wishlist) || [];
+
+  const { userDetails, userLoggedIn } =
+    useSelector((state: RootStore) => state?.reduceUsers) || {};
 
   const [searchClickArray, setSearchClickArray] = useState([]);
   const [searchString, setSearchString] = useState('');
@@ -61,7 +63,7 @@ function Navbar() {
         />
 
         <div className='position-relative'>
-          <Link to='/wishlist'>
+          <Link to={userLoggedIn ? '/wishlist' : '/login'}>
             <div className='position-absolute text-center wishlist__item__count'>
               <span className='f-12'>{productWishList.length}</span>
             </div>

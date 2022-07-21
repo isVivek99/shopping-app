@@ -1,3 +1,4 @@
+import { type } from 'os';
 import types from 'redux/actionTypes';
 export const addProducts = (product: any) => {
   return {
@@ -98,9 +99,21 @@ export const resetCoupon = (couponObject: any) => {
   };
 };
 
+export const loginUserSuccess = (loggedInUserInfo: any) => ({
+  type: types.LOGIN_USER_SUCCESS,
+  payload: {
+    fName: loggedInUserInfo.fName.fName,
+    email: loggedInUserInfo.email.emailAddress,
+  },
+});
+
+//async actions
 export const loginUser = (userInfo: any) => ({
   type: types.LOGIN_USER,
-  payload: { ...userInfo },
+  payload: {
+    email: userInfo.email.emailAddress,
+    password: userInfo.password.password,
+  },
 });
 
 export const addUser = (userInfo: any) => ({

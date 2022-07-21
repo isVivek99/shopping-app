@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import rootReducer from 'redux/reducers';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import 'assets/scss/common/dropdown/dropdownListOne.scss';
 
 interface ObjType {
@@ -24,7 +27,18 @@ const DropdownListOne = ({
   setStateDropdownValue,
   listHeader,
 }: dropDownListProps) => {
-  const toggleDropdown = () => setDropdownStatus((prev: boolean) => !prev);
+  const navigate = useNavigate();
+
+  type RootStore = ReturnType<typeof rootReducer>;
+  const { userDetails, userLoggedIn } =
+    useSelector((state: RootStore) => state?.reduceUsers) || {};
+
+  const toggleDropdown = () => {
+    if (!userLoggedIn) {
+      navigate('../login');
+    }
+    setDropdownStatus((prev: boolean) => !prev);
+  };
   const setDropdownValue = (e: any) => {
     const value = e.target.lastElementChild?.value;
 
@@ -33,7 +47,7 @@ const DropdownListOne = ({
       toggleDropdown();
       return;
     }
-    // console.log('here', e.target, e.target.value);
+
     setStateDropdownValue('Recommended');
     toggleDropdown();
   };

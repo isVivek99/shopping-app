@@ -17,11 +17,12 @@ const syncActions: any = {
   RESET_COUPONCODE: 'RESET_COUPONCODE',
   ADD_TO_WISHLIST: 'ADD_TO_WISHLIST',
   REMOVE_FROM_WISHLIST: 'REMOVE_FROM_WISHLIST',
+  LOGIN_USER_SUCCESS: 'LOGIN_USER_SUCCESS',
 };
 
-const actions = {
+const actionTypes = {
   ...asyncActions,
   ...syncActions,
 };
 
-export default actions;
+export default actionTypes;

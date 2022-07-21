@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   removeProducts,
   addQuantity,
@@ -10,7 +11,7 @@ import Rating from 'components/common/rating/Rating';
 import { calculateDiscount } from 'utils/calculateDiscountPrice';
 import useCustomToast from 'components/common/toast/CustomToast';
 import 'assets/scss/screens/checkout/cartProduct.scss';
-
+import rootReducer from 'redux/reducers';
 interface cartProductProps extends CartproductArrayProps {
   discount?: string;
   pName: string;
@@ -42,6 +43,12 @@ const CartProduct = ({
   productWishList,
   productCartList,
 }: cartProductProps) => {
+  const navigate = useNavigate();
+
+  type RootStore = ReturnType<typeof rootReducer>;
+  const { userDetails, userLoggedIn } =
+    useSelector((state: RootStore) => state?.reduceUsers) || {};
+
   const toastProp = {
     message: 'cannot add more than 5 products',
     variant: 'error',
@@ -56,6 +63,10 @@ const CartProduct = ({
   };
 
   const addToWishlistClickHandler = () => {
+    if (!userLoggedIn) {
+      navigate('../login');
+      return;
+    }
     const product = productWishList?.filter((iter) => iter.id === id);
 
     const checkWishlistPresent = product
