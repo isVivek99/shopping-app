@@ -2,6 +2,7 @@ const asyncActions: any = {
   LOGIN_USER: 'LOGIN_USER',
   ADD_USER: 'ADD_USER',
   LOGOUT_USER: 'LOGOUT_USER',
+  REFRESH_TOKEN: 'REFRESH_TOKEN',
 };
 
 const syncActions: any = {

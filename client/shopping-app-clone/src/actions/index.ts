@@ -82,6 +82,7 @@ export const resetFilters = () => {
   };
 };
 
+//coupon
 export const setCoupon = (couponObject: any) => {
   return {
     type: types.ADD_COUPONCODE,
@@ -100,12 +101,30 @@ export const resetCoupon = (couponObject: any) => {
   };
 };
 
+//toast
+export const setToast = (toastInfo: any) => ({
+  type: types.SET_TOAST,
+  payload: { ...toastInfo, toastId: Math.floor(Math.random() * 100) },
+});
+
+export const closeToast = (id: number) => ({
+  type: types.CLOSE_TOAST,
+  payload: { id },
+});
+
+//user login & logout
+
 export const loginUserSuccess = (loggedInUserInfo: any) => ({
   type: types.LOGIN_USER_SUCCESS,
   payload: {
     fName: loggedInUserInfo.fName.fName,
     email: loggedInUserInfo.email.emailAddress,
   },
+});
+
+export const logoutUser = (userInfo: any) => ({
+  type: types.LOGOUT_USER,
+  payload: { ...userInfo },
 });
 
 //async actions
@@ -127,17 +146,7 @@ export const addUser = (userInfo: any) => ({
   },
 });
 
-export const logoutUser = (userInfo: any) => ({
-  type: types.LOGOUT_USER,
-  payload: { ...userInfo },
-});
-
-export const setToast = (toastInfo: any) => ({
-  type: types.SET_TOAST,
-  payload: { ...toastInfo, toastId: Math.floor(Math.random() * 100) },
-});
-
-export const closeToast = (id: number) => ({
-  type: types.CLOSE_TOAST,
-  payload: { id },
+export const refreshToken = (accessToken: string) => ({
+  type: types.REFRESH_TOKEN,
+  payload: { accessToken },
 });

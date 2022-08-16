@@ -31,9 +31,9 @@ export function* handleLoginUser(action: ActionType) {
   try {
     const response: UserInfoArray = yield call(requestGetUser, action.payload);
     const data: any = { ...response.data };
-    console.log('getUser:', data);
+    console.log('getUser:', data.user);
     if (data.user) {
-      const user: { fName: string; email: string } = jwt(data.user);
+      const user: { fName: string; email: string } = data.user;
       console.log(user);
       yield put({
         type: types.LOGIN_USER_SUCCESS,
@@ -62,7 +62,26 @@ export function* handleAddUser(action: ActionType) {
       action.payload
     );
     const data = { ...response.data };
-    console.log(data.status, data);
+    const user: { fName: string; email: string } = data.user;
+
+    if (user) {
+      yield put({
+        type: types.LOGIN_USER_SUCCESS,
+        payload: user,
+      });
+      yield put({
+        type: types.SET_TOAST,
+        payload: {
+          message: `hi ${user.fName}, you are logged In !!`,
+          variant: 'success',
+          position: 'top-right',
+          show: true,
+          id: Math.floor(Math.random() * 100),
+        },
+      });
+    }
+
+    console.log(jwt(data.user));
     if (data.status === 'error') {
       console.log(data);
     }

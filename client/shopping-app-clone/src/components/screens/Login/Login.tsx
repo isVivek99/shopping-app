@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { loginUser, logoutUser, setToast } from 'actions';
@@ -46,12 +46,6 @@ const Login = () => {
     dispatch(logoutUser({}));
     console.log('user logged out !!', 'success', 'top-right');
   };
-
-  useEffect(() => {
-    if (userLoggedIn) {
-      console.log('user logged in !!', 'success', 'top-right');
-    }
-  }, [userLoggedIn]);
 
   return (
     <div>

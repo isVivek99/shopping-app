@@ -1,5 +1,6 @@
 const User = require('./models/user.model');
 const express = require('express');
+require('dotenv').config();
 const app = express();
 const cors = require('cors');
 const { default: mongoose } = require('mongoose');
@@ -19,7 +20,6 @@ const connectDatabase = async () => {
         useUnifiedTopology: true,
       }
     );
-    ``;
     console.log('connected to database');
   } catch (error) {
     console.log(error);
@@ -36,7 +36,7 @@ app.post('/api/register', async (req, res) => {
     const { fName, lName, email, password } = req.body;
 
     if (!(email && password && fName && lName)) {
-      res.status(400).send('All inputs are required');
+      return res.status(400).send('All inputs are required');
     }
 
     const oldUser = await User.findOne({ email });
@@ -44,17 +44,28 @@ app.post('/api/register', async (req, res) => {
       return res.status(409).send('User Already Exist. Please Login');
     }
 
+    // add user to DB
     const user = await User.create({
-      fName: req.body.fName,
-      lName: req.body.lName,
-      email: req.body.emailtoLowerCase(), // sanitize: convert email to lowercase
-      password: req.body.password,
+      fName: fName,
+      lName: lName,
+      email: email.toLowerCase(), //sanitize: convert email to lowercase
+      password: password,
     });
-    console.log(user);
-    res.json({ status: 'ok' });
+
+    // Create token
+    const token = jwt.sign(
+      {
+        fName: fName,
+        email: email,
+      },
+      process.env.TOKEN_KEY
+    );
+    return res.json({ status: 201, user: token });
+
+    //catch error
   } catch (error) {
     console.log(error);
-    res.json({ status: 'error', error: 'duplicate email' });
+    res.json({ status: 'error', error: error.message });
   }
 });
 
@@ -65,15 +76,25 @@ app.post('/api/login', async (req, res) => {
     email: req.body.email,
     password: req.body.password,
   });
+
   if (user) {
     const token = jwt.sign(
       {
         fName: user.fName,
         email: user.email,
       },
-      'secret123'
+      process.env.TOKEN_KEY
     );
-    return res.json({ status: 'ok', user: token });
+    const newUserInstance = {
+      fName: user.fName,
+      lName: user.lName,
+      email: user.email,
+      password: user.password,
+      token,
+    };
+
+    console.log('user:', newUserInstance);
+    return res.json({ status: 200, user: newUserInstance });
   } else {
     return res.json({ status: 'error', user: false });
   }
@@ -82,7 +103,7 @@ app.post('/api/login', async (req, res) => {
 app.get('/api/login', async (req, res) => {
   const token = req.headers['x-access-token'];
   try {
-    const decoded = jwt.verify(token, 'secret123');
+    const decoded = jwt.verify(token, process.env.TOKEN_KEY);
     const email = decoded.email;
   } catch (error) {
     console.log(error);
@@ -99,7 +120,7 @@ app.get('/api/login', async (req, res) => {
         name: user.name,
         email: user.email,
       },
-      'secret123'
+      process.env.TOKEN_KEY
     );
     return res.json({ status: 'ok', user: token });
   } else {

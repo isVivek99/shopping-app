@@ -1,11 +1,5 @@
 import axios from 'axios';
 
-interface UserPayload {
-  email: string;
-  fName: string;
-  lName: string;
-  password: string;
-}
 interface UserLoginPayload {
   email: string;
   password: string;

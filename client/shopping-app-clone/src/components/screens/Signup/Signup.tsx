@@ -1,23 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import InputElementTwo from 'components/common/input/InputElementTwo';
 import Button from 'components/common/button/Button';
 import Footer from 'components/common/footer/Footer';
 import { addUser } from 'actions';
+import rootReducer from 'redux/reducers';
 import 'assets/scss/screens/login/login.scss';
+interface userDetails {
+  fName: string;
+  email: string;
+}
+interface userObject {
+  userDetails: userDetails;
+  userLoggedIn: boolean;
+}
 
 const Signup = () => {
   //dispatch action
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState({ firstName: '' });
   const [lastName, setLastName] = useState({ lastName: '' });
   const [email, setEmail] = useState({ emailAddress: '' });
   const [password, setPassword] = useState({ password: '' });
+
+  type RootStore = ReturnType<typeof rootReducer>;
+
+  const { userDetails, userLoggedIn }: userObject =
+    useSelector((state: RootStore) => state?.reduceUsers) || {};
+  console.log(userDetails, userLoggedIn);
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
     dispatch(addUser({ firstName, lastName, email, password }));
   };
+
+  useEffect(() => {
+    if (userLoggedIn) {
+      navigate('../', { replace: true });
+    }
+  }, [userLoggedIn]);
 
   return (
     <div className='screen login'>
