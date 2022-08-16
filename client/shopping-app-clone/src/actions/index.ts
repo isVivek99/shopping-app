@@ -1,4 +1,5 @@
 import { type } from 'os';
+import { toast } from 'react-toastify';
 import types from 'redux/actionTypes';
 export const addProducts = (product: any) => {
   return {
@@ -129,4 +130,14 @@ export const addUser = (userInfo: any) => ({
 export const logoutUser = (userInfo: any) => ({
   type: types.LOGOUT_USER,
   payload: { ...userInfo },
+});
+
+export const setToast = (toastInfo: any) => ({
+  type: types.SET_TOAST,
+  payload: { ...toastInfo, toastId: Math.floor(Math.random() * 100) },
+});
+
+export const closeToast = (id: number) => ({
+  type: types.CLOSE_TOAST,
+  payload: { id },
 });

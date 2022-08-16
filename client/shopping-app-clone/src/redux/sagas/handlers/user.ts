@@ -33,12 +33,21 @@ export function* handleLoginUser(action: ActionType) {
     const data: any = { ...response.data };
     console.log('getUser:', data);
     if (data.user) {
-      // localStorage.setItem('token', data.user);
-      const user: string = jwt(data.user);
+      const user: { fName: string; email: string } = jwt(data.user);
       console.log(user);
       yield put({
         type: types.LOGIN_USER_SUCCESS,
         payload: user,
+      });
+      yield put({
+        type: types.SET_TOAST,
+        payload: {
+          message: `hi ${user.fName}, you are logged In !!`,
+          variant: 'success',
+          position: 'top-right',
+          show: true,
+          id: Math.floor(Math.random() * 100),
+        },
       });
     }
   } catch (error) {

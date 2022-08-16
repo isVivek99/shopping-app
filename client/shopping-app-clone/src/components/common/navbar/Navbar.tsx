@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import rootReducer from 'redux/reducers';
 import { Link } from 'react-router-dom';
 import { productDetails } from 'utils/productDetails';
+
 import 'assets/scss/common/navbar.scss';
 
 function Navbar() {
@@ -23,6 +24,7 @@ function Navbar() {
 
   const [searchClickArray, setSearchClickArray] = useState([]);
   const [searchString, setSearchString] = useState('');
+
   useEffect(() => {
     if (searchClickArray.length > 0 || searchString.length > 0) {
       navigate(`../v1/suggestions/${searchString}`);

@@ -6,8 +6,7 @@ interface BtnProps {
 }
 const CtaButton = ({ text }: BtnProps) => {
   return (
-    <button className='glow-on-hover' id='testbutton' type='button'>
-      <div className='explore_btn'> </div>
+    <button className='glowing-button' type='button'>
       {text}
     </button>
   );

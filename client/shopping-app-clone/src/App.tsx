@@ -8,7 +8,7 @@ import CategoryProductListing from 'components/screens/ListingPage/CategoryProdu
 import Wishlist from 'components/screens/Wishlist/Wishlist';
 import Suggestions from 'components/screens/Suggestions/Suggestions';
 import PageNotFound from 'components/screens/PageNotFound';
-
+import ToastComponent from 'components/common/toast/ToastComponent';
 import { categoryListProductDetails } from 'utils/categoryListProductDetails';
 
 import { productDetails } from 'utils/productDetails';
@@ -25,6 +25,7 @@ function App() {
 
   return (
     <div className='App'>
+      <ToastComponent />
       <div
         className='mx-auto navbar__big w-100 position-relative'
         style={{ maxWidth: '1440px', zIndex: '1' }}

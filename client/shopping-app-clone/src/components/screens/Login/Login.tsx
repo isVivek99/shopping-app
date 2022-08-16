@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { loginUser, logoutUser } from 'actions';
+import { loginUser, logoutUser, setToast } from 'actions';
 import brandImage from 'assets/images/Brand.png';
 import brandImageWhiteMobile from 'assets/images/freshness-mobile-png.png';
 import rootReducer from 'redux/reducers';
@@ -35,14 +35,47 @@ const Login = () => {
     dispatch(loginUser({ email, password }));
   };
   const handleLogoutUser = () => {
+    dispatch(
+      setToast({
+        message: `${userDetails.fName} logged out !!!`,
+        variant: 'success',
+        show: true,
+        position: 'top-right',
+      })
+    );
     dispatch(logoutUser({}));
+    console.log('user logged out !!', 'success', 'top-right');
   };
+
+  useEffect(() => {
+    if (userLoggedIn) {
+      console.log('user logged in !!', 'success', 'top-right');
+    }
+  }, [userLoggedIn]);
 
   return (
     <div>
+      <div></div>
       {!userLoggedIn ? (
         <div className='screen login'>
-          <div className='col-5 mb-4 mx-auto p-4 login__modal'>
+          <div className='d-flex justify-content-between align-items-center mb-5 p-2 p-sm-5'>
+            <Link to={'/'}>
+              <div className='d-none d-sm-block'>
+                <img src={brandImage} alt='brandImage' />
+              </div>
+              <div className='d-block d-sm-none'>
+                <img
+                  src={brandImageWhiteMobile}
+                  alt='brandImage'
+                  className='mobile__brand__logo'
+                />
+              </div>
+            </Link>
+            <Link to={'/'}>
+              <CtaButton text={'explore'} />
+            </Link>
+          </div>
+          <div className='col-12 com-md-5 mb-4 mx-auto p-4 login__modal'>
             <h2>Login</h2>
             <div className='my-2'>
               <InputElementTwo

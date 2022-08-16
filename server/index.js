@@ -19,6 +19,7 @@ const connectDatabase = async () => {
         useUnifiedTopology: true,
       }
     );
+    ``;
     console.log('connected to database');
   } catch (error) {
     console.log(error);
@@ -32,10 +33,21 @@ app.post('/api/register', async (req, res) => {
   console.log(req.body);
 
   try {
+    const { fName, lName, email, password } = req.body;
+
+    if (!(email && password && fName && lName)) {
+      res.status(400).send('All inputs are required');
+    }
+
+    const oldUser = await User.findOne({ email });
+    if (oldUser) {
+      return res.status(409).send('User Already Exist. Please Login');
+    }
+
     const user = await User.create({
       fName: req.body.fName,
       lName: req.body.lName,
-      email: req.body.email,
+      email: req.body.emailtoLowerCase(), // sanitize: convert email to lowercase
       password: req.body.password,
     });
     console.log(user);

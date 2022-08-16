@@ -71,7 +71,7 @@ function NavbarMobile() {
             </Link>
           </div>
           <div className='d-flex'>
-            <Link to='/wishlist'>
+            <Link to={userLoggedIn ? '/wishlist' : '/login'}>
               <div className='position-relative'>
                 <div className='position-absolute text-center wishlist__item__count'>
                   <span className='f-12'>{productWishList.length}</span>

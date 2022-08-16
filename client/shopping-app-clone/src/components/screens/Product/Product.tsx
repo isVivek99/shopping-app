@@ -12,7 +12,7 @@ import SingleSlideCarousel from 'components/common/carousels/SingleSlideCarousel
 import ProductFastDelivery from './ProductFastDelivery';
 import Footer from 'components/common/footer/Footer';
 import 'assets/scss/screens/product/product.scss';
-import useCustomToast from 'components/common/toast/CustomToast';
+
 import { useNavigate } from 'react-router-dom';
 
 interface productCardProps {
@@ -38,7 +38,7 @@ interface productCardArrayProps extends productCardProps {
 
 const Product = ({ productDetails }: any) => {
   const navigate = useNavigate();
-  const { openToast, ToastComponent } = useCustomToast();
+
   const dispatch = useDispatch();
   const { id, productName } = useParams();
   const productId = id || '1';
@@ -82,7 +82,11 @@ const Product = ({ productDetails }: any) => {
 
     if (checkIfInWishlist() && checkIfInCart()) {
       console.log('publish error already in cart');
-      openToast('product already in cart,please delete to add more', 'error');
+      console.log(
+        'product already in cart,please delete to add more',
+        'error',
+        'top-right'
+      );
     } else if (checkIfInWishlist()) {
       console.log('delete from wishlist');
       //product should be deleted only if user is clicking from wishlist page else we just add it to cart
@@ -124,7 +128,6 @@ const Product = ({ productDetails }: any) => {
 
   return (
     <div className='screen '>
-      <ToastComponent />
       <div className='page__path py-3 ps-3'>
         <p>
           <span>Homepage/</span> <span>{product.category}/ </span>

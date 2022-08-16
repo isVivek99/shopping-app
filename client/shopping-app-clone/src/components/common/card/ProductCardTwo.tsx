@@ -3,7 +3,7 @@ import Button from 'components/common/button/Button';
 import ListItemsCard from 'components/common/lists/ListItemsCard';
 import Tags from 'components/common/tags/Tags';
 import Rating from 'components/common/rating/Rating';
-import useCustomToast from 'components/common/toast/CustomToast';
+
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addProducts, removeFromWishlist } from 'actions';
@@ -60,8 +60,6 @@ const ProductCardTwo = ({
     addedToWishlist,
   };
 
-  const { openToast, ToastComponent } = useCustomToast();
-
   const productFromCart = productCartList
     ? productCartList.filter((product) => product.id === id)
     : [];
@@ -88,8 +86,11 @@ const ProductCardTwo = ({
     }
 
     if (checkIfInWishlist() && checkIfInCart()) {
-      console.log('publish error already in cart');
-      openToast('product already in cart,please delete to add more', 'error');
+      console.log(
+        'product already in cart,please delete to add more',
+        'error',
+        'top-right'
+      );
     } else if (checkIfInWishlist()) {
       console.log('delete from wishlist');
       //product should be deleted only if user is clicking from wishlist page else we just add it to cart
@@ -132,7 +133,6 @@ const ProductCardTwo = ({
 
   return (
     <div>
-      <ToastComponent />
       <div className='d-flex flex-column flex-md-row ctn2'>
         <Link to={`/v1/product/${id}/${pName}`} className='text__link'>
           <div className='d-flex '>

@@ -5,7 +5,7 @@ import Tags from 'components/common/tags/Tags';
 import { addProducts, removeFromWishlist } from 'actions';
 import Rating from 'components/common/rating/Rating';
 import { calculateDiscount } from 'utils/calculateDiscountPrice';
-import useCustomToast from 'components/common/toast/CustomToast';
+
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -48,7 +48,6 @@ const ProductCardOne = ({
   navigateString,
   navigateLink,
 }: productCardArrayProps) => {
-  const { openToast, ToastComponent } = useCustomToast();
   useEffect(() => {
     if (pName === 'Mangoes') console.log('mango-rating:', rating);
   }, [rating]);
@@ -94,7 +93,6 @@ const ProductCardOne = ({
 
     if (checkIfInWishlist() && checkIfInCart()) {
       console.log('publish error already in cart');
-      openToast('product already in cart,please delete to add more', 'error');
     } else if (checkIfInWishlist()) {
       console.log('delete from wishlist');
       //product should be deleted only if user is clicking from wishlist page else we just add it to cart
@@ -151,7 +149,6 @@ const ProductCardOne = ({
   console.log('rerender');
   return (
     <div>
-      <ToastComponent />
       <div>
         <div className='ctn mx-auto cursor-pointer position-relative'>
           <Link to={`/v1/product/${id}/${pName}`} className='text__link'>

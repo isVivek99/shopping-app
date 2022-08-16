@@ -1,0 +1,132 @@
+@import 'assets/scss/_variables.scss';
+
+.notification_container {
+  font-size: 14px;
+  box-sizing: border-box;
+  position: fixed;
+  right: 12px;
+  z-index: 999999;
+}
+
+.snackbar {
+  width: fit-content;
+  max-width: 350px;
+  margin-left: -125px;
+  margin-top: 1rem;
+  color: $color-white;
+  text-align: center;
+  border-radius: 2px;
+  padding: 8px;
+  position: relative;
+  border-radius: 6px;
+  box-shadow: 0 0 10px #999;
+  overflow: hidden;
+}
+
+.snackbar:hover {
+  box-shadow: 0 0 12px #fff;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.icon_bg_red {
+  background-color: #fff;
+  height: 30px;
+  width: 30px;
+  color: $text-color-green;
+  border-radius: 16px;
+  cursor: pointer;
+}
+.icon_bg_green {
+  background-color: #fff;
+  height: 30px;
+  width: 30px;
+  color: $text-color-green;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.error {
+  background-color: #ff0000;
+  border-top: 5px solid #ff0000;
+}
+.success {
+  background-color: $primary-color;
+  border-top: 5px solid $bg-color-primary;
+}
+.content {
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 3;
+}
+
+.icon {
+  height: 25px;
+  width: 25px;
+  margin-right: 10px;
+}
+
+.top-right {
+  top: 12px;
+  right: 12px;
+  transition: transform 0.6s ease-in-out;
+  animation: toast-in-right 0.7s;
+}
+
+.bottom-right {
+  bottom: 12px;
+  right: 12px;
+  transition: transform 0.6s ease-in-out;
+  animation: toast-in-right 0.7s;
+}
+
+.top-left {
+  top: 12px;
+  left: 12px;
+  transition: transform 0.6s ease-in;
+  animation: toast-in-left 0.7s;
+}
+
+.bottom-left {
+  bottom: 12px;
+  left: 12px;
+  transition: transform 0.6s ease-in;
+  animation: toast-in-left 0.7s;
+}
+
+.toast_timer {
+  width: 100%;
+  height: 5px;
+  position: absolute;
+  background-color: $color-white;
+  left: 0;
+  bottom: 0;
+  animation: width-zero 4s;
+}
+@keyframes width-zero {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes toast-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes toast-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

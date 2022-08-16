@@ -20,7 +20,6 @@ const reduceUsers = (
 ) => {
   switch (action.type) {
     case types.LOGIN_USER_SUCCESS:
-      console.log(action.payload);
       return {
         userDetails: { ...action.payload },
         userLoggedIn: true,

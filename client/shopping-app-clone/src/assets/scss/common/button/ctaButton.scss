@@ -1,102 +1,35 @@
 @import 'assets/scss/_variables.scss';
 
-.glow-on-hover {
-  width: 220px;
-  height: 50px;
-  border: none;
-  outline: none;
+.glowing-button {
+  font-size: 1rem;
+  width: 6rem;
+  height: 2.5rem;
+  background-color: $color-white;
+  border: 2px $border-color-primary solid;
+  border-radius: 1rem;
   color: $border-color-primary;
-  background: $background-color-white;
-  border: 2px solid $border-color-primary;
-  cursor: pointer;
+
   position: relative;
-  z-index: 0;
-  border-radius: 10px;
-  font-weight: 600;
-  z-index: 1;
+  transition: 0.3s ease-in-out;
 }
-.explore_btn {
+.glowing-button::before,
+.glowing-button::after {
   content: '';
-  background: linear-gradient(
-    45deg,
-    #ff0000,
-    #ff7300,
-    #fffb00,
-    #48ff00,
-    #00ffd5,
-    #002bff,
-    #7a00ff,
-    #ff00c8,
-    #ff0000
-  );
+  background: linear-gradient(45deg, #c65d7b, #b22727, #ffb562, #f87474);
+  /* size of the background will be 400% of the original div*/
+  background-size: 400%;
   position: absolute;
-  top: -2px;
-  left: -2px;
-  background-size: 500%;
+  top: 0px;
+  left: 0px;
+  right: 0;
+  bottom: 0;
   z-index: -1;
-  filter: blur(5px);
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  animation: glowing 20s linear infinite;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-  border-radius: 10px;
+  width: calc(100%);
+  height: calc(100%);
+  animation: animate 20s linear infinite;
 }
 
-.glow-on-hover:before {
-  content: '';
-  background: linear-gradient(
-    45deg,
-    #ff0000,
-    #ff7300,
-    #fffb00,
-    #48ff00,
-    #00ffd5,
-    #002bff,
-    #7a00ff,
-    #ff00c8,
-    #ff0000
-  );
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  background-size: 500%;
-  z-index: -1;
-  filter: blur(5px);
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  animation: glowing 20s linear infinite;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-  border-radius: 10px;
-}
-
-.glow-on-hover:active {
-  color: #000;
-}
-
-.glow-on-hover:active:after {
-  background: transparent;
-}
-
-.glow-on-hover:hover:before {
-  opacity: 1;
-}
-
-.glow-on-hover:after {
-  z-index: -1;
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: $background-color-white;
-  left: 0;
-  top: 0;
-  border-radius: 10px;
-  animation: glowing 1.5s infinite;
-}
-
-@keyframes glowing {
+@keyframes animate {
   0% {
     background-position: 0 0;
   }
@@ -106,4 +39,18 @@
   100% {
     background-position: 0 0;
   }
+}
+.glowing-button::after {
+  filter: blur(10px);
+  opacity: 0.9;
+}
+.glowing-button::before {
+  filter: blur(10px);
+  opacity: 0.8;
+}
+
+.glowing-button:hover {
+  background: transparent;
+  color: $navbar-bg-color;
+  border: none;
 }

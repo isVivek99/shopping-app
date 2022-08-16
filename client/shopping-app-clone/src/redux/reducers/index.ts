@@ -1,5 +1,6 @@
 /* eslint-disable no-case-declarations */
 import reduceUsers from 'redux/reducers/reduceUsers';
+import reduceToast from './reduceToast';
 import types from 'redux/actionTypes';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
@@ -94,7 +95,7 @@ const reduceProducts = (
       const arr1 = state.myState.filter(
         (product) => product.id !== action.payload.id
       );
-      console.log(arr1);
+
       return {
         myState: arr1,
         filters: {
@@ -253,6 +254,7 @@ const rootReducer = combineReducers({
   reduceProducts,
   reduceWishlist,
   reduceUsers,
+  reduceToast,
 });
 export default rootReducer;
 export { reduceProducts, reduceWishlist };
