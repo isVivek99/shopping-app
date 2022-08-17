@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { loginUser, logoutUser, setToast } from 'actions';
@@ -43,9 +43,16 @@ const Login = () => {
         position: 'top-right',
       })
     );
-    dispatch(logoutUser({}));
+    dispatch(logoutUser());
     console.log('user logged out !!', 'success', 'top-right');
   };
+
+  useEffect(() => {
+    if (userLoggedIn) {
+      setEmail({ emailAddress: '' });
+      setPassword({ password: '' });
+    }
+  }, [userLoggedIn]);
 
   return (
     <div>

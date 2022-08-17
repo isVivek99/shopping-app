@@ -1,7 +1,8 @@
 import types from 'redux/actionTypes';
-import { call, put } from 'redux-saga/effects';
+import { call, put, delay } from 'redux-saga/effects';
 import { requestGetUser, requestAddUser } from 'redux/sagas/requests/user';
 import jwt from 'jwt-decode';
+import { saveUserInLocalStorage } from 'services/Authservice';
 
 interface UserInfoArray {
   config: object;
@@ -27,14 +28,19 @@ interface userLoginResponse {
 }
 
 //worker saga
+
 export function* handleLoginUser(action: ActionType) {
   try {
     const response: UserInfoArray = yield call(requestGetUser, action.payload);
     const data: any = { ...response.data };
-    console.log('getUser:', data.user);
+
     if (data.user) {
-      const user: { fName: string; email: string } = data.user;
-      console.log(user);
+      const user: { fName: string; email: string; token: string } = data.user;
+      const JWTDestructured: { expiresIn: string } = jwt(data.user.token);
+      const userExpireTimeInMilliSec =
+        parseInt(JWTDestructured.expiresIn) * 1000;
+      console.log(jwt(data.user.token), user);
+      saveUserInLocalStorage(jwt(user.token));
       yield put({
         type: types.LOGIN_USER_SUCCESS,
         payload: user,
@@ -43,6 +49,22 @@ export function* handleLoginUser(action: ActionType) {
         type: types.SET_TOAST,
         payload: {
           message: `hi ${user.fName}, you are logged In !!`,
+          variant: 'success',
+          position: 'top-right',
+          show: true,
+          id: Math.floor(Math.random() * 100),
+        },
+      });
+
+      yield delay(userExpireTimeInMilliSec);
+      yield put({
+        type: types.LOGOUT_USER,
+        payload: {},
+      });
+      yield put({
+        type: types.SET_TOAST,
+        payload: {
+          message: ` ${user.fName}, logged out !!`,
           variant: 'success',
           position: 'top-right',
           show: true,
@@ -62,9 +84,15 @@ export function* handleAddUser(action: ActionType) {
       action.payload
     );
     const data = { ...response.data };
-    const user: { fName: string; email: string } = data.user;
+    const user: { fName: string; email: string; token: string } = data.user;
+    console.log(data, user, jwt(user.token));
 
     if (user) {
+      const JWTDestructured: { expiresIn: string } = jwt(user.token);
+      const userExpireTimeInMilliSec =
+        parseInt(JWTDestructured.expiresIn) * 1000;
+
+      saveUserInLocalStorage(jwt(user.token));
       yield put({
         type: types.LOGIN_USER_SUCCESS,
         payload: user,
@@ -73,6 +101,21 @@ export function* handleAddUser(action: ActionType) {
         type: types.SET_TOAST,
         payload: {
           message: `hi ${user.fName}, you are logged In !!`,
+          variant: 'success',
+          position: 'top-right',
+          show: true,
+          id: Math.floor(Math.random() * 100),
+        },
+      });
+      yield delay(userExpireTimeInMilliSec);
+      yield put({
+        type: types.LOGOUT_USER,
+        payload: {},
+      });
+      yield put({
+        type: types.SET_TOAST,
+        payload: {
+          message: ` ${user.fName}, logged out !!`,
           variant: 'success',
           position: 'top-right',
           show: true,

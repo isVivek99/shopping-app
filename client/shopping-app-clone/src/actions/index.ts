@@ -122,9 +122,9 @@ export const loginUserSuccess = (loggedInUserInfo: any) => ({
   },
 });
 
-export const logoutUser = (userInfo: any) => ({
+export const logoutUser = () => ({
   type: types.LOGOUT_USER,
-  payload: { ...userInfo },
+  payload: {},
 });
 
 //async actions

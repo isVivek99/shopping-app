@@ -1,9 +1,10 @@
 import types from 'redux/actionTypes';
+import { removeUserInLocalStorage } from 'services/Authservice';
 
 interface UserLoggedIn {
   email: string;
   password: string;
-  accesstoken: string;
+  token: string;
 }
 interface UserLoggedInObject {
   userDetails: UserLoggedIn;
@@ -12,7 +13,7 @@ interface UserLoggedInObject {
 }
 
 const defaultUserState: UserLoggedInObject = {
-  userDetails: { email: '', password: '', accesstoken: '' },
+  userDetails: { email: '', password: '', token: '' },
   userLoggedIn: false,
 };
 
@@ -24,11 +25,12 @@ const reduceUsers = (
     case types.LOGIN_USER_SUCCESS:
       return {
         userDetails: { ...action.payload },
-        token: action.payload.accesstoken,
+        token: action.payload.token,
         userLoggedIn: true,
       };
 
     case types.LOGOUT_USER:
+      removeUserInLocalStorage();
       return {
         userDetails: {},
         token: '',

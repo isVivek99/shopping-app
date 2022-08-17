@@ -34,8 +34,6 @@ const reduceToast = (
       return [...filteredArray];
     }
     default:
-      console.log('default toast');
-
       return toastArray;
   }
 };

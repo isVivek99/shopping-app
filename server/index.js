@@ -1,4 +1,5 @@
 const User = require('./models/user.model');
+const RefreshToken = require('./models/refreshtoken.model');
 const express = require('express');
 require('dotenv').config();
 const app = express();
@@ -57,10 +58,21 @@ app.post('/api/register', async (req, res) => {
       {
         fName: fName,
         email: email,
+        expiresIn: '3600',
       },
       process.env.TOKEN_KEY
     );
-    return res.json({ status: 201, user: token });
+    let refreshToken = await RefreshToken.createToken(user);
+
+    const newUserInstance = {
+      fName: fName,
+      lName: lName,
+      email: email,
+      password: password,
+      token,
+      refreshToken,
+    };
+    return res.json({ status: 201, user: newUserInstance });
 
     //catch error
   } catch (error) {
@@ -82,6 +94,15 @@ app.post('/api/login', async (req, res) => {
       {
         fName: user.fName,
         email: user.email,
+        expiresIn: '3600',
+      },
+      process.env.TOKEN_KEY
+    );
+    const refreshToken = jwt.sign(
+      {
+        fName: user.fName,
+        email: user.email,
+        expiresIn: '86400',
       },
       process.env.TOKEN_KEY
     );
@@ -91,6 +112,7 @@ app.post('/api/login', async (req, res) => {
       email: user.email,
       password: user.password,
       token,
+      refreshToken,
     };
 
     console.log('user:', newUserInstance);
@@ -101,15 +123,6 @@ app.post('/api/login', async (req, res) => {
 });
 
 app.get('/api/login', async (req, res) => {
-  const token = req.headers['x-access-token'];
-  try {
-    const decoded = jwt.verify(token, process.env.TOKEN_KEY);
-    const email = decoded.email;
-  } catch (error) {
-    console.log(error);
-    res.json({ status: 'error', error: 'invalid token' });
-  }
-
   const user = await User.findOne({
     email: req.body.email,
     password: req.body.password,
