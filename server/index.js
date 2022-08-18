@@ -1,5 +1,6 @@
 const User = require('./models/user.model');
 const RefreshToken = require('./models/refreshtoken.model');
+const categorySubTopicList = require('./models/categorySubTopicList.model');
 const express = require('express');
 require('dotenv').config();
 const app = express();
@@ -29,6 +30,18 @@ const connectDatabase = async () => {
 };
 
 connectDatabase();
+
+//get homepage products
+
+app.get('/api/categoryListProducts', async (req, res) => {
+  try {
+    const categoryListProducts = await categorySubTopicList.find();
+
+    res.status(200).json(categoryListProducts);
+  } catch (error) {
+    res.status(500).json({ anda: error.message });
+  }
+});
 
 app.post('/api/register', async (req, res) => {
   console.log(req.body);
@@ -90,27 +103,21 @@ app.post('/api/login', async (req, res) => {
   });
 
   if (user) {
+    const { fName, lName, email, password } = user;
     const token = jwt.sign(
       {
-        fName: user.fName,
-        email: user.email,
+        fName: fName,
+        email: email,
         expiresIn: '3600',
       },
       process.env.TOKEN_KEY
     );
-    const refreshToken = jwt.sign(
-      {
-        fName: user.fName,
-        email: user.email,
-        expiresIn: '86400',
-      },
-      process.env.TOKEN_KEY
-    );
+    let refreshToken = await RefreshToken.createToken(user);
     const newUserInstance = {
-      fName: user.fName,
-      lName: user.lName,
-      email: user.email,
-      password: user.password,
+      fName: fName,
+      lName: lName,
+      email: email,
+      password: password,
       token,
       refreshToken,
     };

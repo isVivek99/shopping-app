@@ -35,12 +35,21 @@ export function* handleLoginUser(action: ActionType) {
     const data: any = { ...response.data };
 
     if (data.user) {
-      const user: { fName: string; email: string; token: string } = data.user;
-      const JWTDestructured: { expiresIn: string } = jwt(data.user.token);
+      const user: {
+        fName: string;
+        email: string;
+        token: string;
+        refreshToken: string;
+      } = data.user;
+      const JWTDestructured: { expiresIn: string } = jwt(user.token);
       const userExpireTimeInMilliSec =
         parseInt(JWTDestructured.expiresIn) * 1000;
       console.log(jwt(data.user.token), user);
-      saveUserInLocalStorage(jwt(user.token));
+
+      saveUserInLocalStorage({
+        ...jwt(user.token),
+        refreshToken: user.refreshToken,
+      });
       yield put({
         type: types.LOGIN_USER_SUCCESS,
         payload: user,
@@ -84,7 +93,12 @@ export function* handleAddUser(action: ActionType) {
       action.payload
     );
     const data = { ...response.data };
-    const user: { fName: string; email: string; token: string } = data.user;
+    const user: {
+      fName: string;
+      email: string;
+      token: string;
+      refreshToken: string;
+    } = data.user;
     console.log(data, user, jwt(user.token));
 
     if (user) {
@@ -92,7 +106,10 @@ export function* handleAddUser(action: ActionType) {
       const userExpireTimeInMilliSec =
         parseInt(JWTDestructured.expiresIn) * 1000;
 
-      saveUserInLocalStorage(jwt(user.token));
+      saveUserInLocalStorage({
+        ...jwt(user.token),
+        refreshToken: user.refreshToken,
+      });
       yield put({
         type: types.LOGIN_USER_SUCCESS,
         payload: user,
