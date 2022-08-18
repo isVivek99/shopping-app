@@ -4,7 +4,6 @@ import RecipeCard from 'components/common/card/RecipeCard';
 import CategoryProductList from 'components/common/categoryProductList/CategoryProductList';
 import Footer from 'components/common/footer/Footer';
 import { recipeDetails } from 'utils/recipeDetails';
-// import { categoryListDetails } from 'utils/categoryListDetails';
 import axiosInstance from 'services/api';
 import 'assets/scss/screens/homepage.scss';
 import 'assets/scss/common.scss';
@@ -16,17 +15,13 @@ interface categoryList {
   products: Array<any>;
 }
 
-type categoryListType = categoryList[];
-
 function Homepage() {
   const [categoryListDetails, setCategoryListDetails] = useState<
     categoryList | any
   >([]);
   const getCategoryList = async () => {
     try {
-      const response = await axios.get(
-        'http://localhost:4011/api/categoryListProducts'
-      );
+      const response = await axiosInstance.get('/api/categoryListProducts');
       setCategoryListDetails(response.data);
     } catch (error) {
       console.log(error.message);

@@ -41,10 +41,6 @@ export function* handleLoginUser(action: ActionType) {
         token: string;
         refreshToken: string;
       } = data.user;
-      const JWTDestructured: { expiresIn: string } = jwt(user.token);
-      const userExpireTimeInMilliSec =
-        parseInt(JWTDestructured.expiresIn) * 1000;
-      console.log(jwt(data.user.token), user);
 
       saveUserInLocalStorage({
         ...jwt(user.token),
@@ -58,22 +54,6 @@ export function* handleLoginUser(action: ActionType) {
         type: types.SET_TOAST,
         payload: {
           message: `hi ${user.fName}, you are logged In !!`,
-          variant: 'success',
-          position: 'top-right',
-          show: true,
-          id: Math.floor(Math.random() * 100),
-        },
-      });
-
-      yield delay(userExpireTimeInMilliSec);
-      yield put({
-        type: types.LOGOUT_USER,
-        payload: {},
-      });
-      yield put({
-        type: types.SET_TOAST,
-        payload: {
-          message: ` ${user.fName}, logged out !!`,
           variant: 'success',
           position: 'top-right',
           show: true,
@@ -102,10 +82,6 @@ export function* handleAddUser(action: ActionType) {
     console.log(data, user, jwt(user.token));
 
     if (user) {
-      const JWTDestructured: { expiresIn: string } = jwt(user.token);
-      const userExpireTimeInMilliSec =
-        parseInt(JWTDestructured.expiresIn) * 1000;
-
       saveUserInLocalStorage({
         ...jwt(user.token),
         refreshToken: user.refreshToken,
@@ -118,21 +94,6 @@ export function* handleAddUser(action: ActionType) {
         type: types.SET_TOAST,
         payload: {
           message: `hi ${user.fName}, you are logged In !!`,
-          variant: 'success',
-          position: 'top-right',
-          show: true,
-          id: Math.floor(Math.random() * 100),
-        },
-      });
-      yield delay(userExpireTimeInMilliSec);
-      yield put({
-        type: types.LOGOUT_USER,
-        payload: {},
-      });
-      yield put({
-        type: types.SET_TOAST,
-        payload: {
-          message: ` ${user.fName}, logged out !!`,
           variant: 'success',
           position: 'top-right',
           show: true,

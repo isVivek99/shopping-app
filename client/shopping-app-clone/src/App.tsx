@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div className='App'>
-      <ToastComponent />
+      {/* <ToastComponent /> */}
       <div
         className='mx-auto navbar__big w-100 position-relative'
         style={{ maxWidth: '1440px', zIndex: '1' }}
