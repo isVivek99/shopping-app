@@ -7,6 +7,7 @@ const app = express();
 const cors = require('cors');
 const { default: mongoose } = require('mongoose');
 const jwt = require('jsonwebtoken');
+const sendForgotPasswordEmail = require('./utils/sendEmail.js');
 const port = 4011;
 
 app.use(cors());
@@ -30,6 +31,64 @@ const connectDatabase = async () => {
 };
 
 connectDatabase();
+
+//forgot password
+
+app.post('/api/forgotPassword', async (req, res, next) => {
+  const { email } = req.body;
+
+  const user = await User.findOne({ email });
+  // console.log(user._id);
+  if (!user) {
+    res.status(404).json({ message: 'user not found !' });
+  }
+
+  //user exist, create a one time link for 15 mins
+
+  const payload = {
+    email: user.email,
+    expiresIn: new Date().setSeconds(new Date().getSeconds() + 900),
+  };
+  const token = jwt.sign(payload, process.env.TOKEN_KEY);
+  const link = `http://localhost:3002/resetPassword/${user.email}/${token}`;
+  console.log(link);
+  // sendForgotPasswordEmail(user.email, link);
+
+  res.status(200).json('password reset link has been sent to your email!');
+});
+
+//reset password
+app.post('/api/resetPassword/:fName/:token', async (req, res, next) => {
+  const { newPasswordOne, newPasswordTwo, email, token } = req.body;
+  const payload = jwt.verify(token, process.env.TOKEN_KEY);
+
+  if (payload.expiresIn < new Date().getTime()) {
+    res.status(410).json({ message: 'link is expired, try again !' });
+    return;
+  }
+  const user = await User.findOne({ email });
+  if (!user) {
+    res.status(404).json({ message: 'user not found !' });
+    return;
+  }
+
+  if (newPasswordOne !== newPasswordTwo) {
+    res.status(406).json({ message: 'paswords don not match !' });
+    return;
+  }
+  console.log('here');
+  const updatedInfo = await User.updateOne(
+    { email: user.email },
+    {
+      $set: { password: newPasswordOne },
+    }
+  );
+  console.log('here:', updatedInfo);
+  if (updatedInfo.modifiedCount === 1 || updatedInfo.matchedCount === 1) {
+    res.status(201).json({ message: 'password successfully updated!' });
+    return;
+  }
+});
 
 //get homepage products
 

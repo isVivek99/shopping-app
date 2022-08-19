@@ -12,7 +12,7 @@ const setup = (store: any) => {
       const userDetails = localStorage.getItem('userDetails');
       const accessTokenExpireTime =
         localStorage.getItem('userDetails') === null
-          ? ''
+          ? new Date().getTime() + 60000
           : JSON.parse(userDetails as string)?.expiresIn;
 
       console.log(
@@ -34,7 +34,7 @@ const setup = (store: any) => {
         TokenService.updateUserAccessToken(response.data.accessToken);
         const dummyreq = { 'x-access-token': '' };
         req.headers
-          ? req.headers['x-access-token']
+          ? (req.headers['x-access-token'] = response.data.accessToken)
           : (dummyreq['x-access-token'] = response.data.accessToken);
         return req;
       } catch (error) {

@@ -56,7 +56,6 @@ const Login = () => {
 
   return (
     <div>
-      <div></div>
       {!userLoggedIn ? (
         <div className='screen login'>
           <div className='d-flex justify-content-between align-items-center mb-5 p-2 p-sm-5'>
@@ -76,7 +75,7 @@ const Login = () => {
               <CtaButton text={'explore'} />
             </Link>
           </div>
-          <div className='col-12 com-md-5 mb-4 mx-auto p-4 login__modal'>
+          <div className='col-12 col-md-5col-lg-10  mb-4 mx-auto p-4 login__modal'>
             <h2>Login</h2>
             <div className='my-2'>
               <InputElementTwo
@@ -121,7 +120,7 @@ const Login = () => {
                 <p className='mb-0 p-1'>Remember me</p>
               </div>
               <div className='py-1'>
-                <Link to='#'>
+                <Link to='/forgotPassword'>
                   <p className='mb-0 '>forgot password ?</p>
                 </Link>
               </div>

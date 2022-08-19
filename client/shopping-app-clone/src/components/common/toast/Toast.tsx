@@ -19,7 +19,7 @@ const Toast = ({
   toastId,
   toastArrayLength,
 }: toastList) => {
-  console.log('araylen:', toastArrayLength);
+  // console.log('araylen:', toastArrayLength);
 
   const dispatch = useDispatch();
   type interval = ReturnType<typeof setInterval>;
@@ -36,10 +36,10 @@ const Toast = ({
   };
 
   useEffect(() => {
-    console.log(timer, toastId, timerIdSetter);
+    // console.log(timer, toastId, timerIdSetter);
 
     if (timer === 0) {
-      console.log('close ', toastId, timerIdSetter);
+      // console.log('close ', toastId, timerIdSetter);
       clearInterval(timerIdSetter);
       onCloseHandler(toastId);
     }
