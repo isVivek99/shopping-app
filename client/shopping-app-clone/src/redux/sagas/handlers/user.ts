@@ -2,7 +2,7 @@ import types from 'redux/actionTypes';
 import { call, put, delay } from 'redux-saga/effects';
 import { requestGetUser, requestAddUser } from 'redux/sagas/requests/user';
 import jwt from 'jwt-decode';
-import { saveUserInLocalStorage } from 'services/Authservice';
+import TokenService from 'services/Authservice';
 
 interface UserInfoArray {
   config: object;
@@ -33,18 +33,20 @@ export function* handleLoginUser(action: ActionType) {
   try {
     const response: UserInfoArray = yield call(requestGetUser, action.payload);
     const data: any = { ...response.data };
+    console.log(data.user);
 
     if (data.user) {
       const user: {
         fName: string;
         email: string;
-        token: string;
+        accessToken: string;
         refreshToken: string;
       } = data.user;
 
-      saveUserInLocalStorage({
-        ...jwt(user.token),
+      TokenService.saveUserInLocalStorage({
+        ...jwt(user.accessToken),
         refreshToken: user.refreshToken,
+        accessToken: user.accessToken,
       });
       yield put({
         type: types.LOGIN_USER_SUCCESS,
@@ -76,15 +78,16 @@ export function* handleAddUser(action: ActionType) {
     const user: {
       fName: string;
       email: string;
-      token: string;
+      accessToken: string;
       refreshToken: string;
     } = data.user;
-    console.log(data, user, jwt(user.token));
+    console.log(data, user, jwt(user.accessToken));
 
     if (user) {
-      saveUserInLocalStorage({
-        ...jwt(user.token),
+      TokenService.saveUserInLocalStorage({
+        ...jwt(user.accessToken),
         refreshToken: user.refreshToken,
+        accessToken: user.accessToken,
       });
       yield put({
         type: types.LOGIN_USER_SUCCESS,

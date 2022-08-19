@@ -22,6 +22,8 @@ function Homepage() {
   const getCategoryList = async () => {
     try {
       const response = await axiosInstance.get('/api/categoryListProducts');
+      console.log(response.data);
+
       setCategoryListDetails(response.data);
     } catch (error) {
       console.log(error.message);

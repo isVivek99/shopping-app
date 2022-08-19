@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import axios from 'axios';
+import setupInterceptors from 'services/setupInterceptor';
 import App from './App';
 import 'typeface-poppins';
 import 'assets/scss/index.scss';
@@ -22,3 +22,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+setupInterceptors(store);

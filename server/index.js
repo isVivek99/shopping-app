@@ -71,7 +71,7 @@ app.post('/api/register', async (req, res) => {
       {
         fName: fName,
         email: email,
-        expiresIn: '3600',
+        expiresIn: new Date().getTime() + 360000,
       },
       process.env.TOKEN_KEY
     );
@@ -81,8 +81,7 @@ app.post('/api/register', async (req, res) => {
       fName: fName,
       lName: lName,
       email: email,
-      password: password,
-      token,
+      accessToken: token,
       refreshToken,
     };
     return res.json({ status: 201, user: newUserInstance });
@@ -108,7 +107,7 @@ app.post('/api/login', async (req, res) => {
       {
         fName: fName,
         email: email,
-        expiresIn: '3600',
+        expiresIn: new Date().getTime() + 360000,
       },
       process.env.TOKEN_KEY
     );
@@ -117,32 +116,12 @@ app.post('/api/login', async (req, res) => {
       fName: fName,
       lName: lName,
       email: email,
-      password: password,
-      token,
+      accessToken: token,
       refreshToken,
     };
 
     console.log('user:', newUserInstance);
     return res.json({ status: 200, user: newUserInstance });
-  } else {
-    return res.json({ status: 'error', user: false });
-  }
-});
-
-app.get('/api/login', async (req, res) => {
-  const user = await User.findOne({
-    email: req.body.email,
-    password: req.body.password,
-  });
-  if (user) {
-    const token = jwt.sign(
-      {
-        name: user.name,
-        email: user.email,
-      },
-      process.env.TOKEN_KEY
-    );
-    return res.json({ status: 'ok', user: token });
   } else {
     return res.json({ status: 'error', user: false });
   }
@@ -172,12 +151,13 @@ app.post('/api/refreshtoken', async (req, res) => {
       return;
     }
     let newAccessToken = jwt.sign(
-      { id: refreshToken.user._id },
-      process.env.TOKEN_KEY,
       {
-        expiresIn: '3600',
-      }
+        id: refreshToken.user._id,
+        expiresIn: new Date().setSeconds(new Date().getSeconds() + 360),
+      },
+      process.env.TOKEN_KEY
     );
+
     return res.status(200).json({
       accessToken: newAccessToken,
       refreshToken: refreshToken.token,

@@ -1,5 +1,5 @@
 import types from 'redux/actionTypes';
-import { removeUserInLocalStorage } from 'services/Authservice';
+import TokenService from 'services/Authservice';
 
 interface UserLoggedIn {
   email: string;
@@ -30,7 +30,7 @@ const reduceUsers = (
       };
 
     case types.LOGOUT_USER:
-      removeUserInLocalStorage();
+      TokenService.removeUserInLocalStorage();
       return {
         userDetails: {},
         token: '',
