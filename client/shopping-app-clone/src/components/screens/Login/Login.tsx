@@ -33,6 +33,8 @@ const Login = () => {
 
   const handleLoginUser = () => {
     dispatch(loginUser({ email, password }));
+    setEmail({ emailAddress: '' });
+    setPassword({ password: '' });
   };
   const handleLogoutUser = () => {
     dispatch(

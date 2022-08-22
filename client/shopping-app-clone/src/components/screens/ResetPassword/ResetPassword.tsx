@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import brandImage from 'assets/images/Brand.png';
 import brandImageWhiteMobile from 'assets/images/freshness-mobile-png.png';
 import InputElementTwo from 'components/common/input/InputElementTwo';
@@ -15,6 +15,7 @@ const ResetPassword = () => {
 
   const [newPasswordOne, setNewPasswordOne] = useState({ password: '' });
   const [newPasswordTwo, setOldPasswordTwo] = useState({ password: '' });
+  const navigate = useNavigate();
 
   const handleLoginUser = async () => {
     try {
@@ -38,6 +39,7 @@ const ResetPassword = () => {
       );
       setNewPasswordOne({ password: '' });
       setOldPasswordTwo({ password: '' });
+      navigate('../login', { replace: true });
     } catch (error) {
       console.log(error.response.data.message);
       dispatch(

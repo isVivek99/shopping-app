@@ -33,7 +33,7 @@ export function* handleLoginUser(action: ActionType) {
   try {
     const response: UserInfoArray = yield call(requestGetUser, action.payload);
     const data: any = { ...response.data };
-    console.log(data.user);
+    console.log(data, data.user);
 
     if (data.user) {
       const user: {
@@ -65,6 +65,16 @@ export function* handleLoginUser(action: ActionType) {
     }
   } catch (error) {
     console.log(error);
+    yield put({
+      type: types.SET_TOAST,
+      payload: {
+        message: `${error.response.data.message}`,
+        variant: 'error',
+        position: 'top-right',
+        show: true,
+        id: Math.floor(Math.random() * 100),
+      },
+    });
   }
 }
 

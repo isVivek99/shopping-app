@@ -159,7 +159,7 @@ app.post('/api/login', async (req, res) => {
     email: req.body.email,
     password: req.body.password,
   });
-
+  console.log(user);
   if (user) {
     const { fName, lName, email, password } = user;
     const token = jwt.sign(
@@ -182,7 +182,9 @@ app.post('/api/login', async (req, res) => {
     console.log('user:', newUserInstance);
     return res.json({ status: 200, user: newUserInstance });
   } else {
-    return res.json({ status: 'error', user: false });
+    return res.status(404).json({
+      message: 'please check email or password!',
+    });
   }
 });
 
