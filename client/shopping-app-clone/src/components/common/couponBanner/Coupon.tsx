@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import rootReducer from 'reducers';
+import rootReducer from 'redux/reducers';
 import { useSelector } from 'react-redux';
 import 'assets/scss/common/coupon/coupon.scss';
 

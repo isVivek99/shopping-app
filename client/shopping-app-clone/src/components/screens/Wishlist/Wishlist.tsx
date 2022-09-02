@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import rootReducer from 'reducers';
+import rootReducer from 'redux/reducers';
 import ProductCardOne from 'components/common/card/ProductCardOne';
 import Footer from 'components/common/footer/Footer';
 import JeffLaugh from 'assets/images/jeff_bezzos_laugh.gif';

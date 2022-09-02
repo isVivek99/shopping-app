@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setPriceRange, setSortFilter, resetFilters, setRating } from 'actions';
-import rootReducer from 'reducers';
+import rootReducer from 'redux/reducers';
 import ProductCardOne from 'components/common/card/ProductCardOne';
 import ProductCardTwo from 'components/common/card/ProductCardTwo';
 import Footer from 'components/common/footer/Footer';

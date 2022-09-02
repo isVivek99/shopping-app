@@ -7,7 +7,7 @@ interface BtnProps {
   text: string;
   arrow?: string;
   width?: string;
-  clickHandle?: () => unknown;
+  clickHandle?: (e: any) => unknown;
 }
 
 const Button = ({

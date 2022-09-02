@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   removeProducts,
   addQuantity,
   subtractQuantity,
   addToWishlist,
+  setToast,
 } from 'actions';
 import Rating from 'components/common/rating/Rating';
 import { calculateDiscount } from 'utils/calculateDiscountPrice';
-import useCustomToast from 'components/common/toast/CustomToast';
-import 'assets/scss/screens/checkout/cartProduct.scss';
 
+import 'assets/scss/screens/checkout/cartProduct.scss';
+import rootReducer from 'redux/reducers';
 interface cartProductProps extends CartproductArrayProps {
   discount?: string;
   pName: string;
@@ -42,20 +44,30 @@ const CartProduct = ({
   productWishList,
   productCartList,
 }: cartProductProps) => {
-  const toastProp = {
-    message: 'cannot add more than 5 products',
-    variant: 'error',
-    style: {},
-  };
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const { openToast, ToastComponent } = useCustomToast();
+  type RootStore = ReturnType<typeof rootReducer>;
+  const { userDetails, userLoggedIn } =
+    useSelector((state: RootStore) => state?.reduceUsers) || {};
 
   const removeProductClickHandler = () => {
     dispatch(removeProducts({ id }));
+    console.log(`removed product from cart !!`, 'success', 'top-right');
+    dispatch(
+      setToast({
+        message: 'removed product from cart !',
+        variant: 'success',
+        show: true,
+        position: 'top-right',
+      })
+    );
   };
 
   const addToWishlistClickHandler = () => {
+    if (!userLoggedIn) {
+      navigate('../login');
+      return;
+    }
     const product = productWishList?.filter((iter) => iter.id === id);
 
     const checkWishlistPresent = product
@@ -79,8 +91,9 @@ const CartProduct = ({
         })
       );
       removeProductClickHandler();
+      console.log(`added ${pName} to wishlist !!`, 'success', 'top-right');
     } else {
-      openToast('already exist in wishlist', 'error');
+      console.log('already exist in wishlist', 'error', 'top-right');
     }
   };
 
@@ -90,7 +103,7 @@ const CartProduct = ({
     if (filterProduct[0]?.quantity < 5) {
       dispatch(addQuantity({ id }));
     } else {
-      openToast('cannot add more than 5', 'error');
+      console.log('cannot add more than 5', 'error', 'top-right');
     }
   };
   const subtractProductsClickHandler = () => {
@@ -105,7 +118,6 @@ const CartProduct = ({
 
   return (
     <div className='cart__product my-2'>
-      <ToastComponent />
       <div className='cart__content__section__one d-flex'>
         <div className='cart__content__section__one__img__parent '>
           <img

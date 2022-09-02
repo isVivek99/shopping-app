@@ -1,7 +1,7 @@
 @import 'assets/scss/_variables.scss';
 
 .button {
-  transition: background-color 250ms;
+  transition: opacity 150ms;
 }
 .button:hover {
   opacity: 0.8;

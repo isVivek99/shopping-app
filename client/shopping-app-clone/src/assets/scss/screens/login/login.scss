@@ -9,3 +9,26 @@
   border-radius: 12px;
   padding: 1rem;
 }
+.mobile__brand__logo {
+  filter: invert(100%);
+}
+
+.snackbar {
+  width: fit-content;
+  max-width: 350px;
+  margin-left: -125px;
+  color: $color-white;
+  text-align: center;
+  border-radius: 2px;
+  padding: 8px;
+  background-color: $bg-color-primary;
+  border-radius: 6px;
+}
+
+.icon_bg {
+  background-color: #fff;
+  height: 30px;
+  width: 30px;
+  color: $text-color-green;
+  border-radius: 16px;
+}

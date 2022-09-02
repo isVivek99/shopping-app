@@ -2,6 +2,7 @@ const asyncActions: any = {
   LOGIN_USER: 'LOGIN_USER',
   ADD_USER: 'ADD_USER',
   LOGOUT_USER: 'LOGOUT_USER',
+  REFRESH_TOKEN: 'REFRESH_TOKEN',
 };
 
 const syncActions: any = {
@@ -17,11 +18,14 @@ const syncActions: any = {
   RESET_COUPONCODE: 'RESET_COUPONCODE',
   ADD_TO_WISHLIST: 'ADD_TO_WISHLIST',
   REMOVE_FROM_WISHLIST: 'REMOVE_FROM_WISHLIST',
+  LOGIN_USER_SUCCESS: 'LOGIN_USER_SUCCESS',
+  SET_TOAST: 'SET_TOAST',
+  CLOSE_TOAST: 'CLOSE_TOAST',
 };
 
-const actions = {
+const actionTypes = {
   ...asyncActions,
   ...syncActions,
 };
 
-export default actions;
+export default actionTypes;

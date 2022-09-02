@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CartProduct from 'components/screens/Checkout/CartProduct';
-import rootReducer from 'reducers';
+import rootReducer from 'redux/reducers';
 import 'assets/scss/screens/checkout/checkout.scss';
 import { calculateDiscount } from 'utils/calculateDiscountPrice';
 import { validateCoupon, calculateCouponDiscount } from 'utils/validateCoupon';
 import { setCoupon, resetCoupon } from 'actions';
 import { getDeliveryDate } from 'utils/getDeliveryDate';
 import tenMinuteCeo from 'assets/images/10_min_ceo_2.jpeg';
-import useCustomToast from 'components/common/toast/CustomToast';
+import ToastComponent from 'components/common/toast/ToastComponent';
 import BillingUserInfo from 'components/screens/Checkout/BillingUserInfo';
 import Button from 'components/common/button/Button';
 
@@ -33,8 +33,6 @@ const Cart = () => {
 
   const productWishList =
     useSelector((state: RootStore) => state?.reduceWishlist?.wishlist) || [];
-
-  const { openToast, ToastComponent } = useCustomToast();
 
   console.log(productCartList.length);
 
@@ -83,7 +81,7 @@ const Cart = () => {
       );
       return;
     }
-    openToast('add products to cart!', 'error');
+    console.log('add products to cart!', 'error', 'top-right');
   };
 
   const priceArray = productCartList.map((item) => {
@@ -119,7 +117,6 @@ const Cart = () => {
 
   return (
     <div className='screen d-flex mx-auto'>
-      <ToastComponent />
       <div className='col-12'>
         <div className='d-flex flex-column flex-xl-row flex-column-reverse'>
           <div className='col-12 col-xl-7 padding-default'>

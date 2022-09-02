@@ -1,0 +1,56 @@
+@import 'assets/scss/_variables.scss';
+
+.glowing-button {
+  font-size: 1rem;
+  width: 6rem;
+  height: 2.5rem;
+  background-color: $color-white;
+  border: 2px $border-color-primary solid;
+  border-radius: 1rem;
+  color: $border-color-primary;
+
+  position: relative;
+  transition: 0.3s ease-in-out;
+}
+.glowing-button::before,
+.glowing-button::after {
+  content: '';
+  background: linear-gradient(45deg, #c65d7b, #b22727, #ffb562, #f87474);
+  /* size of the background will be 400% of the original div*/
+  background-size: 400%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  width: calc(100%);
+  height: calc(100%);
+  animation: animate 20s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+.glowing-button::after {
+  filter: blur(10px);
+  opacity: 0.9;
+}
+.glowing-button::before {
+  filter: blur(10px);
+  opacity: 0.8;
+}
+
+.glowing-button:hover {
+  background: transparent;
+  color: $navbar-bg-color;
+  border: none;
+}

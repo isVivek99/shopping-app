@@ -1,6 +1,14 @@
 /* eslint-disable no-case-declarations */
-import { combineReducers } from 'redux';
-import types from 'utils/actionTypes';
+import reduceUsers from 'redux/reducers/reduceUsers';
+import reduceToast from './reduceToast';
+import types from 'redux/actionTypes';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { watcherSaga } from '../sagas/rootSaga';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
 interface productType {
   id: number;
   pName: string;
@@ -87,7 +95,7 @@ const reduceProducts = (
       const arr1 = state.myState.filter(
         (product) => product.id !== action.payload.id
       );
-      console.log(arr1);
+
       return {
         myState: arr1,
         filters: {
@@ -241,10 +249,31 @@ const reduceWishlist = (
   }
 };
 
+//rootreducer
 const rootReducer = combineReducers({
   reduceProducts,
   reduceWishlist,
+  reduceUsers,
+  reduceToast,
 });
-
 export default rootReducer;
 export { reduceProducts, reduceWishlist };
+
+//saga-middleware
+const sagaMiddleware = createSagaMiddleware();
+const middleware = [sagaMiddleware];
+const enhancer = applyMiddleware(...middleware);
+
+//store
+const persistConfig = {
+  key: 'persist-key',
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+export const store = createStore(
+  persistedReducer,
+  composeWithDevTools(enhancer)
+);
+sagaMiddleware.run(watcherSaga);
+export const persistor = persistStore(store);

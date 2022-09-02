@@ -8,10 +8,8 @@ export const getDeliveryDate = () => {
 };
 
 const getDeliveryDateString = (deliveryDate: any) => {
-  console.log(deliveryDate);
   const mm = getMonth(deliveryDate.getMonth());
   const dd = deliveryDate.getDate();
-  console.log(mm, dd);
 
   return [(dd > 9 ? '' : '0') + dd, mm, deliveryDate.getFullYear()].join(' ');
 };

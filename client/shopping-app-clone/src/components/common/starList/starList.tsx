@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import rootReducer from 'redux/reducers';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Rating from 'components/common/rating/Rating';
 import 'assets/scss/common/starlist/starlist.scss';
 
@@ -8,12 +11,21 @@ interface StarListProps {
 }
 
 const starList = ({ setListingRating, category }: StarListProps) => {
+  const navigate = useNavigate();
+
+  type RootStore = ReturnType<typeof rootReducer>;
+  const { userDetails, userLoggedIn } =
+    useSelector((state: RootStore) => state?.reduceUsers) || {};
+
   const [selected, setSelected] = useState(null);
   useEffect(() => {
     setSelected(null);
   }, [category]);
 
   const setRatingLocal = (e: any) => {
+    if (!userLoggedIn) {
+      navigate('../login');
+    }
     setSelected(e.target.value);
     setListingRating(e.target.value);
   };
