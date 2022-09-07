@@ -14,12 +14,7 @@ import ToastComponent from 'components/common/toast/ToastComponent';
 import { categoryListProductDetails } from 'utils/categoryListProductDetails';
 
 import { productDetails } from 'utils/productDetails';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import './assets/scss/App.scss';
 
 function App() {

@@ -1,5 +1,3 @@
-import { type } from 'os';
-import { toast } from 'react-toastify';
 import types from 'redux/actionTypes';
 export const addProducts = (product: any) => {
   return {
