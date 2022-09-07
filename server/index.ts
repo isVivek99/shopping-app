@@ -49,7 +49,7 @@ app.post('/api/forgotPassword', async (req, res, next) => {
     email: user.email,
     expiresIn: new Date().setSeconds(new Date().getSeconds() + 900),
   };
-  const token = jwt.sign(payload, process.env.TOKEN_KEY);
+  const token = jwt.sign(payload, process.env.JWT_SECRET);
   const link = `http://localhost:3002/resetPassword/${user.email}/${token}`;
   console.log(link);
   // sendForgotPasswordEmail(user.email, link);
@@ -60,7 +60,7 @@ app.post('/api/forgotPassword', async (req, res, next) => {
 //reset password
 app.post('/api/resetPassword/:fName/:token', async (req, res, next) => {
   const { newPasswordOne, newPasswordTwo, email, token } = req.body;
-  const payload = jwt.verify(token, process.env.TOKEN_KEY);
+  const payload = jwt.verify(token, process.env.JWT_SECRET);
 
   if (payload.expiresIn < new Date().getTime()) {
     res.status(410).json({ message: 'link is expired, try again !' });
@@ -132,7 +132,7 @@ app.post('/api/register', async (req, res) => {
         email: email,
         expiresIn: new Date().getTime() + 360000,
       },
-      process.env.TOKEN_KEY
+      process.env.JWT_SECRET
     );
     let refreshToken = await RefreshToken.createToken(user);
 
@@ -168,7 +168,7 @@ app.post('/api/login', async (req, res) => {
         email: email,
         expiresIn: new Date().getTime() + 360000,
       },
-      process.env.TOKEN_KEY
+      process.env.JWT_SECRET
     );
     let refreshToken = await RefreshToken.createToken(user);
     const newUserInstance = {
@@ -216,7 +216,7 @@ app.post('/api/refreshtoken', async (req, res) => {
         id: refreshToken.user._id,
         expiresIn: new Date().setSeconds(new Date().getSeconds() + 360),
       },
-      process.env.TOKEN_KEY
+      process.env.JWT_SECRET
     );
 
     return res.status(200).json({
