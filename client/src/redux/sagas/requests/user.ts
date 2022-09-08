@@ -25,7 +25,7 @@ export function requestAddUser(UserPayloadObject: any) {
   };
   return axios.request({
     method: 'post',
-    url: 'http://localhost:4011/api/register',
+    url: 'http://localhost:4000/api/auth/signup',
     headers: headerObject,
     data: body,
   });

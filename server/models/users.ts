@@ -3,26 +3,10 @@ import Joi from 'joi';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-// const User = new mongoose.Schema(
-//   {
-//     fName: { type: String, required: true },
-//     lName: { type: String, required: true },
-//     email: { type: String, required: true, unique: true },
-//     password: { type: String, required: true },
-//   },
-//   {
-//     collection: 'user-data',
-//   }
-// );
-// const model = mongoose.model('UserData', User);
-
-// module.exports = model;
-
 //& interfaces
-
 interface IUser {
-  fName: string;
-  lname: string;
+  fName?: string;
+  lName?: string;
   email: string;
   password: string;
 }
@@ -66,14 +50,14 @@ userSchema.methods.validatePassword = function (password: string): boolean {
 userSchema.methods.generateToken = function (): string {
   return jwt.sign(
     { _id: this._id, email: this.email },
-    process.env.JWT_SECRET || '',
+    process.env.JWT_SECRET || 'secret123',
     { expiresIn: '1h' }
   );
 };
 
 //& Model
 
-const User = model<IUser, UserModel>('freshnessUser', userSchema);
+const User = model<IUser, UserModel>('freshnessUsers', userSchema);
 
 //& Validation
 const validateUser = (user: IUser): any => {
@@ -86,4 +70,12 @@ const validateUser = (user: IUser): any => {
   return schema.validate(user);
 };
 
-export { User, validateUser, IUser };
+const validateLoginUser = (user: IUser): any => {
+  const schema = Joi.object({
+    email: Joi.string().email().min(3).max(25).required(),
+    password: Joi.string().min(3).max(25).required(),
+  });
+  return schema.validate(user);
+};
+
+export { User, validateUser, validateLoginUser, IUser };
