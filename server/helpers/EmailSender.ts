@@ -1,6 +1,6 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
-function sendForgotPasswordEmail(userEmail, link) {
+export const sendForgotPasswordEmail = (userEmail: string, link: string) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -25,6 +25,4 @@ function sendForgotPasswordEmail(userEmail, link) {
       console.log('mail sent successfully!');
     }
   });
-}
-
-module.exports = sendForgotPasswordEmail;
+};

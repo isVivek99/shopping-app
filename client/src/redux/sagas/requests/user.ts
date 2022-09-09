@@ -12,13 +12,13 @@ export function requestGetUser(UserPayloadObject: UserLoginPayload) {
   };
   return axios.request({
     method: 'post',
-    url: 'http://localhost:4011/api/login',
+    url: 'http://localhost:4000/api/auth/login',
     headers: headerObject,
     data: body,
   });
 }
 
-export function requestAddUser(UserPayloadObject: any) {
+export function requestAddUser(UserPayloadObject: unknown) {
   const body = UserPayloadObject;
   const headerObject = {
     'Content-type': 'application/json',

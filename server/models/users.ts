@@ -8,13 +8,14 @@ interface IUser {
   fName?: string;
   lName?: string;
   email: string;
-  password: string;
+  password?: string;
 }
 
 interface IUserMethods {
   generateHash: () => string;
   validatePassword: (password: string) => boolean;
-  generateToken: () => string;
+  generateToken: (time: string) => string;
+  generateLink: () => string;
 }
 
 type UserModel = Model<IUser, {}, IUserMethods>;
@@ -47,12 +48,20 @@ userSchema.methods.validatePassword = function (password: string): boolean {
 };
 
 //& token
-userSchema.methods.generateToken = function (): string {
+userSchema.methods.generateToken = function (time: string): string {
   return jwt.sign(
     { _id: this._id, email: this.email },
-    process.env.JWT_SECRET || 'secret123',
-    { expiresIn: '1h' }
+    process.env.JWT_SECRET || '',
+    { expiresIn: `${time}` }
   );
+};
+userSchema.methods.generateLink = function (): string {
+  const sign = jwt.sign(
+    { _id: this._id, email: this.email },
+    process.env.JWT_SECRET || '',
+    { expiresIn: '900s' }
+  );
+  return `http://localhost:3000/resetPassword/${this.email}/${sign}`;
 };
 
 //& Model
@@ -77,5 +86,17 @@ const validateLoginUser = (user: IUser): any => {
   });
   return schema.validate(user);
 };
+const validateForgotPasswordUser = (user: IUser): any => {
+  const schema = Joi.object({
+    email: Joi.string().email().min(3).max(25).required(),
+  });
+  return schema.validate(user);
+};
 
-export { User, validateUser, validateLoginUser, IUser };
+export {
+  User,
+  validateUser,
+  validateLoginUser,
+  validateForgotPasswordUser,
+  IUser,
+};

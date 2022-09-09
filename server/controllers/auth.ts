@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 import { ResponseWrapper, responseObject } from '../helpers';
 import authService from '../services/auth.service';
 
@@ -23,4 +24,22 @@ export const logInUser = async (req: Request, res: Response) => {
   const result: responseObject = await authService.login({ email, password });
   const response: ResponseWrapper = new ResponseWrapper(res);
   return response.ok(result);
+};
+
+//forgot-password
+export const forgotPassword = async (req: Request, res: Response) => {
+  const { email } = req.body;
+  const result: responseObject = await authService.forgotPassword({ email });
+  const response: ResponseWrapper = new ResponseWrapper(res);
+  return response.ok(result);
+};
+
+//refreshtoken
+export const refreshToken = async (req: Request, res: Response) => {
+  const { refreshToken } = req.body;
+  const result: responseObject = await authService.refreshToken({
+    refreshToken,
+  });
+  const response: ResponseWrapper = new ResponseWrapper(res);
+  return response.unauthorized(result);
 };

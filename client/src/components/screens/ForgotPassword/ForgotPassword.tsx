@@ -17,7 +17,7 @@ const ForgotPassword = () => {
   const handleLoginUser = async () => {
     try {
       const response = await axios.post(
-        'http://localhost:4011/api/forgotPassword',
+        'http://localhost:4000/api/auth/forgotpassword',
         {
           email: email.emailAddress,
         }

@@ -33,29 +33,36 @@ export function* handleLoginUser(action: ActionType) {
   try {
     const response: UserInfoArray = yield call(requestGetUser, action.payload);
     const data: any = { ...response.data };
-    console.log(data, data.user);
+    console.log(data, data.data);
 
-    if (data.user) {
+    if (data.success) {
       const user: {
         fName: string;
         email: string;
         accessToken: string;
         refreshToken: string;
-      } = data.user;
+      } = data.user;\
 
       TokenService.saveUserInLocalStorage({
         ...jwt(user.accessToken),
-        refreshToken: user.refreshToken,
+        refreshToken: data.data.refreshToken,
         accessToken: user.accessToken,
       });
+      console.log(jwt(data.data.encodedToken), jwt(data.data.refreshToken));
+      const payload = {
+        fName: data.data.user.fName,
+        email: data.data.user.email,
+        accessToken: data.data.encodedToken,
+        refreshToken: data.data.refreshToken,
+      };
       yield put({
         type: types.LOGIN_USER_SUCCESS,
-        payload: user,
+        payload: payload,
       });
       yield put({
         type: types.SET_TOAST,
         payload: {
-          message: `hi ${user.fName}, you are logged In !!`,
+          message: `hi ${data.data.user.fName}, you are logged In !!`,
           variant: 'success',
           position: 'top-right',
           show: true,
