@@ -41,7 +41,7 @@ export function* handleLoginUser(action: ActionType) {
         email: string;
         accessToken: string;
         refreshToken: string;
-      } = data.user;\
+      } = data.user;
 
       TokenService.saveUserInLocalStorage({
         ...jwt(user.accessToken),
