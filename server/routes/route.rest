@@ -1,1 +1,24 @@
-GET http://localhost:4011/api/categoryListProducts
+GET http://localhost:4000/api/categoryListProducts
+
+###
+
+POST http://localhost:4000/api/auth/login 
+Content-Type: application/json
+
+{
+   "email":"satyamkt@gmail.com",
+   "password":"satyamkt"
+}
+
+###
+
+POST http://localhost:4000/api/auth/signup
+
+Content-Type: application/json
+
+ {
+    "fName":"Vivek",
+    "lName":"Lokhande",
+   "email":"vivekl@geekyants.com",
+   "password":"qwerty"
+}
