@@ -22,7 +22,10 @@ interface forgotPasswordCredProps {
   email: string;
 }
 interface refreshTokenCredProps {
-  refreshToken: string;
+  _id: any;
+  token: string;
+  user: any;
+  expiryDate: Date;
 }
 
 const signUp = async ({
@@ -149,7 +152,7 @@ const forgotPassword = async ({ email }: forgotPasswordCredProps) => {
   }
 };
 
-const refreshToken = async ({ refreshToken }: refreshTokenCredProps) => {
+const refreshToken = async ({ refreshToken }: { refreshToken: string }) => {
   try {
     //~ Check if token exists
     const userRefreshToken = await RefreshToken.findOne({
@@ -157,9 +160,24 @@ const refreshToken = async ({ refreshToken }: refreshTokenCredProps) => {
     });
     if (!userRefreshToken) throw { status: 401, message: 'Invalid token.' };
 
+    if (userRefreshToken.verifyExpiration(userRefreshToken)) {
+      RefreshToken.findByIdAndRemove(userRefreshToken._id, {
+        useFindAndModify: false,
+      });
+      throw { status: 401, message: 'Invalid token.' };
+    }
+
+    const user = await User.findOne({ user: userRefreshToken.user });
+    // console.log( user, userRefreshToken);
+
+    let idToken = user?.generateToken('900s');
+
     return {
       success: true,
-      data: {},
+      data: {
+        refreshToken,
+        idToken,
+      },
     };
   } catch (err) {
     return {

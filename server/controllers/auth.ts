@@ -37,6 +37,8 @@ export const forgotPassword = async (req: Request, res: Response) => {
 //refreshtoken
 export const refreshToken = async (req: Request, res: Response) => {
   const { refreshToken } = req.body;
+  console.log(refreshToken);
+
   const result: responseObject = await authService.refreshToken({
     refreshToken,
   });

@@ -3,8 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 // & interfaces
 interface IRefreshToken {
-  tokem: string;
+  _id: string;
+  token: string;
   expiryDate: Date;
+  user: string;
 }
 
 interface IRefreshTokenMethods {
@@ -38,8 +40,8 @@ RefreshTokenSchema.statics.createToken = async function (user: any) {
   return refreshToken;
 };
 
-RefreshTokenSchema.methods.verifyExpiration = (token: any) => {
-  return token.expiryDate.getTime() < new Date().getTime();
+RefreshTokenSchema.methods.verifyExpiration = (tokenData: any) => {
+  return tokenData.expiryDate.getTime() < new Date().getTime();
 };
 
 //& Model

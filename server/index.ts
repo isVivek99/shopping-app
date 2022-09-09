@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose, { ConnectOptions } from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import { auth } from './routes';
+import { auth, categorySubTopicList } from './routes';
 
 const app = express();
 app.use(express.json());
@@ -27,6 +27,7 @@ const connectDatabase = async () => {
 connectDatabase();
 
 app.use('/api/auth', auth);
+app.use('/api/categorySubTopicList', categorySubTopicList);
 
 app.listen(process.env.PORT || 4011, () => {
   console.log(`app listening at http://localhost:${process.env.PORT || 4011}`);

@@ -33,17 +33,17 @@ const setup = (store: any) => {
       if (!isExpired) return req;
       try {
         const response = await axios.post(
-          'http://localhost:4000/api/refreshtoken',
+          'http://localhost:4000/api/auth/refreshtoken',
           {
             refreshToken,
           }
         );
-        console.log(response.data, jwtDecode(response.data.accessToken));
-        TokenService.updateUserAccessToken(response.data.accessToken);
-        const dummyreq = { 'x-access-token': '' };
+        console.log(response.data);
+
+        const dummyreq = { authorization: '' };
         req.headers
-          ? (req.headers['x-access-token'] = response.data.accessToken)
-          : (dummyreq['x-access-token'] = response.data.accessToken);
+          ? (req.headers['authorization'] = response.data.idToken)
+          : (dummyreq['authorization'] = response.data.idToken);
         return req;
       } catch (error) {
         console.log(error.message);

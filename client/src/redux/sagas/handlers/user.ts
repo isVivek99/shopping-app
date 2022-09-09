@@ -36,19 +36,12 @@ export function* handleLoginUser(action: ActionType) {
     const user = data.data.user;
     const idToken = data.data.idToken;
     const refreshToken = data.data.refreshToken;
-    // console.log(data, data.data);
 
     if (data.success) {
-      // TokenService.saveUserInLocalStorage({
-      //   ...jwt(refreshToken),
-      //   refreshToken: refreshToken,
-      //   accessToken: idToken,
-      // });
-      console.log(jwt(data.data.encodedToken), jwt(data.data.refreshToken));
       const payload = {
         fName: user.fName,
         email: user.email,
-        accessToken: idToken,
+        idToken: idToken,
         refreshToken: refreshToken,
       };
       yield put({
@@ -58,7 +51,7 @@ export function* handleLoginUser(action: ActionType) {
       yield put({
         type: types.SET_TOAST,
         payload: {
-          message: `hi ${data.data.user.fName}, you are logged In !!`,
+          message: `hi ${user.fName}, you are logged In !!`,
           variant: 'success',
           position: 'top-right',
           show: true,
@@ -71,7 +64,7 @@ export function* handleLoginUser(action: ActionType) {
     yield put({
       type: types.SET_TOAST,
       payload: {
-        message: `${error.response.data.message}`,
+        message: `${error.response.data.data.message}`,
         variant: 'error',
         position: 'top-right',
         show: true,
@@ -108,7 +101,7 @@ export function* handleAddUser(action: ActionType) {
       yield put({
         type: types.SET_TOAST,
         payload: {
-          message: `hi ${data.data.user.fName}, you are logged In !!`,
+          message: `hi ${user.fName}, you are logged In !!`,
           variant: 'success',
           position: 'top-right',
           show: true,

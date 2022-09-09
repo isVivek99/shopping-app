@@ -21,10 +21,10 @@ function Homepage() {
   >([]);
   const getCategoryList = async () => {
     try {
-      const response = await axiosInstance.get('/api/categoryListProducts');
+      const response = await axiosInstance.get('/api/categorySubTopicList');
       console.log(response.data);
 
-      setCategoryListDetails(response.data);
+      setCategoryListDetails(response.data.data.subtopicList);
     } catch (error) {
       console.log(error.message);
     }
@@ -32,6 +32,7 @@ function Homepage() {
   useEffect(() => {
     getCategoryList();
   }, []);
+
   return (
     <div className='homepage screen'>
       <div className='homepage__components'>

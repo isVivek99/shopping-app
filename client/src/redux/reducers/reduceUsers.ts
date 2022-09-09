@@ -35,7 +35,6 @@ const reduceUsers = (
       };
 
     case types.LOGOUT_USER:
-      TokenService.removeUserInLocalStorage();
       return {
         userDetails: {},
         token: '',
