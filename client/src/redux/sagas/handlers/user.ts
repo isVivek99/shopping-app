@@ -33,27 +33,23 @@ export function* handleLoginUser(action: ActionType) {
   try {
     const response: UserInfoArray = yield call(requestGetUser, action.payload);
     const data: any = { ...response.data };
-    console.log(data, data.data);
+    const user = data.data.user;
+    const idToken = data.data.idToken;
+    const refreshToken = data.data.refreshToken;
+    // console.log(data, data.data);
 
     if (data.success) {
-      const user: {
-        fName: string;
-        email: string;
-        accessToken: string;
-        refreshToken: string;
-      } = data.user;
-
-      TokenService.saveUserInLocalStorage({
-        ...jwt(user.accessToken),
-        refreshToken: data.data.refreshToken,
-        accessToken: user.accessToken,
-      });
+      // TokenService.saveUserInLocalStorage({
+      //   ...jwt(refreshToken),
+      //   refreshToken: refreshToken,
+      //   accessToken: idToken,
+      // });
       console.log(jwt(data.data.encodedToken), jwt(data.data.refreshToken));
       const payload = {
-        fName: data.data.user.fName,
-        email: data.data.user.email,
-        accessToken: data.data.encodedToken,
-        refreshToken: data.data.refreshToken,
+        fName: user.fName,
+        email: user.email,
+        accessToken: idToken,
+        refreshToken: refreshToken,
       };
       yield put({
         type: types.LOGIN_USER_SUCCESS,
@@ -91,29 +87,28 @@ export function* handleAddUser(action: ActionType) {
       requestAddUser,
       action.payload
     );
-    const data = { ...response.data };
-    const user: {
-      fName: string;
-      email: string;
-      accessToken: string;
-      refreshToken: string;
-    } = data.user;
-    console.log(data, user, jwt(user.accessToken));
+    const data: any = { ...response.data };
+    const user = data.data.user;
+    const idToken = data.data.idToken;
+    const refreshToken = data.data.refreshToken;
+    // console.log(data, data.data);
 
-    if (user) {
-      TokenService.saveUserInLocalStorage({
-        ...jwt(user.accessToken),
-        refreshToken: user.refreshToken,
-        accessToken: user.accessToken,
-      });
+    if (data.success) {
+      const payload = {
+        fName: user.fName,
+        email: user.email,
+        idToken: idToken,
+        refreshToken: refreshToken,
+      };
+
       yield put({
         type: types.LOGIN_USER_SUCCESS,
-        payload: user,
+        payload: payload,
       });
       yield put({
         type: types.SET_TOAST,
         payload: {
-          message: `hi ${user.fName}, you are logged In !!`,
+          message: `hi ${data.data.user.fName}, you are logged In !!`,
           variant: 'success',
           position: 'top-right',
           show: true,

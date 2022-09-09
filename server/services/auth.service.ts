@@ -59,15 +59,15 @@ const signUp = async ({
     await newUser.save();
 
     //~ create tokens
-    const encodedToken = newUser.generateToken('900s');
+    const idToken = newUser.generateToken('900s');
 
     //~ create a new refresh token
     let refreshToken = await RefreshToken.createToken(newUser);
     refreshToken = refreshToken.token;
     //~ send response
     const data = {
-      user: _.pick(newUser, ['_id', 'email']),
-      encodedToken,
+      user: _.pick(newUser, ['_id', 'email', 'fName']),
+      idToken,
       refreshToken,
     };
 
@@ -100,14 +100,14 @@ const login = async ({ email, password }: loginCredProps) => {
       throw { status: 400, message: 'Invalid email or password.' };
 
     //~ Send response
-    const encodedToken = user.generateToken('900s');
+    const idToken = user.generateToken('900s');
     //~ create a new refresh token
     let refreshToken = await RefreshToken.createToken(user);
     refreshToken = refreshToken.token;
 
     const data = {
       user: _.pick(user, ['_id', 'email', 'fName']),
-      encodedToken,
+      idToken,
       refreshToken,
     };
     return {

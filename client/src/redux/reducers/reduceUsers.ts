@@ -3,8 +3,9 @@ import TokenService from 'services/Authservice';
 
 interface UserLoggedIn {
   email: string;
-  password: string;
-  token: string;
+  fName: string;
+  idToken: string;
+  refreshToken: string;
 }
 interface UserLoggedInObject {
   userDetails: UserLoggedIn;
@@ -13,7 +14,7 @@ interface UserLoggedInObject {
 }
 
 const defaultUserState: UserLoggedInObject = {
-  userDetails: { email: '', password: '', token: '' },
+  userDetails: { email: '', fName: '', idToken: '', refreshToken: '' },
   userLoggedIn: false,
 };
 
@@ -24,8 +25,12 @@ const reduceUsers = (
   switch (action.type) {
     case types.LOGIN_USER_SUCCESS:
       return {
-        userDetails: { ...action.payload },
-        token: action.payload.token,
+        userDetails: {
+          email: action.payload.email,
+          fName: action.payload.fName,
+        },
+        idToken: action.payload.idToken,
+        refreshToken: action.payload.refreshToken,
         userLoggedIn: true,
       };
 

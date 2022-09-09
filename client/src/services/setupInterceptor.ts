@@ -3,31 +3,39 @@ import axiosInstance from './api';
 import { logoutUser, setToast } from 'actions';
 import TokenService from './Authservice';
 import jwtDecode from 'jwt-decode';
+
 //get token from local storage
+interface userDetails {
+  _id: string;
+  email: string;
+  iat: number;
+  exp: number;
+}
 
 const setup = (store: any) => {
   const { dispatch } = store;
+  let userDetails: userDetails;
+  let refreshToken: string;
+  const updateTokens = () => {
+    const state = store?.getState();
+    userDetails = state.reduceUsers?.idToken
+      ? jwtDecode(state.reduceUsers?.idToken)
+      : { _id: '', email: '', iat: 1, exp: 1 };
+    refreshToken = state.reduceUsers?.refreshToken;
+    console.log(userDetails, refreshToken);
+  };
+  store.subscribe(updateTokens);
   axiosInstance.interceptors.request.use(
     async (req) => {
-      const userDetails = localStorage.getItem('userDetails');
-      const accessTokenExpireTime =
-        localStorage.getItem('userDetails') === null
-          ? new Date().getTime() + 60000
-          : JSON.parse(userDetails as string)?.expiresIn;
-
-      console.log(
-        accessTokenExpireTime,
-        accessTokenExpireTime - new Date().getTime()
-      );
-      const isExpired = accessTokenExpireTime < new Date().getTime();
+      const idTokenExpireTime = userDetails.exp * 1000;
+      const isExpired = idTokenExpireTime < new Date().getTime();
       console.log(isExpired);
-
       if (!isExpired) return req;
       try {
         const response = await axios.post(
-          'http://localhost:4011/api/refreshtoken',
+          'http://localhost:4000/api/refreshtoken',
           {
-            refreshToken: JSON.parse(userDetails as string).refreshToken,
+            refreshToken,
           }
         );
         console.log(response.data, jwtDecode(response.data.accessToken));
@@ -39,7 +47,6 @@ const setup = (store: any) => {
         return req;
       } catch (error) {
         console.log(error.message);
-
         dispatch(logoutUser());
       }
     },
