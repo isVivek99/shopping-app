@@ -32,7 +32,7 @@ app.use('/api/auth', auth);
 app.use('/api/categorySubTopicList', categorySubTopicList);
 
 // all your routes should go here
-app.use('/api', require(path.join(__dirname, 'routes', 'index.ts')));
+// app.use('/api', path.join(__dirname, 'routes', 'index.ts'));
 
 // static files (build of frontend)
 if (process.env.NODE_ENV == 'production') {
