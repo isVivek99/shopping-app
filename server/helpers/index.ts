@@ -1,2 +1,2 @@
-export * from './responseWrapper';
+export * from './ResponseWrapper';
 export * from './EmailSender';

@@ -6,7 +6,7 @@ import {
   validateForgotPasswordUser,
   RefreshToken,
 } from '../models';
-import { responseObject, sendForgotPasswordEmail } from '../helpers';
+import { responseObject, sendForgotPasswordEmail } from '../helpers/index';
 
 interface credProps {
   fName: string;
