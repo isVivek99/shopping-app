@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ResponseWrapper, responseObject } from '../helpers';
+import { ResponseWrapper, responseObject } from '../helpers/ResponseWrapper';
 import authService from '../services/auth.service';
 
 //signup-user

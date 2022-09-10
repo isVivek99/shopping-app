@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.refreshToken = exports.forgotPassword = exports.logInUser = exports.signupUser = void 0;
-const helpers_1 = require("../helpers");
+const ResponseWrapper_1 = require("../helpers/ResponseWrapper");
 const auth_service_1 = __importDefault(require("../services/auth.service"));
 //signup-user
 const signupUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -25,7 +25,7 @@ const signupUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         fName,
         lName,
     });
-    const response = new helpers_1.ResponseWrapper(res);
+    const response = new ResponseWrapper_1.ResponseWrapper(res);
     return response.created(result);
 });
 exports.signupUser = signupUser;
@@ -33,7 +33,7 @@ exports.signupUser = signupUser;
 const logInUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     const result = yield auth_service_1.default.login({ email, password });
-    const response = new helpers_1.ResponseWrapper(res);
+    const response = new ResponseWrapper_1.ResponseWrapper(res);
     return response.ok(result);
 });
 exports.logInUser = logInUser;
@@ -41,7 +41,7 @@ exports.logInUser = logInUser;
 const forgotPassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email } = req.body;
     const result = yield auth_service_1.default.forgotPassword({ email });
-    const response = new helpers_1.ResponseWrapper(res);
+    const response = new ResponseWrapper_1.ResponseWrapper(res);
     return response.ok(result);
 });
 exports.forgotPassword = forgotPassword;
@@ -52,7 +52,7 @@ const refreshToken = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     const result = yield auth_service_1.default.refreshToken({
         refreshToken,
     });
-    const response = new helpers_1.ResponseWrapper(res);
+    const response = new ResponseWrapper_1.ResponseWrapper(res);
     return response.unauthorized(result);
 });
 exports.refreshToken = refreshToken;

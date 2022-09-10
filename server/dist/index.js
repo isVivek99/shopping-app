@@ -39,6 +39,9 @@ const connectDatabase = () => __awaiter(void 0, void 0, void 0, function* () {
 connectDatabase();
 app.use('/api/auth', routes_1.auth);
 app.use('/api/categorySubTopicList', routes_1.categorySubTopicList);
+// all your routes should go here
+app.use('/api', require(path_1.default.join(__dirname, 'routes', 'index.ts')));
+// static files (build of frontend)
 if (process.env.NODE_ENV == 'production') {
     app.get('/', (req, res) => {
         app.use(express_1.default.static(path_1.default.resolve(__dirname, 'client', 'build')));

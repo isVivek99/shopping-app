@@ -30,4 +30,4 @@ class ResponseWrapper {
     }
 }
 exports.ResponseWrapper = ResponseWrapper;
-//# sourceMappingURL=responseWrapper.js.map
+//# sourceMappingURL=ResponseWrapper.js.map
