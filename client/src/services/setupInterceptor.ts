@@ -44,6 +44,8 @@ const setup = (store: any) => {
         req.headers
           ? (req.headers['authorization'] = response.data.idToken)
           : (dummyreq['authorization'] = response.data.idToken);
+        console.log('here:', req.headers);
+
         return req;
       } catch (error) {
         console.log(error.message);

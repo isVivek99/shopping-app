@@ -2,7 +2,9 @@ import express from 'express';
 import mongoose, { ConnectOptions } from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import path from 'path';
 import { auth, categorySubTopicList } from './routes';
+import { newConfig } from './config/keys';
 
 const app = express();
 app.use(express.json());
@@ -12,7 +14,7 @@ dotenv.config();
 const connectDatabase = async () => {
   try {
     await mongoose.connect(
-      process.env.MONGODB_URI || 'mongodb://localhost:27017/freshness',
+      newConfig.MONGODB_URI || 'mongodb://localhost:27017/freshness',
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -29,6 +31,13 @@ connectDatabase();
 app.use('/api/auth', auth);
 app.use('/api/categorySubTopicList', categorySubTopicList);
 
-app.listen(process.env.PORT || 4011, () => {
-  console.log(`app listening at http://localhost:${process.env.PORT || 4011}`);
+if (process.env.NODE_ENV == 'production') {
+  app.get('/', (req, res) => {
+    app.use(express.static(path.resolve(__dirname, 'client', 'build')));
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
+app.listen(newConfig.PORT || 4011, () => {
+  console.log(`app listening at http://localhost:${newConfig.PORT || 4011}`);
 });

@@ -61,6 +61,7 @@
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-react": "^7.29.2",
     "git-cz": "^4.8.0",
-    "redux-devtools-extension": "^2.13.9"
+    "redux-devtools-extension": "^2.13.9",
+    "vercel": "^28.2.3"
   }
 }
