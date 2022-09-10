@@ -170,7 +170,7 @@ const refreshToken = async ({ refreshToken }: { refreshToken: string }) => {
     const user = await User.findOne({ user: userRefreshToken.user });
     // console.log( user, userRefreshToken);
 
-    let idToken = user?.generateToken('900s');
+    const idToken = user?.generateToken('900s');
 
     return {
       success: true,

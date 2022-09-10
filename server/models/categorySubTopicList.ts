@@ -12,17 +12,13 @@ interface ICategorySubTopicListSchema {
   products: Array<object>;
 }
 
-interface ICategorySubTopicListMethods {}
-
 type ICategorySubTopicListModel = Model<
   ICategorySubTopicListSchema,
-  {},
-  ICategorySubTopicListMethods
+  Record<string, never>
 >;
 
 const categorySubTopicListSchema = new Schema<
   ICategorySubTopicListSchema,
-  ICategorySubTopicListMethods,
   ICategorySubTopicListModel
 >({
   categoryName: String,

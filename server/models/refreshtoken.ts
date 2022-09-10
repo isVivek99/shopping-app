@@ -11,9 +11,14 @@ interface IRefreshToken {
 
 interface IRefreshTokenMethods {
   verifyExpiration: (token: any) => string;
+  createToken: (user: any) => object;
 }
 
-type RefreshTokenModel = Model<IRefreshToken, {}, IRefreshTokenMethods>;
+type RefreshTokenModel = Model<
+  IRefreshToken,
+  Record<string, never>,
+  IRefreshTokenMethods
+>;
 
 //& Schema
 const RefreshTokenSchema = new Schema({
@@ -26,16 +31,16 @@ const RefreshTokenSchema = new Schema({
 });
 //& methods
 RefreshTokenSchema.statics.createToken = async function (user: any) {
-  let expireDate = new Date();
+  const expireDate = new Date();
   expireDate.setSeconds(expireDate.getSeconds() + 86400);
-  let _token = uuidv4();
-  let _object = new this({
+  const _token = uuidv4();
+  const _object = new this({
     token: _token,
     user: user._id,
     expiryDate: expireDate.getTime(),
   });
 
-  let refreshToken = await _object.save();
+  const refreshToken = await _object.save();
 
   return refreshToken;
 };

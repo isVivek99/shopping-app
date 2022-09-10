@@ -18,7 +18,7 @@ interface IUserMethods {
   generateLink: () => string;
 }
 
-type UserModel = Model<IUser, {}, IUserMethods>;
+type UserModel = Model<IUser, unknown, IUserMethods>;
 
 //& Schema
 
