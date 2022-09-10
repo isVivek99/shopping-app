@@ -6,22 +6,29 @@ interface IRefreshToken {
   _id: string;
   token: string;
   expiryDate: Date;
-  user: string;
+  user: any;
 }
 
 interface IRefreshTokenMethods {
-  verifyExpiration: (token: any) => string;
-  createToken: (user: any) => object;
+  verifyExpiration: (token: any) => boolean;
+}
+interface RefreshTokenModel
+  extends Model<IRefreshToken, unknown, IRefreshTokenMethods> {
+  createToken(user: any): any;
 }
 
-type RefreshTokenModel = Model<
-  IRefreshToken,
-  Record<string, never>,
-  IRefreshTokenMethods
->;
+// type RefreshTokenModel = Model<
+//   IRefreshToken,
+//   Record<string, never>,
+//   IRefreshTokenMethods
+// >;
 
 //& Schema
-const RefreshTokenSchema = new Schema({
+const RefreshTokenSchema = new Schema<
+  IRefreshToken,
+  RefreshTokenModel,
+  IRefreshTokenMethods
+>({
   token: String,
   user: {
     type: Schema.Types.ObjectId,
