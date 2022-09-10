@@ -15,7 +15,7 @@ import { store, persistor } from 'redux/reducers';
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate persistor={persistor}>
-      <Router>
+      <Router basename='/'>
         <App />
       </Router>
     </PersistGate>
