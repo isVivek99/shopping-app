@@ -71,6 +71,13 @@ function Homepage() {
                   </div>
                 )
               )}
+            {!categoryListDetails.length && (
+              <div>
+                <p className='text-center bold f-22 text__success'>
+                  login to continue
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
