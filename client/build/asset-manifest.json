@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.20dad9a7.css",
-    "main.js": "/static/js/main.44732af2.js",
+    "main.js": "/static/js/main.3d15d2e5.js",
     "static/media/background.svg": "/static/media/background.29aed006aedb5f37b42a.svg",
     "static/media/jeff_bezzos_laugh.gif": "/static/media/jeff_bezzos_laugh.4f527ffb50059132b8c5.gif",
     "static/media/mutton-boneless-1.jpeg": "/static/media/mutton-boneless-1.71788fa99398068db697.jpeg",
@@ -95,10 +95,10 @@
     "static/media/footer-genuine-products.webp": "/static/media/footer-genuine-products.0a842b2a38561b0c89b6.webp",
     "static/media/footer-best-price.webp": "/static/media/footer-best-price.c5ad957729c2b13ec364.webp",
     "main.20dad9a7.css.map": "/static/css/main.20dad9a7.css.map",
-    "main.44732af2.js.map": "/static/js/main.44732af2.js.map"
+    "main.3d15d2e5.js.map": "/static/js/main.3d15d2e5.js.map"
   },
   "entrypoints": [
     "static/css/main.20dad9a7.css",
-    "static/js/main.44732af2.js"
+    "static/js/main.3d15d2e5.js"
   ]
 }
