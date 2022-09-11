@@ -29,7 +29,6 @@ const Login = () => {
 
   const { userDetails, userLoggedIn }: userObject =
     useSelector((state: RootStore) => state?.reduceUsers) || {};
-  console.log(userDetails, userLoggedIn);
 
   const handleLoginUser = () => {
     dispatch(loginUser({ email, password }));

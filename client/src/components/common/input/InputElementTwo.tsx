@@ -40,7 +40,6 @@ const InputElementTwo = ({
 
   const setInput = (e: any) => {
     const { name, value } = e.target;
-    console.log(userInfo);
 
     setUserInfo((prevState: any) => ({
       ...prevState,
