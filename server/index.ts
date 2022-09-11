@@ -34,7 +34,7 @@ app.use('/api/categorySubTopicList', categorySubTopicList);
 // all  routes should go here
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-app.use('/api', path.join(__dirname, 'api', 'routes', 'index.ts'));
+// app.use('/api', path.join(__dirname, 'api', 'routes', 'index.ts'));
 
 // static files (build of frontend)
 if (process.env.NODE_ENV == 'production') {
@@ -43,6 +43,7 @@ if (process.env.NODE_ENV == 'production') {
     res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
   });
 }
+console.log(newConfig.PORT);
 
 app.listen(newConfig.PORT || 4011, () => {
   console.log(`app listening at http://localhost:${newConfig.PORT || 4011}`);
