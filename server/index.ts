@@ -34,7 +34,7 @@ app.use('/api/categorySubTopicList', categorySubTopicList);
 // all  routes should go here
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-app.use('/api', path.join(__dirname, 'routes', 'index.ts'));
+app.use('/api', path.join(__dirname, 'api', 'routes', 'index.ts'));
 
 // static files (build of frontend)
 if (process.env.NODE_ENV == 'production') {
