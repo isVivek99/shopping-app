@@ -119,8 +119,8 @@ export function* handleAddUser(action: ActionType) {
     yield put({
       type: types.SET_TOAST,
       payload: {
-        message: `hi ${error.response.data.data.message}, you are logged In !!`,
-        variant: 'success',
+        message: `${error.response.data.data.message}`,
+        variant: 'error',
         position: 'top-right',
         show: true,
         id: Math.floor(Math.random() * 100),
