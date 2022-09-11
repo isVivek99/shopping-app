@@ -45,7 +45,7 @@ const Signup = () => {
 
   return (
     <div className='screen login'>
-      <div className='col-5 mb-4 mx-auto p-4 login__modal'>
+      <div className='col-10 col-md-5 mb-4 mx-auto p-4 login__modal'>
         <h2>Signup</h2>
         <div className='my-2'>
           <InputElementTwo
