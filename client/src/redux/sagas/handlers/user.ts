@@ -116,5 +116,15 @@ export function* handleAddUser(action: ActionType) {
     }
   } catch (error) {
     console.log(error);
+    yield put({
+      type: types.SET_TOAST,
+      payload: {
+        message: `hi ${error.response.data.data.message}, you are logged In !!`,
+        variant: 'success',
+        position: 'top-right',
+        show: true,
+        id: Math.floor(Math.random() * 100),
+      },
+    });
   }
 }
