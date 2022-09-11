@@ -12,7 +12,7 @@ export function requestGetUser(UserPayloadObject: UserLoginPayload) {
   };
   return axios.request({
     method: 'post',
-    url: 'http://localhost:4000/api/auth/login',
+    url: 'https://shopping-app-beryl.vercel.app//api/auth/login',
     headers: headerObject,
     data: body,
   });
@@ -25,7 +25,7 @@ export function requestAddUser(UserPayloadObject: unknown) {
   };
   return axios.request({
     method: 'post',
-    url: 'http://localhost:4000/api/auth/signup',
+    url: 'https://shopping-app-beryl.vercel.app//api/auth/signup',
     headers: headerObject,
     data: body,
   });
