@@ -31,11 +31,6 @@ connectDatabase();
 app.use('/api/auth', auth);
 app.use('/api/categorySubTopicList', categorySubTopicList);
 
-// all  routes should go here
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-// app.use('/api', path.join(__dirname, 'api', 'routes', 'index.ts'));
-
 // static files (build of frontend)
 if (process.env.NODE_ENV == 'production') {
   app.use(express.static(path.resolve(__dirname, '../client', 'build')));
