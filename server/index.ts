@@ -5,6 +5,8 @@ import cors from 'cors';
 import path from 'path';
 import { auth, categorySubTopicList } from './routes';
 import { newConfig } from './config/keys';
+import { string } from 'joi';
+import router from './routes/auth';
 
 const app = express();
 app.use(express.json());
@@ -31,8 +33,12 @@ connectDatabase();
 app.use('/api/auth', auth);
 app.use('/api/categorySubTopicList', categorySubTopicList);
 
-// all your routes should go here
-// app.use('/api', path.join(__dirname, 'routes', 'index.ts'));
+const routes: string | Record<string, string> = 'routes';
+const index: string | Record<string, string> = 'index.ts';
+// all routes should go here
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+app.use('/api', path.join(__dirname, routes, index));
 
 // static files (build of frontend)
 if (process.env.NODE_ENV == 'production') {
