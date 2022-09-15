@@ -33,7 +33,7 @@ const setup = (store: any) => {
       if (!isExpired) return req;
       try {
         const response = await axios.post(
-          'http://localhost:4000/api/auth/refreshtoken',
+          'https://shopping-app-beryl.vercel.app/api/auth/refreshtoken',
           {
             refreshToken,
           }

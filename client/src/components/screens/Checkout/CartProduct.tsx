@@ -50,17 +50,19 @@ const CartProduct = ({
   const { userDetails, userLoggedIn } =
     useSelector((state: RootStore) => state?.reduceUsers) || {};
 
-  const removeProductClickHandler = () => {
+  const removeProductClickHandler = (addToWishlist = false) => {
     dispatch(removeProducts({ id }));
     console.log(`removed product from cart !!`, 'success', 'top-right');
-    dispatch(
-      setToast({
-        message: 'removed product from cart !',
-        variant: 'success',
-        show: true,
-        position: 'top-right',
-      })
-    );
+    if (!addToWishlist) {
+      dispatch(
+        setToast({
+          message: 'removed product from cart !',
+          variant: 'success',
+          show: true,
+          position: 'top-right',
+        })
+      );
+    }
   };
 
   const addToWishlistClickHandler = () => {
@@ -90,8 +92,16 @@ const CartProduct = ({
           addedToCart,
         })
       );
-      removeProductClickHandler();
-      console.log(`added ${pName} to wishlist !!`, 'success', 'top-right');
+      removeProductClickHandler(true);
+
+      dispatch(
+        setToast({
+          message: `added ${pName} to wishlist !!`,
+          variant: 'success',
+          show: true,
+          position: 'top-right',
+        })
+      );
     } else {
       console.log('already exist in wishlist', 'error', 'top-right');
     }
@@ -150,7 +160,7 @@ const CartProduct = ({
           </div>
           <div
             className='cart__remove d-flex align-items-center'
-            onClick={removeProductClickHandler}
+            onClick={() => removeProductClickHandler(false)}
           >
             <div className='cart__remove__cart'>
               <i className='fas fa-xmark mx-2'></i>
