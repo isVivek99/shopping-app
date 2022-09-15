@@ -77,7 +77,7 @@ const CartProduct = ({
         ? false
         : true
       : false;
-    console.log(product, checkWishlistPresent);
+
     if (checkWishlistPresent) {
       dispatch(
         addToWishlist({
