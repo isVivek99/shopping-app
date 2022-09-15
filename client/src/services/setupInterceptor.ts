@@ -38,7 +38,6 @@ const setup = (store: any) => {
             refreshToken,
           }
         );
-        console.log(response.data);
 
         const dummyreq = { authorization: '' };
         req.headers
