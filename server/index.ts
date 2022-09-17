@@ -8,15 +8,14 @@ import { newConfig } from './config/keys';
 
 const app = express();
 app.use(express.json());
-// const allowedDomains = [
-//   'https://shopping-app-git-main-vickydonor-99.vercel.app',
-//   'http://shopping-orjz6u640-vickydonor-99.vercel.app',
-//   'https://https://shopping-app-git-main-vickydonor-99.vercel.app/',
-// ];
 
 app.use(
   cors({
-    origin: 'https://shopping-app-beryl.vercel.app/',
+    origin: `${
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3002/'
+        : 'https://shopping-app-beryl.vercel.app/'
+    }`,
   })
 );
 dotenv.config();
