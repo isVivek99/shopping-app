@@ -9,15 +9,16 @@ import { newConfig } from './config/keys';
 const app = express();
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: `${
-      process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3002/'
-        : 'https://shopping-app-beryl.vercel.app/'
-    }`,
-  })
-);
+// app.use(
+//   cors({
+//     origin: `${
+//       process.env.NODE_ENV === 'development'
+//         ? 'http://localhost:3002/'
+//         : 'https://shopping-app-beryl.vercel.app/'
+//     }`,
+//   })
+// );
+app.use(cors());
 dotenv.config();
 
 const connectDatabase = async () => {

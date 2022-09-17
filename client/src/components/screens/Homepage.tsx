@@ -4,7 +4,7 @@ import RecipeCard from 'components/common/card/RecipeCard';
 import CategoryProductList from 'components/common/categoryProductList/CategoryProductList';
 import Footer from 'components/common/footer/Footer';
 import { recipeDetails } from 'utils/recipeDetails';
-import axiosInstance from 'services/api';
+import { getCategorySubtopicList } from 'utils/urls';
 import 'assets/scss/screens/homepage.scss';
 import 'assets/scss/common.scss';
 
@@ -21,7 +21,7 @@ function Homepage() {
   >([]);
   const getCategoryList = async () => {
     try {
-      const response = await axiosInstance.get('/api/categorySubTopicList');
+      const response = await axios.get(getCategorySubtopicList);
       console.log(response.data);
 
       setCategoryListDetails(response.data.data.subtopicList);
