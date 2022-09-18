@@ -19,6 +19,7 @@ function Homepage() {
   const [categoryListDetails, setCategoryListDetails] = useState<
     categoryList | any
   >([]);
+
   const getCategoryList = async () => {
     try {
       const response = await axios.get(getCategorySubtopicList);
@@ -29,6 +30,7 @@ function Homepage() {
       console.log(error.message);
     }
   };
+
   useEffect(() => {
     getCategoryList();
   }, []);

@@ -41,9 +41,13 @@ const Suggestions = ({ productDetails }: SuggestionsProps) => {
   );
 
   useEffect(() => {
+    //returns products based on input currently in the i/p
+    //helps on rerenders btwn user clicking out and in again the i/p
     const newProductsArray = sortElementsByInput();
+
+    // return products in cart
     const findProductInCart = findProductInCartMethod(newProductsArray);
-    console.log(newProductsArray, productCartList);
+    console.log('asd', newProductsArray, productCartList);
 
     if (findProductInCart.length) {
       setlocalArray(findProductInCart);

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import brandImage from 'assets/images/Brand.png';
 import InputElementOne from 'components/common/input/InputElementOne';
 import CouponModal from 'components/common/couponBanner/Coupon';
@@ -7,11 +8,20 @@ import NavbarMobile from 'components/common/navbar/NavbarMobile';
 import { useSelector } from 'react-redux';
 import rootReducer from 'redux/reducers';
 import { Link } from 'react-router-dom';
-import { productDetails } from 'utils/productDetails';
-
+import { getProductList } from 'utils/urls';
 import 'assets/scss/common/navbar.scss';
 
 function Navbar() {
+  const getProductListDetails = async () => {
+    try {
+      const response = await axios.get(getProductList);
+      console.log(response.data);
+
+      setProductList(response.data.data.productList);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   const navigate = useNavigate();
   type RootStore = ReturnType<typeof rootReducer>;
   const productCartList =
@@ -22,6 +32,7 @@ function Navbar() {
   const { userDetails, userLoggedIn } =
     useSelector((state: RootStore) => state?.reduceUsers) || {};
 
+  const [productList, setProductList] = useState([]);
   const [searchClickArray, setSearchClickArray] = useState([]);
   const [searchString, setSearchString] = useState('');
 
@@ -29,6 +40,7 @@ function Navbar() {
     if (searchClickArray.length > 0 || searchString.length > 0) {
       navigate(`../v1/suggestions/${searchString}`);
     }
+    getProductListDetails();
   }, [searchClickArray]);
 
   return (
@@ -59,7 +71,7 @@ function Navbar() {
           <img src={brandImage} alt='brandImage' />
         </Link>
         <InputElementOne
-          productArray={productDetails}
+          productArray={productList}
           setSearchClickArray={setSearchClickArray}
           setSearchString={setSearchString}
         />

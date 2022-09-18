@@ -1,3 +1,4 @@
 import authService from './auth.service';
 import categorySubTopicListService from './categorySubTopicList.service';
-export { authService, categorySubTopicListService };
+import productListService from './productList.service';
+export { authService, categorySubTopicListService, productListService };

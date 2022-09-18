@@ -3,7 +3,7 @@ import mongoose, { ConnectOptions } from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
-import { auth, categorySubTopicList } from './routes';
+import { auth, categorySubTopicList, productList } from './routes';
 import { newConfig } from './config/keys';
 
 const app = express();
@@ -40,7 +40,7 @@ connectDatabase();
 
 app.use('/api/auth', auth);
 app.use('/api/categorySubTopicList', categorySubTopicList);
-
+app.use('/api/productList', productList);
 // static files (build of frontend)
 if (process.env.NODE_ENV == 'production') {
   app.use(express.static(path.resolve(__dirname, '../client', 'build')));
