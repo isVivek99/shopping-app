@@ -20,8 +20,11 @@ app.use(express.json());
 // );
 app.use(cors());
 dotenv.config();
+console.log(process.env.PORT);
 
 const connectDatabase = async () => {
+  console.log(newConfig.MONGODB_URI);
+
   try {
     await mongoose.connect(
       newConfig.MONGODB_URI || 'mongodb://localhost:27017/freshness',
@@ -48,7 +51,7 @@ if (process.env.NODE_ENV == 'production') {
     res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
   });
 }
-console.log(newConfig.PORT);
+console.log(newConfig.PORT, newConfig);
 
 app.listen(newConfig.PORT || 4011, () => {
   console.log(`app listening at http://localhost:${newConfig.PORT || 4011}`);

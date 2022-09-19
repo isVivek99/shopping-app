@@ -1,8 +1,8 @@
-export module dev {
+// eslint-disable-next-line @typescript-eslint/no-namespace
+export namespace dev {
   export const devConfig = {
-    JWT_SECRET: 'secret123',
-    PORT: '4000',
-    MONGODB_URI:
-      'mongodb+srv://vivek:XztbrjMuRMKIPQo8@cluster0.9o444.mongodb.net/?retryWrites=true&w=majority',
+    JWT_SECRET: process.env.JWT_SECRET,
+    PORT: process.env.PORT,
+    MONGODB_URI: process.env.MONGODB_URI,
   };
 }

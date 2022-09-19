@@ -22,6 +22,7 @@ interface InputEleTwoProps {
   setUserInfo: any;
   userInfo: userInfoProps;
   errorString: string;
+  setErrors?: any;
   padding?: string;
 }
 
@@ -33,6 +34,7 @@ const InputElementTwo = ({
   userInfo,
   setUserInfo,
   errorString,
+  setErrors,
   padding = 'py-2',
 }: InputEleTwoProps) => {
   const inputEleRef = useRef<HTMLInputElement>(document.createElement('input'));
@@ -51,17 +53,38 @@ const InputElementTwo = ({
   const setBlur = (e: any) => {
     const { name, value } = e.target;
 
-    if (value.length === 0) setInputError(true);
+    if (value.length === 0) {
+      setInputError(true);
+      return;
+    }
 
     if (name === 'emailAddress' && !emailValidationRegex.test(value)) {
       setInputError(true);
+      setErrors((prev: any) => ({
+        ...prev,
+        emailError: errorString,
+      }));
+      return;
     }
 
     if (name === 'phoneNumber' && (value.length > 10 || value.length < 10)) {
       setInputError(true);
+      return;
     }
 
-    if (name === 'password' && value.length < 6) setInputError(true);
+    if (name === 'password' && value.length < 6) {
+      setInputError(true);
+      setErrors((prev: any) => ({
+        ...prev,
+        passwordError: errorString,
+      }));
+      return;
+    }
+    //on blur if no error set error values as empty
+    setErrors((prev: any) => ({
+      emailError: '',
+      passwordError: '',
+    }));
   };
 
   return (

@@ -6,4 +6,4 @@ if (process.env.NODE_ENV == 'production') {
 } else {
   config = dev.devConfig;
 }
-export let newConfig = config;
+export const newConfig = config;
