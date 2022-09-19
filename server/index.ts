@@ -1,13 +1,13 @@
-import express from 'express';
-import mongoose, { ConnectOptions } from 'mongoose';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import path from 'path';
-import { auth, categorySubTopicList, productList } from './routes';
-import { newConfig } from './config/keys';
+import express from 'express'
+import mongoose, { ConnectOptions } from 'mongoose'
+import dotenv from 'dotenv'
+import cors from 'cors'
+import path from 'path'
+import { auth, categorySubTopicList, productList } from './routes'
+import { newConfig } from './config/keys'
 
-const app = express();
-app.use(express.json());
+const app = express()
+app.use(express.json())
 
 // app.use(
 //   cors({
@@ -16,43 +16,41 @@ app.use(express.json());
 //         ? 'http://localhost:3002/'
 //         : 'https://shopping-app-beryl.vercel.app/'
 //     }`,
-//   })
-// );
-app.use(cors());
-dotenv.config();
-console.log(process.env.PORT);
+//   }),
+// )
+app.use(cors())
+dotenv.config()
 
 const connectDatabase = async () => {
-  console.log(newConfig.MONGODB_URI);
-
   try {
     await mongoose.connect(
-      newConfig.MONGODB_URI || 'mongodb://localhost:27017/freshness',
+      process.env.MONGODB_URI || 'mongodb://localhost:27017/freshness',
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-      } as ConnectOptions
-    );
-    console.log('connected to database');
+      } as ConnectOptions,
+    )
+    console.log('connected to database')
   } catch (error) {
-    console.log(error);
-    process.exit(1);
+    console.log(error)
+    process.exit(1)
   }
-};
-connectDatabase();
+}
+connectDatabase()
 
-app.use('/api/auth', auth);
-app.use('/api/categorySubTopicList', categorySubTopicList);
-app.use('/api/productList', productList);
+app.use('/api/auth', auth)
+app.use('/api/categorySubTopicList', categorySubTopicList)
+app.use('/api/productList', productList)
+
 // static files (build of frontend)
 if (process.env.NODE_ENV == 'production') {
-  app.use(express.static(path.resolve(__dirname, '../client', 'build')));
+  app.use(express.static(path.resolve(__dirname, '../client', 'build')))
   app.get('/*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
-  });
+    res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'))
+  })
 }
-console.log(newConfig.PORT, newConfig);
+console.log(process.env.PORT)
 
-app.listen(newConfig.PORT || 4011, () => {
-  console.log(`app listening at http://localhost:${newConfig.PORT || 4011}`);
-});
+app.listen(process.env.PORT || 4011, () => {
+  console.log(`app listening at http://localhost:${process.env.PORT || 4011}`)
+})

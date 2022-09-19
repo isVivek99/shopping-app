@@ -54,7 +54,16 @@ const Login = () => {
   };
 
   const handleGuestLogin = () => {
-    // setEmail('');
+    setEmail({ emailAddress: 'guest@gmail.com' });
+    setPassword({ password: 'qwerty' });
+    dispatch(
+      setToast({
+        message: `press login to continue`,
+        variant: 'success',
+        show: true,
+        position: 'top-right',
+      })
+    );
   };
   const handleLogoutUser = () => {
     dispatch(
