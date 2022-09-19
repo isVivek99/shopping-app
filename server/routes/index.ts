@@ -1,4 +1,5 @@
 import auth from './auth';
 import categorySubTopicList from './categorySubTopicList';
 import productList from './productList';
-export { auth, categorySubTopicList, productList };
+import listingPageProductList from './listingPageProductList';
+export { auth, categorySubTopicList, productList, listingPageProductList };

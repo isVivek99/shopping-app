@@ -1,28 +1,25 @@
-import { Schema, Model, model } from 'mongoose';
-import Joi from 'joi';
+import { Schema, Model, model } from 'mongoose'
+import Joi from 'joi'
 
 //& interfaces
 
 interface IProductListSchema {
-  pName: string;
-  pDesc: string;
-  price: number;
-  img: string;
-  rating: number;
-  id: number;
-  pWeight: string;
-  weights: Array<string>;
-  carouselImages: Array<string>;
-  quantity: number;
-  category: string;
-  addedToCart: boolean;
-  addedToWishlist: boolean;
+  pName: string
+  pDesc: string
+  price: number
+  img: string
+  rating: number
+  id: number
+  pWeight: string
+  weights: Array<string>
+  carouselImages: Array<string>
+  quantity: number
+  category: string
+  addedToCart: boolean
+  addedToWishlist: boolean
 }
-// interface IProductListSchema {
-//   productList: Array<IProductListItem>;
-// }
 
-type IProductListModel = Model<IProductListSchema, Record<string, never>>;
+type IProductListModel = Model<IProductListSchema, Record<string, never>>
 
 //& schema
 const productListSchema = new Schema<IProductListSchema, IProductListModel>({
@@ -39,13 +36,13 @@ const productListSchema = new Schema<IProductListSchema, IProductListModel>({
   category: { type: String, required: true },
   addedToCart: { type: Boolean, required: true },
   addedToWishlist: { type: Boolean, required: true },
-});
+})
 
 //& Model
 const ProductList = model<IProductListSchema, IProductListModel>(
   'productList',
-  productListSchema
-);
+  productListSchema,
+)
 
 //& Validation
 const validateProductList = (productList: Array<IProductListSchema>) => {
@@ -64,8 +61,8 @@ const validateProductList = (productList: Array<IProductListSchema>) => {
     addedToCart: Joi.bool(),
     addedToWishlist: Joi.bool(),
     products: Joi.array(),
-  });
-  return schema.validate(productList);
-};
+  })
+  return schema.validate(productList)
+}
 
-export { ProductList, productListSchema, validateProductList };
+export { ProductList, productListSchema, validateProductList }

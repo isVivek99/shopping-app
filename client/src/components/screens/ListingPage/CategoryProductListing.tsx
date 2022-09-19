@@ -74,7 +74,6 @@ const CategoryProductListing = ({ categoryListProductDetails }: any) => {
 
   useEffect(() => {
     return () => {
-      console.log('fire');
       setStateDropdownValue('Recommended');
       dispatch(resetFilters());
     };
