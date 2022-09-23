@@ -5,5 +5,5 @@ const baseURL =
 
 const getCategorySubtopicList = `${baseURL}/categorySubTopicList`;
 const getProductList = `${baseURL}/productList`;
-
-export { getCategorySubtopicList, getProductList };
+const getListingPageProductList = `${baseURL}/listingPageProductList`;
+export { getCategorySubtopicList, getProductList, getListingPageProductList };
