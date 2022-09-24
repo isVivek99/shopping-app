@@ -148,14 +148,20 @@ const Product = ({ productDetails }: any) => {
           </div>
           <div className='mb-5'>
             <p className='product__page__description'>
-              Carrots from Tomissy Farm are one of the best on the market.
-              Tomisso and his family are giving a full love to his Bio products.
-              Tomisso’s carrots are growing on the fields naturally.
+              <span className='bold'>{productName}</span> from Tomissy Farm are
+              one of the best on the market. Tomisso and his family are giving a
+              full love to his Bio products. Tomisso’s
+              <span className='bold'> {productName}</span> are growing on the
+              fields naturally.
             </p>
           </div>
           <div className='d-flex justify-content-around flex-column flex-lg-row justify-content-center mb-5'>
             <div>
-              <ListItemsCard category='SKU:' value='76645' color='black' />
+              <ListItemsCard
+                category='SKU:'
+                value={id?.toString() || '76645'}
+                color='black'
+              />
 
               <ListItemsCard
                 category='Category:'

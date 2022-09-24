@@ -24,6 +24,10 @@ const Login = () => {
   }
   const [email, setEmail] = useState({ emailAddress: '' });
   const [password, setPassword] = useState({ password: '' });
+  const [errors, setErrors] = useState({
+    emailError: '',
+    passwordError: '',
+  });
 
   type RootStore = ReturnType<typeof rootReducer>;
 
@@ -31,9 +35,35 @@ const Login = () => {
     useSelector((state: RootStore) => state?.reduceUsers) || {};
 
   const handleLoginUser = () => {
-    dispatch(loginUser({ email, password }));
-    setEmail({ emailAddress: '' });
-    setPassword({ password: '' });
+    if (!errors.emailError.length && !errors.passwordError.length) {
+      console.log('disp');
+
+      dispatch(loginUser({ email, password }));
+      setEmail({ emailAddress: '' });
+      setPassword({ password: '' });
+    } else {
+      dispatch(
+        setToast({
+          message: `please check your input`,
+          variant: 'error',
+          show: true,
+          position: 'top-right',
+        })
+      );
+    }
+  };
+
+  const handleGuestLogin = () => {
+    setEmail({ emailAddress: 'guest@gmail.com' });
+    setPassword({ password: 'qwerty' });
+    dispatch(
+      setToast({
+        message: `press login to continue`,
+        variant: 'success',
+        show: true,
+        position: 'top-right',
+      })
+    );
   };
   const handleLogoutUser = () => {
     dispatch(
@@ -88,6 +118,7 @@ const Login = () => {
                 userInfo={email}
                 padding='py-3'
                 errorString='please enter correct email address'
+                setErrors={setErrors}
               />
             </div>
             <div className='my-2'>
@@ -100,6 +131,7 @@ const Login = () => {
                 userInfo={password}
                 padding='py-3'
                 errorString='password length must be more than 6 characters'
+                setErrors={setErrors}
               />
             </div>
             <div className='mt-3 w-100'>
@@ -109,6 +141,15 @@ const Login = () => {
                 text={'login'}
                 width={'100'}
                 clickHandle={() => handleLoginUser()}
+              />
+            </div>
+            <div className='mt-3 w-100'>
+              <Button
+                type={'pri'}
+                size={'mid'}
+                text={'guest'}
+                width={'100'}
+                clickHandle={() => handleGuestLogin()}
               />
             </div>
             <div className='login__conditions d-flex justify-content-between mt-2'>

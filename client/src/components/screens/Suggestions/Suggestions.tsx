@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import rootReducer from 'redux/reducers';
 import ProductCardOne from 'components/common/card/ProductCardOne';
-import ProductCardTwo from 'components/common/card/ProductCardTwo';
 
 interface productCardProps {
   discount?: string;
@@ -42,9 +41,13 @@ const Suggestions = ({ productDetails }: SuggestionsProps) => {
   );
 
   useEffect(() => {
+    //returns products based on input currently in the i/p
+    //helps on rerenders btwn user clicking out and in again the i/p
     const newProductsArray = sortElementsByInput();
+
+    // return products in cart
     const findProductInCart = findProductInCartMethod(newProductsArray);
-    console.log(newProductsArray, productCartList);
+    console.log('asd', newProductsArray, productCartList);
 
     if (findProductInCart.length) {
       setlocalArray(findProductInCart);

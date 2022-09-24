@@ -1,5 +1,4 @@
 import types from 'redux/actionTypes';
-import TokenService from 'services/Authservice';
 
 interface UserLoggedIn {
   email: string;

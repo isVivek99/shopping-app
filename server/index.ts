@@ -3,32 +3,36 @@ import mongoose, { ConnectOptions } from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
-import { auth, categorySubTopicList } from './routes';
-import { newConfig } from './config/keys';
+import {
+  auth,
+  categorySubTopicList,
+  productList,
+  listingPageProductList,
+} from './routes';
 
 const app = express();
 app.use(express.json());
-// const allowedDomains = [
-//   'https://shopping-app-git-main-vickydonor-99.vercel.app',
-//   'http://shopping-orjz6u640-vickydonor-99.vercel.app',
-//   'https://https://shopping-app-git-main-vickydonor-99.vercel.app/',
-// ];
 
 app.use(
   cors({
-    origin: 'https://shopping-app-beryl.vercel.app/',
-  })
+    origin: `${
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3002'
+        : 'https://shopping-app-beryl.vercel.app/'
+    }`,
+  }),
 );
+
 dotenv.config();
 
 const connectDatabase = async () => {
   try {
     await mongoose.connect(
-      newConfig.MONGODB_URI || 'mongodb://localhost:27017/freshness',
+      process.env.MONGODB_URI || 'mongodb://localhost:27017/freshness',
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-      } as ConnectOptions
+      } as ConnectOptions,
     );
     console.log('connected to database');
   } catch (error) {
@@ -40,6 +44,8 @@ connectDatabase();
 
 app.use('/api/auth', auth);
 app.use('/api/categorySubTopicList', categorySubTopicList);
+app.use('/api/productList', productList);
+app.use('/api/listingPageProductList', listingPageProductList);
 
 // static files (build of frontend)
 if (process.env.NODE_ENV == 'production') {
@@ -48,8 +54,8 @@ if (process.env.NODE_ENV == 'production') {
     res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
   });
 }
-console.log(newConfig.PORT);
+console.log(process.env.PORT);
 
-app.listen(newConfig.PORT || 4011, () => {
-  console.log(`app listening at http://localhost:${newConfig.PORT || 4011}`);
+app.listen(process.env.PORT || 4011, () => {
+  console.log(`app listening at http://localhost:${process.env.PORT || 4011}`);
 });

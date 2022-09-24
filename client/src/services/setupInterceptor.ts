@@ -1,7 +1,6 @@
 import axios from 'axios';
 import axiosInstance from './api';
 import { logoutUser, setToast } from 'actions';
-import TokenService from './Authservice';
 import jwtDecode from 'jwt-decode';
 
 //get token from local storage

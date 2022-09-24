@@ -1,6 +1,7 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 import { setPriceRange, setSortFilter, resetFilters, setRating } from 'actions';
 import rootReducer from 'redux/reducers';
 import ProductCardOne from 'components/common/card/ProductCardOne';
@@ -11,6 +12,7 @@ import RangeSlider from 'components/common/slider/RangeSlider';
 import StarList from 'components/common/starList/starList';
 import Tags from 'components/common/tags/Tags';
 import { calculateDiscount } from 'utils/calculateDiscountPrice';
+
 import 'assets/scss/screens/categoryListing.scss';
 
 interface productCardProps {
@@ -25,6 +27,13 @@ interface productCardProps {
   quantity: number;
   addedToCart: boolean;
   addedToWishlist: boolean;
+}
+interface listingPageProductList {
+  _id: string;
+  bakery: Array<any>;
+  'fruits&vegetables': Array<any>;
+  'meat&fish': Array<any>;
+  drinks: Array<any>;
 }
 
 const sortArrayParams = [
@@ -74,7 +83,6 @@ const CategoryProductListing = ({ categoryListProductDetails }: any) => {
 
   useEffect(() => {
     return () => {
-      console.log('fire');
       setStateDropdownValue('Recommended');
       dispatch(resetFilters());
     };
