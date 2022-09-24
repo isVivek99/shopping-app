@@ -32,7 +32,7 @@ function Homepage() {
   };
 
   useEffect(() => {
-    getCategoryList();
+    if (!categoryListDetails.length) getCategoryList();
   }, []);
 
   return (
