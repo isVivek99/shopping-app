@@ -34,7 +34,6 @@ function App() {
   const getListingPageProductListMethod = async () => {
     try {
       const response = await axios.get(getListingPageProductList);
-      console.log(response.data);
 
       setListingPageProductList(response.data.data.subtopicList);
     } catch (error) {
