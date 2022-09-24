@@ -2,7 +2,6 @@ import types from 'redux/actionTypes';
 import { call, put, delay } from 'redux-saga/effects';
 import { requestGetUser, requestAddUser } from 'redux/sagas/requests/user';
 import jwt from 'jwt-decode';
-import TokenService from 'services/Authservice';
 
 interface UserInfoArray {
   config: object;

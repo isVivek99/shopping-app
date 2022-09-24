@@ -1,9 +1,10 @@
-import { prod } from './prod';
-import { dev } from './dev';
-let config: any;
+import { prod } from './prod'
+import { dev } from './dev'
+let config: any
+
 if (process.env.NODE_ENV == 'production') {
-  config = prod.prodConfig;
+  config = prod.prodConfig
 } else {
-  config = dev.devConfig;
+  config = dev.devConfig
 }
-export let newConfig = config;
+export const newConfig = config

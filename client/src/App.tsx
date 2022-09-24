@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Login from 'components/screens/Login/Login';
 import Signup from 'components/screens/Signup/Signup';
 import ForgotPassword from 'components/screens/ForgotPassword/ForgotPassword';
@@ -11,14 +13,36 @@ import Wishlist from 'components/screens/Wishlist/Wishlist';
 import Suggestions from 'components/screens/Suggestions/Suggestions';
 import PageNotFound from 'components/screens/PageNotFound';
 import ToastComponent from 'components/common/toast/ToastComponent';
-import { categoryListProductDetails } from 'utils/categoryListProductDetails';
-
+import { getListingPageProductList } from 'utils/urls';
 import { productDetails } from 'utils/productDetails';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './assets/scss/App.scss';
 
+interface listingPageProductList {
+  _id: string;
+  bakery: Array<any>;
+  'fruits&vegetables': Array<any>;
+  'meat&fish': Array<any>;
+  drinks: Array<any>;
+}
 function App() {
   const { pathname } = useLocation();
+  const [listingPageProductList, setListingPageProductList] = useState<
+    listingPageProductList | any
+  >([]);
+
+  const getListingPageProductListMethod = async () => {
+    try {
+      const response = await axios.get(getListingPageProductList);
+
+      setListingPageProductList(response.data.data.subtopicList);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  useEffect(() => {
+    getListingPageProductListMethod();
+  }, []);
 
   return (
     <div className='App'>
@@ -43,7 +67,7 @@ function App() {
           path='/v1/list/:category'
           element={
             <CategoryProductListing
-              categoryListProductDetails={categoryListProductDetails}
+              categoryListProductDetails={listingPageProductList}
             />
           }
         />
